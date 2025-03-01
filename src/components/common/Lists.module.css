@@ -23,3 +23,11 @@
     background-color: #FF6D4D1A;
     border: none;
 }
+.nuqtalar{
+    background-color: unset;
+    border: none;
+}
+.nuqtalar:active{
+    background-color:white;
+    border: none;
+}

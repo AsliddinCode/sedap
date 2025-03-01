@@ -11,7 +11,7 @@ function Lists(props) {
         <p>{item.locate}</p>
         <p>{item.balans}</p>
         <button className={styles['delever']}>{item.order}</button>
-        <img src={item.image} alt="" />
+        <button className={styles['nuqtalar']}><img src={item.image} alt="" /></button>
     </div>
   )
 }
