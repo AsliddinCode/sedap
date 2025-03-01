@@ -1,0 +1,33 @@
+.page{
+    width: 1468px;
+    height: 74px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+.page:hover{
+    width: 1468px;
+    height: 74px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F3F2F7;
+}
+.delever{
+    width: 101px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: #FF6D4D1A;
+    border: none;
+}
+.nuqtalar{
+    background-color: unset;
+    border: none;
+}
+.nuqtalar:active{
+    background-color:white;
+    border: none;
+}
