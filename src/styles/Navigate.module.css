@@ -1,0 +1,111 @@
+.aside{
+    width: 345px;
+    /* height: 300px; */
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Barlow', sans-serif;
+}
+.logo{
+    background-color: unset;
+}
+.aside .aside-header{
+    margin-top: 58px;
+    margin-bottom: 58px;
+    background-color: unset;
+}
+.buttonsMenu{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: unset;
+    position: relative;
+}
+.buttonsMenu a{
+    text-decoration: none;
+    color: black;
+    width: 250px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 8px;
+    background-color: unset;
+    font-weight: 500;
+    position: relative;
+    padding-left: 30px;
+}
+.buttonsMenu .active::before {
+    content: ' ';
+    display: block;
+    width: 8px; 
+    height: 100%; 
+    background-color: #00B074; 
+    margin-right: 15px; 
+    border-radius: 4px; 
+    /* vertical-align: middle;  */
+    position: absolute;
+    left: -20%;
+}
+
+.buttonsMenu a img{
+    margin: 15px 20px;
+    background-color: unset;
+}
+.addMenus{
+    width: 260px;
+    margin-top: 89px;
+    display: flex;
+    padding: 20px;
+    background-color: #00B074;
+    border-radius: 10px;
+}
+.addMenus p{
+    width: 140px;
+    font-size: 12px;
+    color: white;
+    background-color: unset;
+}
+.addMenusText{
+    width: 140px;
+    background-color: unset;
+}
+.addMenusText button{
+    width: 116px;
+    height: 37px;
+    color: #464255;
+    font-size: 15px;
+    background-color: #F2F5F3;
+    border: none;
+    border-radius: 5px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+.addMenus img{
+    background-color: unset;
+}
+.about{
+    width: 245px;
+    background-color: unset;
+    margin-top: 59px;
+    margin-bottom: 43px;
+}
+.about p:nth-child(1){
+    background-color: unset;
+    color: #515151;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.about p:nth-child(2){
+    background-color: unset;
+    color: #969BA0;
+    font-size: 12px;
+    font-weight: 400px;
+}
+.about p:nth-child(3){
+    background-color: unset;
+    color: #969BA0;
+    font-size: 14px;
+    margin-top: 15px;
+}
