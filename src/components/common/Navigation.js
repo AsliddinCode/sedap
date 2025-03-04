@@ -40,6 +40,7 @@ function Navigation() {
           >
             <img src="./home.png" alt="" />
             Dashboard
+            
           </Link>
           <Link
             className={`${router.asPath === "/orders" ? styles.active : ""}`}
