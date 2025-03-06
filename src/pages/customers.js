@@ -14,6 +14,7 @@ export default function Customers() {
       </Head>
       <div>
         <CustomersList />
+        <p>ty</p>
       </div>
     </>
   );
