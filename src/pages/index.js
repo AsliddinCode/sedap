@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import styles from '../styles/Home.module.css'
-export default function Home() {
+import MainLayout from "@/components/Main";
+export default function Dashboard() {
   return (
     <>
       <Head>
@@ -16,3 +17,8 @@ export default function Home() {
     </>
   );
 }
+Dashboard.getLayout = (pageProps) => (
+  <MainLayout>
+    <Dashboard {...pageProps} />
+  </MainLayout>
+)
