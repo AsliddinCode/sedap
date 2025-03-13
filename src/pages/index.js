@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import MainLayout from "@/components/Main";
+import MainLayout from "../components/common/layouts/MainLayout";
 export default function Dashboard() {
   return (
     <>

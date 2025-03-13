@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styles from './StatCal.module.css'
-function Status() {
+
+class Status extends Component {
+ render(){
   return (
     <div className={styles["select"]}>
       <div className={styles["selct-img"]}>
@@ -11,6 +13,7 @@ function Status() {
       </div>
     </div>
   )
+ }
 }
 
 export default Status
