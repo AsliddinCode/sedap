@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import MainLayout from "@/components/Main";
+import MainLayout from "@/components/common/layouts/MainLayout";
 import CustomersList from "@/components/page/customers/Customers";
 
 export default function Customers() {

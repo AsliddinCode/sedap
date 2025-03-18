@@ -1,7 +1,8 @@
 import Head from "next/head";
 import OrdersList from "@/components/pages/orders/OrdersList";
-import MainLayout from "@/components/Main";
-export default function Orders() {
+import MainLayout from "@/components/common/layouts/MainLayout";
+
+function Orders() {
   return (
     <>
       <Head>
@@ -20,3 +21,5 @@ Orders.getLayout = (pageProps) => (
     <Orders {...pageProps} />
   </MainLayout>
 )
+
+export default Orders
