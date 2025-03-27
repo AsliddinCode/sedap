@@ -1,7 +1,6 @@
 .page-order{
     width: 1468px;
     height: 71px;
-    background-color:  #F3F2F7 ;
     display: flex;
     justify-content: space-between;
 }
@@ -14,5 +13,4 @@
 .body{
     width: 100%;
     margin: 0 auto;
-    background-color: #F3F2F7;
 }
