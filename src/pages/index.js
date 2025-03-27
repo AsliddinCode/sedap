@@ -14,6 +14,8 @@ export default function Dashboard() {
       <div>
         <Link className={styles["click"]} href="./orders">
           <h1>dont click me</h1>
+          <p>Asliddin</p>
+          <p>03/27/2025</p>
         </Link>
       </div>
     </>
