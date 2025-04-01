@@ -7,6 +7,82 @@ import styles from "@/styles/Navigate.module.css";
 function Navigation() {
   const router = useRouter();
   console.log("router", router.asPath);
+
+  const page = [
+    {
+      id: 1,
+      linkName: "Dashboard",
+      linkImg: "./home.png",
+      linkHref: "/",
+    },
+    {
+      id: 2,
+      linkName: "Order List",
+      linkImg: "./list.png",
+      linkHref: '/orders',
+    },
+    {
+      id: 3,
+      linkName: "Order Detail",
+      linkImg: "./order.png",
+      linkHref: '#',
+    },
+    {
+      id: 4,
+      linkName: "Customers",
+      linkImg: "./customer.png",
+      linkHref: '#',
+    },
+    {
+      id: 5,
+      linkName: "Analytics",
+      linkImg: "./analis.png",
+      linkHref: '#',
+    },
+    {
+      id: 6,
+      linkName: "Reivews",
+      linkImg: "./review.png",
+      linkHref: '#',
+    },
+    {
+      id: 7,
+      linkName: "Foods",
+      linkImg: "./food.png",
+      linkHref: '#',
+    },
+    {
+      id: 8,
+      linkName: "Foods Details",
+      linkImg: "./foodDetail.png",
+      linkHref: '#',
+    },
+    {
+      id: 9,
+      linkName: "Customers Detail",
+      linkImg: "./customerDetail.png",
+      linkHref: '#',
+    },
+    {
+      id: 10,
+      linkName: "Calendar",
+      linkImg: "./calendar.png",
+      linkHref: '#',
+    },
+    {
+      id: 11,
+      linkName: "chat",
+      linkImg: "./chat.png",
+      linkHref: '#',
+    },
+    {
+      id: 12,
+      linkName: "Wallet",
+      linkImg: "./wallet.png",
+      linkHref: '#',
+    }
+  ];
+
   return (
     <div>
       <Head>
@@ -30,151 +106,20 @@ function Navigation() {
           </p>
         </div>
         <div className={styles["buttonsMenu"]}>
-          <Link
-            className={`${router.asPath === "/" ? styles.active : ""}`}
-            href="/"
-            style={{
-              background: router.asPath === "/" ? "#00B07426" : "",
-              color: router.asPath === "/" ? "#177556" : "",
-            }}
-          >
-            <img src="./home.png" alt="" />
-            Dashboard
-            
-          </Link>
-          <Link
-            className={`${router.asPath === "/orders" ? styles.active : ""}`}
-            href="/orders"
-            style={{
-              background: router.asPath === "/orders" ? "#00B07426" : "",
-
-              color: router.asPath === "/orders" ? "#177556" : "",
-            }}
-          >
-            <img src="./list.png" alt="" />
-            Order List
-          </Link>
-          <Link
-            className={`${
-              router.asPath === "/orderDetail" ? styles.active : ""
-            }`}
-            href="#"
-            style={{
-              background: router.asPath === "/orderDetail" ? "#00B07426" : "",
-              color: router.asPath === "/orderDetail" ? "#177556" : "",
-            }}
-          >
-            <img src="./order.png" alt="" />
-            Order Detail
-          </Link>
-          <Link
-            className={`${router.asPath === "/customers" ? styles.active : ""}`}
-            href="/customers"
-            style={{
-              background: router.asPath === "/customers" ? "#00B07426" : "",
-              color: router.asPath === "/customers" ? "#177556" : "",
-            }}
-          >
-            <img src="./customer.png" alt="" />
-            Customer
-          </Link>
-          <Link
-            className={`${router.asPath === "/analis" ? styles.active : ""}`}
-            href="#"
-            style={{
-              background: router.asPath === "/analis" ? "#00B07426" : "",
-              color: router.asPath === "/analis" ? "#177556" : "",
-            }}
-          >
-            <img src="./analis.png" alt="" />
-            Analytics
-          </Link>
-          <Link
-            className={`${router.asPath === "/review" ? styles.active : ""}`}
-            href="#"
-            style={{
-              background: router.asPath === "/review" ? "#00B07426" : "",
-              color: router.asPath === "/review" ? "#177556" : "",
-            }}
-          >
-            <img src="./review.png" alt="" />
-            Reviews
-          </Link>
-          <Link
-            className={`${router.asPath === "/foods" ? styles.active : ""}`}
-            href="#"
-            style={{
-              background: router.asPath === "/foods" ? "#00B07426" : "",
-              color: router.asPath === "/foods" ? "#177556" : "",
-            }}
-          >
-            <img src="./food.png" alt="" />
-            Foods
-          </Link>
-          <Link
-            className={`${
-              router.asPath === "/foodDetail" ? styles.active : ""
-            }`}
-            href="#"
-            style={{
-              background: router.asPath === "/foodDetail" ? "#00B07426" : "",
-              color: router.asPath === "/foodDetail" ? "#177556" : "",
-            }}
-          >
-            <img src="./foodDetail.png" alt="" />
-            Food Detail
-          </Link>
-          <Link
-            className={`${
-              router.asPath === "/customerDetail" ? styles.active : ""
-            }`}
-            href="#"
-            style={{
-              background:
-                router.asPath === "/customerDetail" ? "#00B07426" : "",
-              color: router.asPath === "/customerDetail" ? "#177556" : "",
-            }}
-          >
-            <img src="./customerDetail.png" alt="" />
-            Customer Detail
-          </Link>
-          <Link
-            className={`${router.asPath === "/calendar" ? styles.active : ""}`}
-            href="#"
-            style={{
-              background: router.asPath === "/calendar" ? "#00B07426" : "",
-              color: router.asPath === "/calendar" ? "#177556" : "",
-            }}
-          >
-            <img src="./calendar.png" alt="" />
-            Calendar
-          </Link>
-          <Link
-            className={`${router.asPath === "/chat" ? styles.active : ""}`}
-            href="#"
-            style={{
-              background: router.asPath === "/chat" ? "#00B07426" : "",
-              color: router.asPath === "/chat" ? "#177556" : "",
-            }}
-          >
-            <img src="./chat.png" alt="" />
-            Chat
-          </Link>
-          <Link
-            className={`${router.asPath === "/wallet" ? styles.active : ""}`}
-            href="#"
-            style={{
-              background: router.asPath === "/wallet" ? "#00B07426" : "",
-              color: router.asPath === "/wallet" ? "#177556" : "",
-            }}
-          >
-            <img src="./wallet.png" alt="" />
-            Wallet
-          </Link>
+          {page.map(({ id, linkName, linkImg, linkHref }) => {
+            return (
+              <Links
+                key={id}
+                linkName={linkName}
+                linkImg={linkImg}
+                linkHref={linkHref}
+              />
+            );
+          })}
         </div>
         <div className={styles["addMenus"]}>
           <div className={styles["addMenusText"]}>
-            <p>Please, organize your menus through button bellow!</p>
+            <p>Please, organize your menus through button below!</p>
             <button>+Add Menus</button>
           </div>
           <img src="./illustration.png" alt="" />
@@ -191,3 +136,21 @@ function Navigation() {
 }
 
 export default Navigation;
+
+function Links(props) {
+  const { linkName, linkImg, linkHref } = props;
+  const router = useRouter();
+  return (
+    <Link
+      className={`${router.asPath === linkHref ? styles.active : ""}`}
+      href={linkHref}
+      style={{
+        background: router.asPath === linkHref ? "#00B07426" : "",
+        color: router.asPath === linkHref ? "#177556" : "",
+      }}
+    >
+      <img src={linkImg} alt={linkName} />
+      {linkName}
+    </Link>
+  );
+}
