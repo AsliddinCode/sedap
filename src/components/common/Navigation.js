@@ -6,9 +6,6 @@ import styles from "@/styles/Navigate.module.css";
 import Image from "next/image";
 
 function Navigation() {
-  const router = useRouter();
-  console.log("router", router.asPath);
-
   const page = [
     {
       id: 1,
@@ -42,7 +39,7 @@ function Navigation() {
     },
     {
       id: 6,
-      linkName: "Reivews",
+      linkName: "Reviews",
       linkImg: "/review.png",
       linkHref: "#",
     },
@@ -72,7 +69,7 @@ function Navigation() {
     },
     {
       id: 11,
-      linkName: "chat",
+      linkName: "Chat",
       linkImg: "/chat.png",
       linkHref: "#",
     },
@@ -95,7 +92,7 @@ function Navigation() {
 
       <aside className={styles["aside"]}>
         <div className={styles["aside-header"]}>
-          <image src="/Sedap.png" alt="" className={styles["logo"]} />
+          <Image src="/Sedap.png" alt="Logo" className={styles["logo"]} width={167} height={49}/>
           <p
             style={{
               color: "#B9BBBD",
@@ -107,23 +104,21 @@ function Navigation() {
           </p>
         </div>
         <div className={styles["buttonsMenu"]}>
-          {page.map(({ id, linkName, linkImg, linkHref }) => {
-            return (
-              <Links
-                key={id}
-                linkName={linkName}
-                linkImg={linkImg}
-                linkHref={linkHref}
-              />
-            );
-          })}
+          {page.map(({ id, linkName, linkImg, linkHref }) => (
+            <Links
+              key={id}
+              linkName={linkName}
+              linkImg={linkImg}
+              linkHref={linkHref}
+            />
+          ))}
         </div>
         <div className={styles["addMenus"]}>
           <div className={styles["addMenusText"]}>
             <p>Please, organize your menus through button below!</p>
             <button>+Add Menus</button>
           </div>
-          <image src="/illustration.png" alt="" />
+          <Image src="/illustration.png" alt="" width={77} height={91} />
         </div>
         <div className={styles["about"]}>
           <p>Sedap Restaurant Admin Dashboard</p>
@@ -131,26 +126,26 @@ function Navigation() {
           <p>Made with ♥ by Peterdraw</p>
         </div>
       </aside>
-      {/* <Section/> */}
     </div>
   );
 }
 
 export default Navigation;
 
-function Links(props) {
-  const { linkName, linkImg, linkHref } = props;
+function Links({ linkName, linkImg, linkHref }) {
   const router = useRouter();
+  const isActive = router.asPath === linkHref;
+
   return (
     <Link
-      className={`${router.asPath === linkHref ? styles.active : ""}`}
       href={linkHref}
+      className={`${isActive ? styles.active : ""}`}
       style={{
-        background: router.asPath === linkHref ? "#00B07426" : "",
-        color: router.asPath === linkHref ? "#177556" : "",
+        background: isActive ? "#00B07426" : "",
+        color: isActive ? "#177556" : "",
       }}
     >
-      <image src={linkImg} alt={linkName} />
+      <Image src={linkImg} alt={linkName} width={24} height={24} />
       {linkName}
     </Link>
   );
