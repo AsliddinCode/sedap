@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "@/styles/Navigate.module.css";
+import Image from "next/image";
 
 function Navigation() {
   const router = useRouter();
@@ -12,75 +13,75 @@ function Navigation() {
     {
       id: 1,
       linkName: "Dashboard",
-      linkImg: "./home.png",
+      linkImg: "/home.png",
       linkHref: "/",
     },
     {
       id: 2,
       linkName: "Order List",
-      linkImg: "./list.png",
-      linkHref: '/orders',
+      linkImg: "/list.png",
+      linkHref: "/orders",
     },
     {
       id: 3,
       linkName: "Order Detail",
-      linkImg: "./order.png",
-      linkHref: '#',
+      linkImg: "/order.png",
+      linkHref: "#",
     },
     {
       id: 4,
       linkName: "Customers",
-      linkImg: "./customer.png",
-      linkHref: '#',
+      linkImg: "/customer.png",
+      linkHref: "#",
     },
     {
       id: 5,
       linkName: "Analytics",
-      linkImg: "./analis.png",
-      linkHref: '#',
+      linkImg: "/analis.png",
+      linkHref: "#",
     },
     {
       id: 6,
       linkName: "Reivews",
-      linkImg: "./review.png",
-      linkHref: '#',
+      linkImg: "/review.png",
+      linkHref: "#",
     },
     {
       id: 7,
       linkName: "Foods",
-      linkImg: "./food.png",
-      linkHref: '#',
+      linkImg: "/food.png",
+      linkHref: "#",
     },
     {
       id: 8,
       linkName: "Foods Details",
-      linkImg: "./foodDetail.png",
-      linkHref: '#',
+      linkImg: "/foodDetail.png",
+      linkHref: "#",
     },
     {
       id: 9,
       linkName: "Customers Detail",
-      linkImg: "./customerDetail.png",
-      linkHref: '#',
+      linkImg: "/customerDetail.png",
+      linkHref: "#",
     },
     {
       id: 10,
       linkName: "Calendar",
-      linkImg: "./calendar.png",
-      linkHref: '#',
+      linkImg: "/calendar.png",
+      linkHref: "#",
     },
     {
       id: 11,
       linkName: "chat",
-      linkImg: "./chat.png",
-      linkHref: '#',
+      linkImg: "/chat.png",
+      linkHref: "#",
     },
     {
       id: 12,
       linkName: "Wallet",
-      linkImg: "./wallet.png",
-      linkHref: '#',
-    }
+      linkImg: "/wallet.png",
+      linkHref: "#",
+    },
   ];
 
   return (
@@ -94,7 +95,7 @@ function Navigation() {
 
       <aside className={styles["aside"]}>
         <div className={styles["aside-header"]}>
-          <img src="./Sedap.png" alt="" className={styles["logo"]} />
+          <image src="/Sedap.png" alt="" className={styles["logo"]} />
           <p
             style={{
               color: "#B9BBBD",
@@ -122,7 +123,7 @@ function Navigation() {
             <p>Please, organize your menus through button below!</p>
             <button>+Add Menus</button>
           </div>
-          <img src="./illustration.png" alt="" />
+          <image src="/illustration.png" alt="" />
         </div>
         <div className={styles["about"]}>
           <p>Sedap Restaurant Admin Dashboard</p>
@@ -149,7 +150,7 @@ function Links(props) {
         color: router.asPath === linkHref ? "#177556" : "",
       }}
     >
-      <img src={linkImg} alt={linkName} />
+      <image src={linkImg} alt={linkName} />
       {linkName}
     </Link>
   );
