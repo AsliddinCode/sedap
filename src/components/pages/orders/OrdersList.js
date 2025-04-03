@@ -7,8 +7,7 @@ import OrderListTable from "./OrderListTable";
 
 function OrdersList() {
   return (
-    <div className={styles['body']}>
-      <div className={styles['main']}>
+    <div className={styles["body"]}>
       <div className={styles["page-order"]}>
         <PageTitle
           title={"Your Orders"}
@@ -21,7 +20,6 @@ function OrdersList() {
       </div>
       <div className="table">
         <OrderListTable />
-      </div>
       </div>
     </div>
   );
