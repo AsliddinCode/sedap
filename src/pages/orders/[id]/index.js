@@ -9,7 +9,7 @@ function OrderDetail() {
         }
     })
     console.log('OrderDetail', currentOrder)
-    return <div>Bu {currentOrder.userName}</div>
+    return <div>Bu detail page</div>
     
 }
 
