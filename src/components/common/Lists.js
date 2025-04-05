@@ -12,16 +12,16 @@ function Lists(props) {
 
   return (
     <div className={`${styles["page"]}`}>
-      <p style={{ cursor: "pointer" }} onClick={() => goToDetails(item.num)}>
-        # {item.num}
+      <p style={{ cursor: "pointer" }} onClick={() => goToDetails(item.userId)}>
+        # {item.userId}
       </p>
-      <p>{item.title}</p>
-      <p>{item.name}</p>
-      <p>{item.locate}</p>
-      <p>{item.balans}</p>
-      <button className={styles["delever"]}>{item.order}</button>
+      <p>{item.date}</p>
+      <p>{item.userName}</p>
+      <p>{item.location}</p>
+      <p>{item.amount}</p>
+      <button className={styles["delever"]}>{item.status}</button>
       <button className={styles["nuqtalar"]}>
-        <img src={item.image} alt="" />
+        ***
       </button>
     </div>
   );

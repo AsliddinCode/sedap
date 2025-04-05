@@ -7,21 +7,21 @@ import OrderListTable from "./OrderListTable";
 
 function OrdersList() {
   return (
-    <div className={styles['body']}>
-      <div className={styles['main']}>
-      <div className={styles["page-order"]}>
-        <PageTitle
-          title={"Your Orders"}
-          subtitle={"This is your order list data"}
-        />
-        <div className={styles["data"]}>
-          <Status />
-          <Calendar />
+    <div className={styles["body"]}>
+      <div className={styles["main"]}>
+        <div className={styles["page-order"]}>
+          <PageTitle
+            title={"Your Orders"}
+            subtitle={"This is your order list data"}
+          />
+          <div className={styles["data"]}>
+            <Status />
+            <Calendar />
+          </div>
         </div>
-      </div>
-      <div className="table">
-        <OrderListTable />
-      </div>
+        <div className="table">
+          <OrderListTable />
+        </div>
       </div>
     </div>
   );

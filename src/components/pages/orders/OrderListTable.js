@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./OrderListTabel.module.css";
 import Lists from "@/components/common/Lists";
-import { data } from "@/data";
+import Data from '@/components/page/Data'
 
 function OrderListTable() {
   return (
@@ -34,8 +34,8 @@ function OrderListTable() {
       </div>
 
       <div className={styles["lists"]}>
-        {data.map((item) => {
-          return <Lists key={item.id} item={item} />;
+        {Data.map((item) => {
+          return <Lists key={item.userId} item={item} />;
         })}
       </div>
 

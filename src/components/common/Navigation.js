@@ -78,7 +78,7 @@ function Navigation() {
   return (
     <div>
       <Head>
-        <link
+        <labelink
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap"
         />
@@ -86,7 +86,13 @@ function Navigation() {
 
       <aside className={styles["aside"]}>
         <div className={styles["aside-header"]}>
-          <Image src="/Sedap.png" alt="Logo" className={styles["logo"]} width={167} height={49}/>
+          <Image
+            src="/Sedap.png"
+            alt="Logo"
+            className={styles["logo"]}
+            width={167}
+            height={49}
+          />
           <p
             style={{
               color: "#B9BBBD",

@@ -1,6 +1,6 @@
-import MainLayout from "@/components/common/layouts/MainLayout";
 import { useParams } from "next/navigation";
-import orderListData from "../../../components/page/Data";
+import orderListData from "@/components/page/Data";
+
 function OrderDetail() {
     const route = useParams();
     const currentOrder = orderListData.find((item) => {
@@ -9,9 +9,8 @@ function OrderDetail() {
         }
     })
     console.log('OrderDetail', currentOrder)
-    return (
-        <div>Bu order detail</div>
-    )
+    return <div>Bu {currentOrder.userName}</div>
+    
 }
 
 export default OrderDetail
