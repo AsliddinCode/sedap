@@ -20,12 +20,6 @@ function Navigation() {
       linkHref: "/orders",
     },
     {
-      id: 3,
-      linkName: "Order Detail",
-      linkImg: "/order.png",
-      linkHref: "#",
-    },
-    {
       id: 4,
       linkName: "Customers",
       linkImg: "/customer.png",

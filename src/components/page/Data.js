@@ -10,7 +10,7 @@ const orderListData = [
     {
       userId: 135231,
       date: "26 March 2020, 12:42 AM",
-      userName: "Mikasa Ackerman",
+      userName: "Mikasa",
       location: "Corner Street 5th London",
       amount: 164.52,
       status: "On Delivery",

@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./OrderListTabel.module.css";
 import Lists from "@/components/common/Lists";
-import { data } from '@/data'
+import { data } from "@/data";
+
 function OrderListTable() {
   return (
     <div>
@@ -31,24 +32,26 @@ function OrderListTable() {
           </select>
         </div>
       </div>
-      <div className={styles['lists']}>
-        {
-          data.map((item)=>{
-            return (
-              <Lists key={item.id} item={item}/>
-            )
-          })
-        }
+
+      <div className={styles["lists"]}>
+        {data.map((item) => {
+          return <Lists key={item.id} item={item} />;
+        })}
       </div>
-      <div className={styles['showing']}>
+
+      <div className={styles["showing"]}>
         <p>Showing 12 from 46 data</p>
-        <div className={styles['btn-num']}>
-          <button className={styles['btn']}><img src="/chap.png" alt="" /></button>
-          <button className={styles['btn']}>1</button>
-          <button className={styles['btn']}>2</button>
-          <button className={styles['btn']}>3</button>
-          <button className={styles['btn']}>4</button>
-          <button className={styles['btn']}><img src="/ung.png" alt="" /></button>
+        <div className={styles["btn-num"]}>
+          <button className={styles["btn"]}>
+            <img src="/chap.png" alt="" />
+          </button>
+          <button className={styles["btn"]}>1</button>
+          <button className={styles["btn"]}>2</button>
+          <button className={styles["btn"]}>3</button>
+          <button className={styles["btn"]}>4</button>
+          <button className={styles["btn"]}>
+            <img src="/ung.png" alt="" />
+          </button>
         </div>
       </div>
     </div>
