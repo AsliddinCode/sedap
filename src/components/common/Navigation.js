@@ -2,79 +2,100 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import styles from "@/styles/Navigate.module.css";
+import styles from "@/styles/Aside.module.css";
+import Section from "./Section";
 import Image from "next/image";
 
-function Navigation() {
-  const page = [
+function Navigation(props) {
+  const router = useRouter();
+  console.log("router", router.asPath);
+
+  const links = [
     {
       id: 1,
       linkName: "Dashboard",
       linkImg: "/home.png",
-      linkHref: "/",
+      href: "/",
+      active: true,
     },
     {
       id: 2,
       linkName: "Order List",
       linkImg: "/list.png",
-      linkHref: "/orders",
+      href: "/orders",
+      active: true,
+    },
+    {
+      id: 3,
+      linkName: "Order Detail",
+      linkImg: "/order.png",
+      href: "/orderDetail",
+      active: true,
     },
     {
       id: 4,
       linkName: "Customers",
       linkImg: "/customer.png",
-      linkHref: "#",
+      href: "/customers",
+      active: true,
     },
     {
       id: 5,
       linkName: "Analytics",
       linkImg: "/analis.png",
-      linkHref: "#",
+      href: "/analis",
+      active: true,
     },
     {
       id: 6,
-      linkName: "Reviews",
+      linkName: "Review",
       linkImg: "/review.png",
-      linkHref: "#",
+      href: "/review",
+      active: true,
     },
     {
       id: 7,
       linkName: "Foods",
       linkImg: "/food.png",
-      linkHref: "#",
+      href: "/food",
+      active: true,
     },
     {
       id: 8,
-      linkName: "Foods Details",
+      linkName: "Food Detail",
       linkImg: "/foodDetail.png",
-      linkHref: "#",
+      href: "/foodDetail",
+      active: true,
     },
     {
       id: 9,
-      linkName: "Customers Detail",
+      linkName: "Customer Detail",
       linkImg: "/customerDetail.png",
-      linkHref: "#",
+      href: "/customerDetail",
+      active: true,
     },
     {
       id: 10,
       linkName: "Calendar",
       linkImg: "/calendar.png",
-      linkHref: "#",
+      href: "/calendar",
+      active: true,
     },
     {
       id: 11,
       linkName: "Chat",
       linkImg: "/chat.png",
-      linkHref: "#",
+      href: "/chat",
+      active: true,
     },
     {
       id: 12,
       linkName: "Wallet",
       linkImg: "/wallet.png",
-      linkHref: "#",
+      href: "/wallet",
+      active: true,
     },
   ];
-
   return (
     <div>
       <Head>
@@ -86,7 +107,13 @@ function Navigation() {
 
       <aside className={styles["aside"]}>
         <div className={styles["aside-header"]}>
-          <Image src="/Sedap.png" alt="Logo" className={styles["logo"]} width={167} height={49}/>
+          <Image
+            src="/Sedap.png"
+            alt=""
+            className={styles["logo"]}
+            width={167}
+            height={49}
+          />
           <p
             style={{
               color: "#B9BBBD",
@@ -98,21 +125,22 @@ function Navigation() {
           </p>
         </div>
         <div className={styles["buttonsMenu"]}>
-          {page.map(({ id, linkName, linkImg, linkHref }) => (
+          {links.map(({ id, href, linkName, linkImg, active }) => (
             <Links
               key={id}
               linkName={linkName}
               linkImg={linkImg}
-              linkHref={linkHref}
+              href={href}
+              active={active}
             />
           ))}
         </div>
         <div className={styles["addMenus"]}>
           <div className={styles["addMenusText"]}>
-            <p>Please, organize your menus through button below!</p>
+            <p>Please, organize your menus through button bellow!</p>
             <button>+Add Menus</button>
           </div>
-          <Image src="/illustration.png" alt="" width={77} height={91} />
+          <img src="./illustration.png" alt="" />
         </div>
         <div className={styles["about"]}>
           <p>Sedap Restaurant Admin Dashboard</p>
@@ -120,27 +148,29 @@ function Navigation() {
           <p>Made with ♥ by Peterdraw</p>
         </div>
       </aside>
+      {/* <Section/> */}
     </div>
   );
 }
 
-export default Navigation;
-
-function Links({ linkName, linkImg, linkHref }) {
+function Links(props) {
+  const { linkName, linkImg, href, active } = props;
   const router = useRouter();
-  const isActive = router.asPath === linkHref;
-
   return (
-    <Link
-      href={linkHref}
-      className={`${isActive ? styles.active : ""}`}
-      style={{
-        background: isActive ? "#00B07426" : "",
-        color: isActive ? "#177556" : "",
-      }}
-    >
-      <Image src={linkImg} alt={linkName} width={24} height={24} />
-      {linkName}
-    </Link>
+    <>
+      <Link
+        className={`${router.asPath === href ? styles.active : ""}`}
+        href={href}
+        style={{
+          background: router.asPath === href ? "#00B07426" : "",
+          color: router.asPath === href ? "#177556" : "",
+        }}
+      >
+        <Image src={linkImg} alt={linkName} width={20} height={20} />
+        {linkName}
+      </Link>
+    </>
   );
 }
+
+export default Navigation;

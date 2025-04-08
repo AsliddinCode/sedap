@@ -1,7 +1,7 @@
 import Head from "next/head";
+import CustomersList from "@/components/pages/customers/CustomersList";
+import MainLayout from "@/components/common/layouts/MainLayout";
 import styles from "@/styles/Home.module.css";
-import MainLayout from "@/components/Main";
-import CustomersList from "@/components/page/customers/Customers";
 
 export default function Customers() {
   return (
@@ -20,7 +20,7 @@ export default function Customers() {
 }
 
 Customers.getLayout = (pageProps) => (
-    <MainLayout>
-      <Customers {...pageProps} />
-    </MainLayout>
-)
+  <MainLayout>
+    <Customers {...pageProps} />
+  </MainLayout>
+);

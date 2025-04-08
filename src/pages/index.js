@@ -1,7 +1,19 @@
 import Head from "next/head";
-import Link from "next/link";
-import styles from "../styles/Home.module.css";
-import MainLayout from "@/components/Main";
+import Image from "next/image";
+import { Geist, Geist_Mono } from "next/font/google";
+import MainLayout from "@/components/common/layouts/MainLayout";
+import styles from "@/styles/Home.module.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
 export default function Dashboard() {
   return (
     <>
@@ -11,16 +23,11 @@ export default function Dashboard() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <Link className={styles["click"]} href="./orders">
-          <h1>dont click me</h1>
-          <p>Asliddin</p>
-          <p>03/27/2025</p>
-        </Link>
-      </div>
+      <div></div>
     </>
   );
 }
+
 Dashboard.getLayout = (pageProps) => (
   <MainLayout>
     <Dashboard {...pageProps} />
