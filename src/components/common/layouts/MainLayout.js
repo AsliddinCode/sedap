@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Navigation from "../Navigation";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function MainLayout(props) {
   const router = useRouter();
@@ -22,7 +23,6 @@ function MainLayout(props) {
           Dashboard
         </h1> */}
         <div style={{ display: router.asPath === "/" ? "block" : "none" }}>
-          <h1 style={{ marginLeft: "20px" }}>Asilbek </h1>
           <h1 style={{ marginLeft: "20px" }}>{[date, "-", month, "-", year]}</h1>
         </div>
       </div>
