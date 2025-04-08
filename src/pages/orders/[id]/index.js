@@ -8,7 +8,7 @@ function OrderDetail() {
     }
   });
   console.log("OrderDetail", currentOrder);
-  return <div>Bu order detail</div>;
+  return <div>Bu order detail{currentOrder?.userName}</div>;
 }
 
 export default OrderDetail;

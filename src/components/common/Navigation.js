@@ -26,13 +26,6 @@ function Navigation(props) {
       active: true,
     },
     {
-      id: 3,
-      linkName: "Order Detail",
-      linkImg: "/order.png",
-      href: "/orderDetail",
-      active: true,
-    },
-    {
       id: 4,
       linkName: "Customers",
       linkImg: "/customer.png",

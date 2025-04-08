@@ -70,6 +70,10 @@ function TableHead({ name }) {
 }
 
 function TableRow(props) {
+  const route = useRouter();
+  const goToDetails = (id) => {
+    route.push(`/orders/${id}`);
+  };
   const { item } = props;
   return (
     <tr
@@ -88,7 +92,11 @@ function TableRow(props) {
         ) : (
           ""
         )}
-        {item.status === "New Order" ? <div className={styles["newOrder"]}>{item.status}</div> : ""}
+        {item.status === "New Order" ? (
+          <div className={styles["newOrder"]}>{item.status}</div>
+        ) : (
+          ""
+        )}
         {item.status === "Delivered" ? (
           <div className={styles["delivered"]}>{item.status}</div>
         ) : (
