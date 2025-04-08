@@ -2,7 +2,6 @@ import React from "react";
 import Head from "next/head";
 import Navigation from "../Navigation";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 function MainLayout(props) {
   const router = useRouter();
