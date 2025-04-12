@@ -1,26 +1,22 @@
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Status from './Status'
-import Calendar from './Calendar'
 import styles from '@/styles/order.module.css'
 import Table from '../pages/orders/Table'
+import Allstatus from './Allstatus'
 
 export default function Section() {
     return (
         <>
             <Head>
-                <link
+                <Link
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap"
                 />
             </Head>
             <div>
                 <div className={styles["orderDiv"]}>
-                    <div className={styles["calendar"]}>
-                        <Status />
-                        <Calendar />
-                    </div>
+                    <Allstatus/>
                 </div>
                 <div className={'tableData'}>
                     <Table/>

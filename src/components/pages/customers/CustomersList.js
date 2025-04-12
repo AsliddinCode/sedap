@@ -19,11 +19,6 @@ export default function CustomersList() {
       <div className={"tableData"}>
         <CustomerTable />
       </div>
-      {/* <PageTitle
-        title="General Customer"
-        subtitle="Here is your general customers list data"
-      />
-      <CustomerTable /> */}
     </>
   );
 }

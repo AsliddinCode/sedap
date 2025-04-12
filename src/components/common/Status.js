@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '@/styles/order.module.css'
 
-function Status() {
+function Status(props) {
     return (
         <div>
             <div className={styles['status']}>

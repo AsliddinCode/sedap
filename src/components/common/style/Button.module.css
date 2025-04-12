@@ -1,0 +1,9 @@
+.btn{
+    max-width: 96px;
+    width: 100%;
+    height: 33px;
+    border-radius: 6px;
+    border: 1px #00B07426;
+    color: #00B074;
+    background-color: #00B07426;
+}

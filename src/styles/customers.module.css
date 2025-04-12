@@ -1,16 +1,11 @@
 .orderDiv {
   display: flex;
-  width: 100%;
-  height: 68px;
-  justify-content: center;
   justify-content: space-between;
-  margin: 40px 0;
   font-family: "Barlow", sans-serif;
-  margin-left: 30px;
+  margin-bottom: 40px;
 }
 .calendar {
   display: flex;
-  margin-left: 828px;
 }
 .status {
   display: flex;
@@ -31,7 +26,6 @@
   font-size: 16px;
 }
 .th div {
-  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: left;
@@ -40,78 +34,43 @@
   width: 10px;
   height: 6px;
 }
-.table {
+.orderTable {
   width: 100%;
   font-family: "Barlow", sans-serif;
   border-collapse: collapse;
 }
-.th,
-.td {
-  /* width: 100%; */
-  padding: 0px 55px;
-}
-/* .td1 {
-  text-align: center;
-} */
-.td12 {
-  width: 77px;
-  height: 43px;
-  background-color: #4642551a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 15px;
-  margin: 20px auto;
-}
-.tr {
-  height: 70px;
+.orderTable thead {
   background-color: #2d9cdb;
   color: white;
 }
-.table .th:nth-child(1) {
+.orderTable .tr th {
+  padding: 24px 0;
+}
+.orderTable .tr th:first-child,
+.orderTable .tr td:first-child {
+  padding-left: 70px;
+}
+.orderTable .tr td {
+  padding: 24px 0;
+}
+
+.orderTable .th:nth-child(1) {
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
 }
-.table .th:nth-child(6) {
+.orderTable .th:nth-child(6) {
   border-bottom-right-radius: 15px;
   border-top-right-radius: 15px;
 }
-.tr2 {
-  height: 70px;
-  background-color: white;
-  cursor: pointer;
-  /* align-items: center; */
+
+.orderTable tbody .tr:hover {
+  background-color: aliceblue;
 }
-.onDelivery {
-  width: 150px;
-  height: 50px;
-  background-color: #2d9cdb26;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 15px;
-  color: #2d9cdb;
+.orderTable .td:nth-child(1) {
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
 }
-.newOrder {
-  width: 150px;
-  height: 50px;
-  background-color: #ff6d4d1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 15px;
-  color: #ff6d4d;
-}
-.delivered {
-  width: 150px;
-  height: 50px;
-  background-color: #00b07426;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 15px;
-  color: #177556;
-}
-.td1 {
-  text-align: center;
+.orderTable .td:nth-child(8) {
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
 }

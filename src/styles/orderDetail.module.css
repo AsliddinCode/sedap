@@ -1,0 +1,139 @@
+.container{
+  max-width: 1440px;
+     
+}.orderDetail {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+.user{  
+  max-width: 339px;
+  margin-right: 40px;
+}
+
+.profil {
+  max-height: 614px;
+  height: 100%;
+  width: 100%;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;  
+}
+
+.icon {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+  height: 317px;
+}
+
+.icon img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 20px 0;
+}
+
+.icon h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.text {
+  width: 100%;
+  background-color: #5e6c93;
+  border-radius: 16px;
+}
+
+.info {
+  height: 220px;
+  padding: 30px;
+  color: white;
+}
+
+.info h1 {
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.info p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.dastabka {
+  background-color: skyblue;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+  height: 110px;
+}
+
+.dastabka p {
+  width: 157px;
+  font-weight: 600;
+  line-height: 26px;
+  color: aliceblue;
+  margin-left: 10px;
+}
+
+.dastabka img {
+  width: 28px;
+  height: 28px;
+}
+
+.iconCircle {
+  border-radius: 50%;
+  width: 49px;
+  height: 49px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row{
+  height: 599px;
+  max-width: 1090px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px aliceblue;
+}
+.map{
+  background-image: url(/mask.png);
+  width: 1030px;
+  height: 349px;
+}
+.set1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delevir{
+  margin-top: 43px;
+}
+.delvir{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px;
+}
+.btn{
+  width: 271px;
+  height: 81px;
+  border-radius: 12px ;
+  border: 1px solid #2D9CDB;
+  background-color: white;
+  padding: 16px;
+}

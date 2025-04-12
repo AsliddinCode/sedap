@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "@/styles/order.module.css";
-import orderListData from "./Data";
+import { orderListData } from '@/data'
 import { useRouter } from "next/router";
 
 export default function Table() {
@@ -42,7 +42,7 @@ export default function Table() {
       </thead>
       <tbody>
         {orderListData.map((item) => (
-          <TableRow key={item.userId} item={item} />
+          <TableRow key={item.id} item={item} />
         ))}
       </tbody>
     </table>
@@ -70,18 +70,20 @@ function TableHead({ name }) {
 }
 
 function TableRow(props) {
-  const route = useRouter();
-  const goToDetails = (id) => {
-    route.push(`/orders/${id}`);
-  };
   const { item } = props;
+  const router = useRouter();
+
+  const goToDetails = (itemId) => {
+    router.push(`/orders/${itemId}`);
+  };  
+
   return (
     <tr
       className={styles["tr"]}
       style={{ cursor: "pointer" }}
-      onClick={() => goToDetails(item.userId)}
+      onClick={() => goToDetails(item.id)}
     >
-      <td className={styles["td"]}>#{item.userId}</td>
+      <td className={styles["td"]}>#{item.id}</td>
       <td className={styles["td"]}>{item.date}</td>
       <td className={styles["td"]}>{item.userName}</td>
       <td className={styles["td"]}>{item.location}</td>
