@@ -1,9 +1,25 @@
 import Head from "next/head";
-import CustomersList from "@/components/pages/customers/CustomersList";
 import MainLayout from "@/components/common/layouts/MainLayout";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/customerdetail.module.css";
+import PageTitle from "@/components/common/PageTitle";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { customerData } from "@/data";
+import Box from "@mui/material/Box";
+
+import Grid from "@mui/material/Grid";
 
 export default function CustomerDetail() {
+  const router = useRouter();
+  const [currentCustomer, setCurrentCustomer] = useState(null);
+  useEffect(() => {
+    if (router.query.id) {
+      setCurrentCustomer(
+        customerData.find((item) => item.id === router.query.id)
+      );
+    }
+  }, [router]);
+  console.log("customer", currentCustomer);
   return (
     <>
       <Head>
@@ -12,8 +28,113 @@ export default function CustomerDetail() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-       <p>CustomerDetail page</p>
+      <div className={styles["container"]}>
+        <PageTitle
+          title={"Customer Detail"}
+          subtitle={"Here your Customer Detail Profile"}
+        />
+        <Grid container spacing={2}>
+          <Grid size={{ lg: 12, xl: 8 }}>
+            <div className={styles["info"]}>
+              <div>
+                <img src="/avatar.png" alt="" />
+              </div>
+              <div className={styles["title"]}>
+                <div className={styles["name"]}>
+                  <div className={styles["main"]}>
+                    <h2>{currentCustomer?.userName}</h2>
+                    <p>UX Designer</p>
+                    <p>{currentCustomer?.location}</p>
+                  </div>
+                  <div className={styles["btn"]}>
+                    <button
+                      style={{
+                        border: "none",
+                        backgroundColor: "unset",
+                        marginRight: "20px",
+                        width: "60px",
+                        height: "60px",
+                      }}
+                    >
+                      <img src="/info.png" alt="" />
+                    </button>
+                    <button
+                      style={{
+                        border: "none",
+                        backgroundColor: "unset",
+                        width: "60px",
+                        height: "60px",
+                      }}
+                    >
+                      <img src="/edit.png" alt="" />
+                    </button>
+                  </div>
+                </div>
+                <div className={styles["email"]}>
+                  <div className={styles["icon"]}>
+                    <img src="/mail.png" alt="" />
+                    <p>eren.yeager@mail.co.id</p>
+                  </div>
+                  <div className={styles["icon"]}>
+                    <img src="/mail.png" alt="" />
+                    <p>+012 345 6789</p>
+                  </div>
+                  <div className={styles["icon"]}>
+                    <img src="/mail.png" alt="" />
+                    <p>Highspeed Studios</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Grid>
+          <Grid
+            sx={{
+              backgroundColor: "#00B074",
+              borderRadius: "16px",
+              color: "white",
+              minWidth: "457px",
+            }}
+            size={4}
+          >
+            <div className={styles["balance"]}>
+              <div className={styles["your"]}>
+                <p>Your Balance</p>
+                <h2>***</h2>
+              </div>
+              <h1>$9,452</h1>
+              <div className={styles["your"]}>
+                <h3>2451 **** **** ****</h3>
+                <h3>02/21</h3>
+              </div>
+            </div>
+            <div className={styles["master"]}>
+              <div>
+                <p>Name</p>
+                <h2>Eren Yeager</h2>
+              </div>
+              <img src="/master.png" alt="" />
+            </div>
+          </Grid>
+        </Grid>
+
+        <div className={styles["order"]}>
+          <div className={styles["food"]}>
+            <div className={styles["most"]}>
+              <h3>Most Ordered Food</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur</p>
+            </div>
+            <div className={styles["data"]}>
+              <button className={styles["month"]}>Monthly</button>
+              <button className={styles["month"]}>Weekly</button>
+              <button className={styles["month"]}>Daily</button>
+            </div>
+          </div>
+          <div className={styles["list"]}>
+            {currentCustomer?.item?.map((item, index) => (
+              <Lists key={index} item={item} />
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
@@ -24,3 +145,67 @@ CustomerDetail.getLayout = (pageProps) => (
     <CustomerDetail {...pageProps} />
   </MainLayout>
 );
+
+function Lists(props) {
+  const { item } = props;
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div>
+        <img
+          style={{
+            width: "87px",
+            height: "87px",
+            marginRight: "30px",
+          }}
+          src={item.img}
+          alt=""
+        />
+      </div>
+
+      <div
+        style={{
+          flexGrow: "1",
+        }}
+      >
+        <div>
+          <h5>{item.food}</h5>
+          <p
+            style={{
+              color: "#2D9CDB",
+            }}
+          >
+            {" "}
+            {item.name}
+          </p>
+        </div>
+        <p>Serves for 4 Person 24mins</p>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
+        <p>${item.cost}</p>
+        <button
+          style={{
+            border: "none",
+            backgroundColor: "unset",
+            fontWeight: "1000",
+            fontSize: "14px",
+            marginLeft: "35px",
+            marginRight: "20px",
+          }}
+        >
+          ***
+        </button>
+      </div>
+    </Box>
+  );
+}

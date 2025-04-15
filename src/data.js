@@ -158,6 +158,13 @@ export const customerData = [
     location: "Corner Street 5th London",
     amount: 164.52,
     lastAmount: 98,
+    item:[{
+      id:'1',
+      img:'/burchak.png',
+      food:'Meidum Spicy Spagethi Italiano',
+      name:'SPAGETHI',
+      cost:'12.56',
+    }]
   },
   {
     id: "135231",
@@ -166,6 +173,13 @@ export const customerData = [
     location: "Corner Street 5th London",
     amount: 164.52,
     lastAmount: 98,
+    item:[{
+      id:'2',
+      img:'/burchak.png',
+      food:'Meidum Spicy Spagethi Italiano',
+      name:'SPAGETHI',
+      cost:'12.56',
+    }]
   },
   {
     id: "325231",
@@ -174,6 +188,13 @@ export const customerData = [
     location: "Corner Street 5th London",
     amount: 164.52,
     lastAmount: 98,
+    item:[{
+      id:'3',
+      img:'/burchak.png',
+      food:'Meidum Spicy Spagethi Italiano',
+      name:'SPAGETHI',
+      cost:'12.56',
+    }]
   },
   {
     id: "555231",
@@ -182,6 +203,13 @@ export const customerData = [
     location: "Corner Street 5th London",
     amount: 164.52,
     lastAmount: 98,
+    item:[{
+      id:'4',
+      img:'/burchak.png',
+      food:'Meidum Spicy Spagethi Italiano',
+      name:'SPAGETHI',
+      cost:'12.56',
+    }]
   },
   {
     id: "523231",
@@ -190,6 +218,13 @@ export const customerData = [
     location: "Corner Street 5th London",
     amount: 164.52,
     lastAmount: 98,
+    item:[{
+      id:'5',
+      img:'/burchak.png',
+      food:'Meidum Spicy Spagethi Italiano',
+      name:'SPAGETHI',
+      cost:'12.56',
+    }]
   },
   {
     id: "558831",
@@ -198,5 +233,12 @@ export const customerData = [
     location: "Corner Street 5th London",
     amount: 164.52,
     lastAmount: 98,
+    item:[{
+      id:'6',
+      img:'/burchak.png',
+      food:'Meidum Spicy Spagethi Italiano',
+      name:'SPAGETHI',
+      cost:'12.56',
+    }]
   },
 ];
