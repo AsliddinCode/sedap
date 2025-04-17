@@ -5,10 +5,11 @@ import styles from '@/styles/order.module.css'
 import PageTitle from "./PageTitle";
 
 
-function Allstatus() {
+function Allstatus(props) {
+  const {id} = props
   return (
     <div className={styles["orderDiv"]}>
-    <PageTitle title="Your Orders" subtitle="This is your order list data" />
+    <PageTitle title={id} subtitle="This is your order list data" />
     <div className={styles["calendar"]}>
       <Status />
       <Calendar />

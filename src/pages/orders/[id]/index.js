@@ -38,7 +38,7 @@ function OrderDetail() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles['container']}>
-      <Allstatus />
+      <Allstatus id={`Order ID: ${currentOrder?.id}`} />  
       <div className={styles["orderDetail"]}>
         <div className={styles['user']}>
           <div className={styles["profil"]}>
