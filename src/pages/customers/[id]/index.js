@@ -1,6 +1,5 @@
 import Head from "next/head";
 import MainLayout from "@/components/common/layouts/MainLayout";
-import styles from "@/styles/customerdetail.module.css";
 import PageTitle from "@/components/common/PageTitle";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -28,7 +27,7 @@ export default function CustomerDetail() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles["container"]}>
+      <div >
         <PageTitle
           title={"Customer Detail"}
           subtitle={"Here your Customer Detail Profile"}
@@ -41,6 +40,7 @@ export default function CustomerDetail() {
                 padding: "30px",
                 display: "flex",
                 borderRadius: "16px",
+                minWidth:'972px'
               }}
             >
               <div>
