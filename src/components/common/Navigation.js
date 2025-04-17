@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "@/styles/Aside.module.css";
 import Image from "next/image";
+import { LuCircuitBoard } from "react-icons/lu";
+import { CiBoxList } from "react-icons/ci";
+import { PiHeadCircuitDuotone } from "react-icons/pi";
 
 function Navigation() {
   const router = useRouter();
@@ -12,76 +15,34 @@ function Navigation() {
     {
       id: 1,
       linkName: "Dashboard",
-      linkImg: "/home.png",
+      linkImg: <LuCircuitBoard />,
       href: "/dashboard",
     },
     {
       id: 2,
       linkName: "Order List",
-      linkImg: "/list.png",
+      linkImg: <CiBoxList />,
       href: "/orders",
     },
     {
       id: 4,
       linkName: "Customers",
-      linkImg: "/customer.png",
+      linkImg: <PiHeadCircuitDuotone />,
       href: "/customers",
-    },
-    {
-      id: 5,
-      linkName: "Analytics",
-      linkImg: "/analis.png",
-      href: "/analis",
-    },
-    {
-      id: 6,
-      linkName: "Review",
-      linkImg: "/review.png",
-      href: "/review",
-    },
-    {
-      id: 7,
-      linkName: "Foods",
-      linkImg: "/food.png",
-      href: "/food",
-    },
-    {
-      id: 8,
-      linkName: "Food Detail",
-      linkImg: "/foodDetail.png",
-      href: "/foodDetail",
-    },
-    {
-      id: 9,
-      linkName: "Customer Detail",
-      linkImg: "/customerDetail.png",
-      href: "/customerDetail",
-    },
-    {
-      id: 10,
-      linkName: "Calendar",
-      linkImg: "/calendar.png",
-      href: "/calendar",
-    },
-    {
-      id: 11,
-      linkName: "Chat",
-      linkImg: "/chat.png",
-      href: "/chat",
-    },
-    {
-      id: 12,
-      linkName: "Wallet",
-      linkImg: "/wallet.png",
-      href: "/wallet",
     },
   ];
   return (
     <div>
       <Head />
-      <aside className={styles["aside"]}>
+      <aside style={{ height: "100%" }} className={styles["aside"]}>
         <div className={styles["aside-header"]}>
-          <Image src="/Sedap.png" alt="" className={styles["logo"]} width={167} height={49} />
+          <Image
+            src="/Sedap.png"
+            alt=""
+            className={styles["logo"]}
+            width={167}
+            height={49}
+          />
           <p
             style={{
               color: "#B9BBBD",
@@ -135,7 +96,7 @@ function CustomLink(props) {
           color: active === href ? "#177556" : "",
         }}
       >
-        <Image src={linkImg} alt={linkName} width={20} height={20} />
+        {linkImg}
         {linkName}
       </Link>
     </>
