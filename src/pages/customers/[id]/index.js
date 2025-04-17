@@ -35,18 +35,56 @@ export default function CustomerDetail() {
         />
         <Grid container spacing={2}>
           <Grid size={{ lg: 12, xl: 8 }}>
-            <div className={styles["info"]}>
+            <div
+              style={{
+                backgroundColor: "rgb(240, 243, 246)",
+                padding: "30px",
+                display: "flex",
+                borderRadius: "16px",
+              }}
+            >
               <div>
                 <img src="/avatar.png" alt="" />
               </div>
-              <div className={styles["title"]}>
-                <div className={styles["name"]}>
-                  <div className={styles["main"]}>
+              <div
+                style={{
+                  maxWidth: "653px",
+                  width: "100%",
+                  marginLeft: "30px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "47.37%",
+                      height: "126px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-around",
+                    }}
+                  >
                     <h2>{currentCustomer?.userName}</h2>
-                    <p>UX Designer</p>
-                    <p>{currentCustomer?.location}</p>
+                    <p
+                      style={{
+                        color: "green",
+                      }}
+                    >
+                      UX Designer
+                    </p>
+                    <p
+                      style={{
+                        color: "gray",
+                      }}
+                    >
+                      {currentCustomer?.location}
+                    </p>
                   </div>
-                  <div className={styles["btn"]}>
+                  <div>
                     <button
                       style={{
                         border: "none",
@@ -70,16 +108,41 @@ export default function CustomerDetail() {
                     </button>
                   </div>
                 </div>
-                <div className={styles["email"]}>
-                  <div className={styles["icon"]}>
+                <div
+                  style={{
+                    minWidth: "653px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "39px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <img src="/mail.png" alt="" />
                     <p>eren.yeager@mail.co.id</p>
                   </div>
-                  <div className={styles["icon"]}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <img src="/mail.png" alt="" />
                     <p>+012 345 6789</p>
                   </div>
-                  <div className={styles["icon"]}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <img src="/mail.png" alt="" />
                     <p>Highspeed Studios</p>
                   </div>
@@ -96,40 +159,159 @@ export default function CustomerDetail() {
             }}
             size={4}
           >
-            <div className={styles["balance"]}>
-              <div className={styles["your"]}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
+                padding: "25px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginBottom: "6px",
+                }}
+              >
                 <p>Your Balance</p>
                 <h2>***</h2>
               </div>
-              <h1>$9,452</h1>
-              <div className={styles["your"]}>
+              <h1
+                style={{
+                  fontWeight: "700",
+                  fontSize: "52px",
+                  lineHeight: "100%",
+                  marginBottom: "11px",
+                }}
+              >
+                $9,452
+              </h1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginBottom: "6px",
+                }}
+              >
                 <h3>2451 **** **** ****</h3>
                 <h3>02/21</h3>
               </div>
             </div>
-            <div className={styles["master"]}>
+            <div
+              style={{
+                backgroundColor: "#33bd8f",
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "25px",
+                borderRadius: "16px",
+              }}
+            >
               <div>
                 <p>Name</p>
                 <h2>Eren Yeager</h2>
               </div>
-              <img src="/master.png" alt="" />
+              <img
+                style={{
+                  width: "60px",
+                  height: "56px",
+                }}
+                src="/master.png"
+                alt=""
+              />
             </div>
           </Grid>
         </Grid>
 
-        <div className={styles["order"]}>
-          <div className={styles["food"]}>
-            <div className={styles["most"]}>
-              <h3>Most Ordered Food</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
+        <div
+          style={{
+            maxWidth: "713px",
+            width: "100%",
+            backgroundColor: "rgb(240, 243, 246)",
+            marginTop: "40px",
+            borderRadius: "16px",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "115px",
+              padding: "35px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <h3
+                style={{
+                  fontWeight: "500",
+                  fontSize: "21px",
+                  lineHeight: "100%",
+                }}
+              >
+                Most Ordered Food
+              </h3>
+              <p
+                style={{
+                  fontWeight: "400",
+                  fontSize: "12px",
+                  lineHeight: "18px",
+                  color: "#A3A3A3",
+                }}
+              >
+                Lorem ipsum dolor sit amet, consectetur
+              </p>
             </div>
-            <div className={styles["data"]}>
-              <button className={styles["month"]}>Monthly</button>
-              <button className={styles["month"]}>Weekly</button>
-              <button className={styles["month"]}>Daily</button>
+            <div
+              style={{
+                width: "280px",
+                height: "48px",
+                borderRadius: "24px",
+                backgroundColor: "#F3F2F7",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <button
+                style={{
+                  width: "89.6px",
+                  height: "37px",
+                  borderRadius: "24px",
+                  border: "none",
+                  backgroundColor: "white",
+                  color: "#5E6C93",
+                }}
+              >
+                Weekly
+              </button>
+              <button
+                style={{
+                  width: "89.6px",
+                  height: "37px",
+                  borderRadius: "24px",
+                  border: "none",
+                  backgroundColor: "unset",
+                  color: "#5E6C93",
+                }}
+              >
+                Daily
+              </button>
+              <button
+                style={{
+                  width: "89.6px",
+                  height: "37px",
+                  borderRadius: "24px",
+                  border: "none",
+                  backgroundColor: "unset",
+                  color: "#5E6C93",
+                }}
+              >
+                Monthly
+              </button>
             </div>
           </div>
-          <div className={styles["list"]}>
+          <div>
             {currentCustomer?.item?.map((item, index) => (
               <Lists key={index} item={item} />
             ))}
