@@ -30,6 +30,12 @@ function Navigation() {
       linkImg: <PiHeadCircuitDuotone />,
       href: "/customers",
     },
+    {
+      id: 5,
+      linkName: "Foods",
+      linkImg: <PiHeadCircuitDuotone />,
+      href: "/foods",
+    },
   ];
   return (
     <div>
