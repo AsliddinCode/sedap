@@ -1,6 +1,6 @@
 import PageTitle from "@/components/common/PageTitle";
 import React from "react";
-import { FoodData } from "./FoodData";
+import { foodData } from "@/data";
 
 export default function Foods() {
   return (
@@ -19,7 +19,7 @@ export default function Foods() {
           padding: "20px 0",
         }}
       >
-        {FoodData.map((item) => (
+        {foodData.map((item) => (
           <div
             key={item.id}
             style={{
