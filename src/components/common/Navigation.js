@@ -36,6 +36,30 @@ function Navigation() {
       linkImg: <PiHeadCircuitDuotone />,
       href: "/foods",
     },
+    {
+      id: 6,
+      linkName: "Analytics",
+      linkImg:'',
+      href: "#",
+    },
+    {
+      id: 7,
+      linkName: "Calendar",
+      linkImg: '',
+      href: "#",
+    },
+    {
+      id: 8,
+      linkName: "Chat",
+      linkImg: '',
+      href: "#",
+    },
+    {
+      id: 9,
+      linkName: "Wallet",
+      linkImg: '',
+      href: "#",
+    },
   ];
   return (
     <div>

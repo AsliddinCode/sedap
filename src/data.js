@@ -248,35 +248,64 @@ export const foodData = [
     id: '1',
     img: '',
     name: 'Spicy Mozarella with Barbeque',
-    title: 'food',
-    context: 'noodle',
+    type: 'food',
+    category: 'noodle',
+    price:'100'
   },
   {
       id: '2',
       img: '',
       name: 'Spicy Mozarella with Barbeque',
-      title: 'food',
-      context: 'noodle',
+      type: 'food',
+      category: 'noodle',
+      price:'100'
     },
     {
       id: '3',
       img: '',
       name: 'Spicy Mozarella with Barbeque',
-      title: 'food',
-      context: 'noodle',
+      type: 'food',
+      category: 'noodle',
+      price:'100'
     },
     {
       id: '4',
       img: '',
       name: 'Spicy Mozarella with Barbeque',
-      title: 'food',
-      context: 'noodle',
+      type: 'food',
+      category: 'noodle',
+      price:'100'
     },
     {
       id: '5',
       img: '',
       name: 'Spicy Mozarella with Barbeque',
-      title: 'food',
-      context: 'noodle',
+      type: 'food',
+      category: 'noodle',
+      price:'100'
+    },
+    {
+      id: '6',
+      img: '',
+      name: 'Spicy Mozarella with Barbeque',
+      type: 'food',
+      category: 'noodle',
+      price:'100'
+    },
+    {
+      id: '7',
+      img: '',
+      name: 'Spicy Mozarella with Barbeque',
+      type: 'food',
+      category: 'noodle',
+      price:'100'
+    },
+    {
+      id: '8',
+      img: '',
+      name: 'Spicy Mozarella with Barbeque',
+      type: 'food',
+      category: 'noodle',
+      price:'100'
     },
 ];

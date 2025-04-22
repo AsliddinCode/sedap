@@ -1,6 +1,6 @@
 import Head from "next/head";
-import TextField from '@mui/material/TextField';
 import MainLayout from "@/components/common/layouts/MainLayout";
+import FoodForm from "@/components/pages/foods/FoodForm";
 
 export default function NewFood() {
   return (
@@ -12,11 +12,7 @@ export default function NewFood() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <form>
-        <TextField id="outlined-basic" label="Name" type="text" variant="outlined" />
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-            <button type="submit">Click</button>
-        </form>
+        <FoodForm title={"Create new food"} btnText={"Create new Food"}/>
       </div>
     </>
   );

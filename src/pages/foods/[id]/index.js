@@ -1,6 +1,7 @@
+import MainLayout from "@/components/common/layouts/MainLayout";
 import Head from "next/head";
 
-export default function Food() {
+export default function Foods() {
     return (
       <>
         <Head>
@@ -10,8 +11,15 @@ export default function Food() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div>
-        <p>s</p>
+        <p>Good bye noob</p>
         </div>
       </>
     );
   }
+  
+  Foods.getLayout = (pageProps) => (
+    <MainLayout>
+      <Foods {...pageProps} />
+    </MainLayout>
+  );
+  

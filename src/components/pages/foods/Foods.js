@@ -1,25 +1,50 @@
 import PageTitle from "@/components/common/PageTitle";
-import React from "react";
+import React, { useState } from "react";
 import { foodData } from "@/data";
+import { useRouter } from "next/router";
+import { Stack, Button } from "@mui/material";
 
 export default function Foods() {
+  const [items, setItems] = useState(foodData);
+  const router = useRouter();
+
+  const handleDelete = (id) => {
+    setItems((Items) => {
+      return Items.filter((item) => item.id !== id); 
+    });
+  };
+
+  const handleClick = () => {
+    router.push("foods/new");
+  };
+
   return (
     <>
       <PageTitle
         title={"Foods"}
         subtitle={"Here is your menus summary with graph view"}
       />
-
+      <Stack
+        sx={{
+          marginTop: "10px",
+        }}
+      >
+        <Button variant="contained" onClick={handleClick}>
+          New Food add
+        </Button>
+      </Stack>
       <div
         style={{
-          maxWidth: "1460px",
+          maxWidth: "1260px",
           width: "100%",
           display: "flex",
           justifyContent: "space-around",
           padding: "20px 0",
+          flexWrap: "wrap",
+          margin: "0 auto",
         }}
       >
-        {foodData.map((item) => (
+        {items.map((item) => (
           <div
             key={item.id}
             style={{
@@ -39,17 +64,10 @@ export default function Foods() {
                 transform: "translateX(-50%)",
                 width: "194px",
                 height: "194px",
+                backgroundColor: "#C4C4C4",
+                borderRadius: "50%",
               }}
-            >
-              <img
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-                src="/iconprofil.png"
-                alt="food"
-              />
-            </div>
+            ></div>
 
             <div
               style={{
@@ -75,9 +93,9 @@ export default function Foods() {
                   margin: "0 0 20px 0",
                 }}
               >
-                {item.title} / {item.context}
+                {item.type} / {item.category}
               </p>
-              <Edit />
+              <Edit id={item.id} handleDelete={handleDelete} />
             </div>
           </div>
         ))}
@@ -86,13 +104,25 @@ export default function Foods() {
   );
 }
 
-function Edit() {
+function Edit({ id, handleDelete }) {
+  const router = useRouter();
+
   const data = [
     { id: "1", img: "/eye.png", name: "View" },
     { id: "2", img: "/icon.svg", name: "Edit" },
     { id: "3", img: "/trash.png", name: "Delete" },
     { id: "4", img: "/plus.png", name: "Duplicate" },
   ];
+
+  const handleClick = (item) => {
+    if (item === "View") {
+      router.push(`/foods/${id}`);
+    } else if (item === "Edit") {
+      router.push(`/foods/${id}/edit`);
+    } else if (item === "Delete") {
+      handleDelete(id); 
+    }
+  };
 
   return (
     <div
@@ -119,6 +149,7 @@ function Edit() {
               backgroundColor: "#00B0741A",
               padding: "8px",
             }}
+            onClick={() => handleClick(item.name)}
           >
             <img
               style={{
