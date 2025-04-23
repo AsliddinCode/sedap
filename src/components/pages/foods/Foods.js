@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { foodData } from "@/data";
 import { useRouter } from "next/router";
 import { Stack, Button } from "@mui/material";
+import HeaderInput from "@/components/common/HeaderInput";
 
 export default function Foods() {
   const [items, setItems] = useState(foodData);
@@ -10,7 +11,7 @@ export default function Foods() {
 
   const handleDelete = (id) => {
     setItems((Items) => {
-      return Items.filter((item) => item.id !== id); 
+      return Items.filter((item) => item.id !== id);
     });
   };
 
@@ -20,10 +21,7 @@ export default function Foods() {
 
   return (
     <>
-      <PageTitle
-        title={"Foods"}
-        subtitle={"Here is your menus summary with graph view"}
-      />
+      <HeaderInput />
       <Stack
         sx={{
           marginTop: "10px",
@@ -51,7 +49,7 @@ export default function Foods() {
               width: "276px",
               height: "340px",
               borderRadius: "14px",
-              backgroundColor: "aliceblue",
+              backgroundColor: 'white',
               position: "relative",
               marginTop: "100px",
             }}
@@ -120,7 +118,7 @@ function Edit({ id, handleDelete }) {
     } else if (item === "Edit") {
       router.push(`/foods/${id}/edit`);
     } else if (item === "Delete") {
-      handleDelete(id); 
+      handleDelete(id);
     }
   };
 

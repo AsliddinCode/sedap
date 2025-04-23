@@ -62,9 +62,11 @@
   border-bottom-right-radius: 15px;
   border-top-right-radius: 15px;
 }
-
+.orderTable tbody tr {
+  background-color: white ;
+}
 .orderTable tbody .tr:hover {
-  background-color: aliceblue;
+  background-color: aliceblue ;
 }
 .orderTable .td:nth-child(1) {
   border-bottom-left-radius: 15px;

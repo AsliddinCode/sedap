@@ -7,7 +7,9 @@ function PageTitle(props) {
       <h1 style={{
         marginBottom:'16px'
       }}>{title}</h1>
-      <p>{subtitle}</p>
+      <p style={{
+        color:'#A3A3A3'
+      }}>{subtitle}</p>
     </div>
   );
 }

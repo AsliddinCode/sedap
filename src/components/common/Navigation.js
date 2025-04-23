@@ -1,12 +1,17 @@
 import React from "react";
 import Link from "next/link";
+import AccountBalanceWalletRoundedIcon from "@mui/icons-material/AccountBalanceWalletRounded";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import HomeSharpIcon from "@mui/icons-material/HomeSharp";
+import FormatListBulletedTwoToneIcon from "@mui/icons-material/FormatListBulletedTwoTone";
+import SupportAgentTwoToneIcon from "@mui/icons-material/SupportAgentTwoTone";
 import styles from "@/styles/Aside.module.css";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Image from "next/image";
-import { LuCircuitBoard } from "react-icons/lu";
-import { CiBoxList } from "react-icons/ci";
-import { PiHeadCircuitDuotone } from "react-icons/pi";
 
 function Navigation() {
   const router = useRouter();
@@ -15,49 +20,49 @@ function Navigation() {
     {
       id: 1,
       linkName: "Dashboard",
-      linkImg: <LuCircuitBoard />,
+      linkImg: <HomeSharpIcon />,
       href: "/dashboard",
     },
     {
       id: 2,
       linkName: "Order List",
-      linkImg: <CiBoxList />,
+      linkImg: <FormatListBulletedTwoToneIcon />,
       href: "/orders",
     },
     {
       id: 4,
       linkName: "Customers",
-      linkImg: <PiHeadCircuitDuotone />,
+      linkImg: <SupportAgentTwoToneIcon />,
       href: "/customers",
     },
     {
       id: 5,
       linkName: "Foods",
-      linkImg: <PiHeadCircuitDuotone />,
+      linkImg: <FastfoodIcon />,
       href: "/foods",
     },
     {
       id: 6,
       linkName: "Analytics",
-      linkImg:'',
+      linkImg: <AnalyticsOutlinedIcon />,
       href: "#",
     },
     {
       id: 7,
       linkName: "Calendar",
-      linkImg: '',
+      linkImg: <CalendarMonthIcon />,
       href: "#",
     },
     {
       id: 8,
       linkName: "Chat",
-      linkImg: '',
+      linkImg: <ChatOutlinedIcon />,
       href: "#",
     },
     {
       id: 9,
       linkName: "Wallet",
-      linkImg: '',
+      linkImg: <AccountBalanceWalletRoundedIcon />,
       href: "#",
     },
   ];
@@ -126,7 +131,13 @@ function CustomLink(props) {
           color: active === href ? "#177556" : "",
         }}
       >
-        {linkImg}
+        <span
+          style={{
+            marginRight: "10px",
+          }}
+        >
+          {linkImg}
+        </span>
         {linkName}
       </Link>
     </>
