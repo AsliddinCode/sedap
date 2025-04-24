@@ -1,12 +1,13 @@
-import PageTitle from "@/components/common/PageTitle";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { foodData } from "@/data";
 import { useRouter } from "next/router";
-import { Stack, Button } from "@mui/material";
+
 import HeaderInput from "@/components/common/HeaderInput";
 
 export default function Foods() {
   const [items, setItems] = useState(foodData);
+  const [search, setSearch] = useState('');
+  const [filteredFoods, setFilteredFoods] = useState(foodData);
   const router = useRouter();
 
   const handleDelete = (id) => {
@@ -15,22 +16,25 @@ export default function Foods() {
     });
   };
 
+  useEffect(() => {
+    if (search.length > 0) {
+      const filtered = items.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredFoods(filtered);
+    } else {
+      setFilteredFoods(items);
+    }
+  }, [search, items]);
+
   const handleClick = () => {
     router.push("foods/new");
   };
 
   return (
     <>
-      <HeaderInput />
-      <Stack
-        sx={{
-          marginTop: "10px",
-        }}
-      >
-        <Button variant="contained" onClick={handleClick}>
-          New Food add
-        </Button>
-      </Stack>
+      <HeaderInput setSearch={setSearch} handleClick={handleClick} />
+     
       <div
         style={{
           maxWidth: "1260px",
@@ -42,7 +46,7 @@ export default function Foods() {
           margin: "0 auto",
         }}
       >
-        {items.map((item) => (
+        {filteredFoods.map((item) => (
           <div
             key={item.id}
             style={{

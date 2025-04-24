@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, TextField, IconButton } from "@mui/material";
+import { Box, TextField, IconButton, Button } from "@mui/material";
 import PageTitle from "./PageTitle";
 
-function HeaderInput() {
+function HeaderInput(props) {
+  const { setSearch, handleClick } = props;
   return (
     <Box
       sx={{
@@ -26,6 +27,7 @@ function HeaderInput() {
         }}
       >
         <TextField
+          onChange={(e) => setSearch(e.target.value)}
           variant="outlined"
           placeholder="Search here"
           sx={{
@@ -59,6 +61,19 @@ function HeaderInput() {
             <img src="/layer.png" alt="" />
           </IconButton>
         </Box>
+
+        <Button
+          variant="contained"
+          onClick={handleClick}
+          sx={{
+            width: "181px",
+            height: "68px",
+            borderRadius: "14px",
+            backgroundColor: "#00B074",
+          }}
+        >
+          New Menu
+        </Button>
       </Box>
     </Box>
   );

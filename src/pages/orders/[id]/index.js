@@ -1,6 +1,5 @@
 import { orderListData } from "@/data";
 import MainLayout from "@/components/common/layouts/MainLayout";
-import styles from "../../../styles/orderDetail.module.css";
 import Allstatus from "@/components/common/Allstatus";
 import Button from "@/components/common/Button";
 import Table2 from "@/components/common/Table2";
@@ -37,67 +36,226 @@ function OrderDetail() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles['container']}>
-      <Allstatus id={`Order ID: ${currentOrder?.id}`} />  
-      <div className={styles["orderDetail"]}>
-        <div className={styles['user']}>
-          <div className={styles["profil"]}>
-            <div className={styles["icon"]}>
-              <img
-                style={{ width: "160px", height: "160px" }}
-                src="/placeholder.png"
-                alt="Use  r"
-              />
-              <h1>{currentOrder?.userName}</h1>
-              <Button Customers={"Customers"} />
-            </div>
-            <div className={styles["text"]}>
-              <div className={styles["info"]}>
-                <h1>Note Order</h1>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor magna aliqua.
-                </p>
+      <div
+        style={{
+          maxWidth: "1440px",
+        }}
+      >
+        <Allstatus id={`Order ID: ${currentOrder?.id}`} />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            padding: "20px",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "339px",
+              marginRight: "40px",
+            }}
+          >
+            <div
+              style={{
+                maxHeight: "614px",
+                height: "100%",
+                width: "100%",
+                backgroundColor: "aliceblue",
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: "16px",
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  marginBottom: "20px",
+                  height: "317px",
+                }}
+              >
+                <img
+                  style={{ width: "160px", height: "160px" }}
+                  src="/placeholder.png"
+                  alt="Use  r"
+                />
+                <h1
+                  style={{
+                    marginTop: "27px",
+                    fontSize: "18px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {currentOrder?.userName}
+                </h1>
+                <Button Customers={"Customers"} />
               </div>
-              <div className={styles["dastabka"]}>
-                <div className={styles["iconCircle"]}>
-                  <img src="/delivir.png" alt="Delivery" />
+              <div
+                style={{
+                  width: "100%",
+                  backgroundColor: "#5e6c93",
+                  borderRadius: "16px",
+                }}
+              >
+                <div
+                  style={{
+                    height: "220px",
+                    padding: "30px",
+                    color: "white",
+                  }}
+                >
+                  <h1
+                    style={{
+                      fontWeight: "700",
+                      fontSize: "24px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Note Order
+                  </h1>
+                  <p
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "14px",
+                      lineHeight: "24px",
+                    }}
+                  >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor magna aliqua.
+                  </p>
                 </div>
-                <p>{currentOrder?.location}</p>
+                <div
+                  style={{
+                    backgroundColor: "skyblue",
+                    borderRadius: "16px",
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    padding: "15px",
+                    height: "110px",
+                  }}
+                >
+                  <div
+                    style={{
+                      borderRadius: "50%",
+                      width: "49px",
+                      height: "49px",
+                      backgroundColor: "white",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <img
+                      style={{
+                        width: "28px",
+                        height: "28px",
+                      }}
+                      src="/delivir.png"
+                      alt="Delivery"
+                    />
+                  </div>
+                  <p
+                    style={{
+                      width: "157px",
+                      fontWeight: "600",
+                      lineHeight: "26px",
+                      color: "aliceblue",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    {currentOrder?.location}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-          
-        </div>
-        <div className={styles["items"]}>
-          <Table2 items={tableItems} />
-          <div className={styles["row"]}>
-            <div className={styles["map"]}></div>
-            <div className={styles["delevir"]}>
-              <h3>Delivery By</h3>
-              <div className={styles["delvir"]}>
-                <div className={styles["set1"]}>
-                  <img src={currentOrder?.deliveryBy.img} alt="" />
+          <div>
+            <Table2 items={tableItems} />
+            <div
+              style={{
+                height: "599px",
+                maxWidth: "1090px",
+                width: "100%",
+                padding: "30px",
+                borderRadius: "12px",
+                border: "1px aliceblue",
+              }}
+            >
+              <div
+                style={{
+                  backgroundImage: "url(/mask.png)",
+                  width: "1030px",
+                  height: "349px",
+                }}
+              ></div>
+              <div
+                style={{
+                  marginTop: "43px",
+                }}
+              >
+                <h3>Delivery By</h3>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "35px",
+                  }}
+                >
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "column",
-                      marginLeft: "30px",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
                   >
-                    <h3>{currentOrder?.deliveryBy.name}</h3>
-                    <p>ID- {currentOrder?.deliveryBy.id}</p>
+                    <img src={currentOrder?.deliveryBy.img} alt="" />
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        marginLeft: "30px",
+                      }}
+                    >
+                      <h3>{currentOrder?.deliveryBy.name}</h3>
+                      <p>ID- {currentOrder?.deliveryBy.id}</p>
+                    </div>
                   </div>
-                </div>
-                <div className={styles["set2"]}>
-                  <button className={styles["btn"]}>telphone </button>
-                  <button className={styles["btn"]}>click </button>
+                  <div>
+                    <button
+                      style={{
+                        width: "271px",
+                        height: "81px",
+                        borderRadius: "12px",
+                        border: "1px solid #2D9CDB",
+                        backgroundColor: "white",
+                        padding: "16px",
+                      }}
+                    >
+                      telphone{" "}
+                    </button>
+                    <button
+                      style={{
+                        width: "271px",
+                        height: "81px",
+                        borderRadius: "12px",
+                        border: "1px solid #2D9CDB",
+                        backgroundColor: "white",
+                        padding: "16px",
+                      }} >
+                      click{" "}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </>
   );

@@ -255,7 +255,7 @@ export const foodData = [
   {
       id: '2',
       img: '',
-      name: 'Spicy Mozarella with Barbeque',
+      name: 'Burger Jumbo SpecialWith Spicy',
       type: 'food',
       category: 'noodle',
       price:'100'
@@ -263,7 +263,7 @@ export const foodData = [
     {
       id: '3',
       img: '',
-      name: 'Spicy Mozarella with Barbeque',
+      name: 'Pizza la Piazza Special Nuggets',
       type: 'food',
       category: 'noodle',
       price:'100'
@@ -279,7 +279,7 @@ export const foodData = [
     {
       id: '5',
       img: '',
-      name: 'Spicy Mozarella with Barbeque',
+      name: 'Sprite Flavourwith Avocado Juice',
       type: 'food',
       category: 'noodle',
       price:'100'
@@ -295,7 +295,7 @@ export const foodData = [
     {
       id: '7',
       img: '',
-      name: 'Spicy Mozarella with Barbeque',
+      name: 'Burger Jumbo SpecialWith Spicy',
       type: 'food',
       category: 'noodle',
       price:'100'
@@ -303,7 +303,7 @@ export const foodData = [
     {
       id: '8',
       img: '',
-      name: 'Spicy Mozarella with Barbeque',
+      name: 'Pizza la Piazza Special Nuggets',
       type: 'food',
       category: 'noodle',
       price:'100'
