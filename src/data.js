@@ -250,7 +250,10 @@ export const foodData = [
     name: 'Spicy Mozarella with Barbeque',
     type: 'food',
     category: 'noodle',
-    price:'100'
+    price:'100',
+    ingredients:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    discription:'Lorem ipsum dolor sit amet, consectetur  adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore.',
+    nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
   },
   {
       id: '2',
@@ -258,7 +261,10 @@ export const foodData = [
       name: 'Burger Jumbo SpecialWith Spicy',
       type: 'food',
       category: 'noodle',
-      price:'100'
+      price:'100',
+      ingredients:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      discription:'Lorem ipsum dolor sit amet, consectetur  adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore.',
+      nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
       id: '3',
@@ -266,7 +272,10 @@ export const foodData = [
       name: 'Pizza la Piazza Special Nuggets',
       type: 'food',
       category: 'noodle',
-      price:'100'
+      price:'100',
+      ingredients:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      discription:'Lorem ipsum dolor sit amet, consectetur  adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore.',
+      nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
       id: '4',
@@ -274,7 +283,10 @@ export const foodData = [
       name: 'Spicy Mozarella with Barbeque',
       type: 'food',
       category: 'noodle',
-      price:'100'
+      price:'100',
+      ingredients:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      discription:'Lorem ipsum dolor sit amet, consectetur  adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore.',
+      nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
       id: '5',
@@ -282,7 +294,10 @@ export const foodData = [
       name: 'Sprite Flavourwith Avocado Juice',
       type: 'food',
       category: 'noodle',
-      price:'100'
+      price:'100',
+      ingredients:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      discription:'Lorem ipsum dolor sit amet, consectetur  adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore.',
+      nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
       id: '6',
@@ -290,7 +305,10 @@ export const foodData = [
       name: 'Spicy Mozarella with Barbeque',
       type: 'food',
       category: 'noodle',
-      price:'100'
+      price:'100',
+      ingredients:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      discription:'Lorem ipsum dolor sit amet, consectetur  adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore.',
+      nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
       id: '7',
@@ -298,7 +316,10 @@ export const foodData = [
       name: 'Burger Jumbo SpecialWith Spicy',
       type: 'food',
       category: 'noodle',
-      price:'100'
+      price:'100',
+      ingredients:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      discription:'Lorem ipsum dolor sit amet, consectetur  adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore.',
+      nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
     {
       id: '8',
@@ -306,6 +327,9 @@ export const foodData = [
       name: 'Pizza la Piazza Special Nuggets',
       type: 'food',
       category: 'noodle',
-      price:'100'
+      price:'100',
+      ingredients:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      discription:'Lorem ipsum dolor sit amet, consectetur  adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore.',
+      nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
 ];
