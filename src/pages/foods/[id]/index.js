@@ -20,6 +20,7 @@ export default function Foods() {
     }
   }, [router.query.id]);
 
+  
   return (
     <>
       <Head>
@@ -37,16 +38,18 @@ export default function Foods() {
 }
 
 function FoodDetailComponent(props) {
+  const router = useRouter('')
   const { data } = props;
   return (
     <>
-      <Grid container spacing={2} sx={{ marginTop: "40px" }}>
+      <Grid container spacing={2} sx={{ marginTop: "40px",  }}>
         <Grid
           size={6}
           sx={{
             padding: "41px 0px",
             border: "1px solid #0000000A",
             borderRadius: "14px",
+            backgroundColor:'white'
           }}
         >
           <Box
@@ -142,6 +145,7 @@ function FoodDetailComponent(props) {
                 </Button>
                 <Button
                   variant="contained"
+                  onClick={()=>router.push(`/foods/${data.id}/edit`)}
                   sx={{
                     backgroundColor: "#F3F2F7",
                     borderRadius: "12px",

@@ -333,3 +333,9 @@ export const foodData = [
       nutritionInfo:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
 ];
+ export const icons = [
+  { id: "1", img: "/eye.png", name: "View" },
+  { id: "2", img: "/icon.svg", name: "Edit" },
+  { id: "3", img: "/trash.png", name: "Delete" },
+  { id: "4", img: "/plus.png", name: "Duplicate" },
+];

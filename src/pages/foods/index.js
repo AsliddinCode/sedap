@@ -1,8 +1,25 @@
 import MainLayout from "@/components/common/layouts/MainLayout";
 import Foods from "@/components/pages/foods/Foods";
 import Head from "next/head";
+import { useEffect } from "react";
 
 export default function Food() {
+  useEffect(() => {
+    fetch("http://192.168.100.108:1337/api/foods?populate=*&asliddin=true", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data);
+        // setFoods(data.data);
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        // setIsLoading(false);
+      });
+  }, []);
+  
   return (
     <>
       <Head>

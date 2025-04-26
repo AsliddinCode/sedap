@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { foodData } from "@/data";
+import { foodData, icons } from "@/data";
 import { useRouter } from "next/router";
 
 import HeaderInput from "@/components/common/HeaderInput";
@@ -109,13 +109,7 @@ export default function Foods() {
 function Edit({ id, handleDelete }) {
   const router = useRouter();
 
-  const data = [
-    { id: "1", img: "/eye.png", name: "View" },
-    { id: "2", img: "/icon.svg", name: "Edit" },
-    { id: "3", img: "/trash.png", name: "Delete" },
-    { id: "4", img: "/plus.png", name: "Duplicate" },
-  ];
-
+  
   const handleClick = (item) => {
     if (item === "View") {
       router.push(`/foods/${id}`);
@@ -134,7 +128,7 @@ function Edit({ id, handleDelete }) {
         width: "100%",
       }}
     >
-      {data.map((item) => (
+      {icons.map((item) => (
         <div
           key={item.id}
           style={{
