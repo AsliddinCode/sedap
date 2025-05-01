@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { foodData, icons } from "@/data";
+import { icons } from "@/data";
 import { useRouter } from "next/router";
-
+import useFetchItems from "@/hooks/useFetchApi";
 import HeaderInput from "@/components/common/HeaderInput";
 
 export default function Foods() {
-  const [items, setItems] = useState(foodData);
-  const [search, setSearch] = useState('');
-  const [filteredFoods, setFilteredFoods] = useState(foodData);
+  const [items, setItems] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filteredFoods, setFilteredFoods] = useState([]);
   const router = useRouter();
 
-  const handleDelete = (id) => {
-    setItems((Items) => {
-      return Items.filter((item) => item.id !== id);
-    });
-  };
+  const [foods, isLoading] = useFetchItems("/foods?populate=*husniyahonim");
+
+  useEffect(() => {
+    setItems(foods);
+  }, [foods]);
 
   useEffect(() => {
     if (search.length > 0) {
       const filtered = items.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
+        item.name?.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredFoods(filtered);
     } else {
       setFilteredFoods(items);
     }
   }, [search, items]);
+
+  const handleDelete = (id) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
+  };
 
   const handleClick = () => {
     router.push("foods/new");
@@ -34,88 +38,98 @@ export default function Foods() {
   return (
     <>
       <HeaderInput setSearch={setSearch} handleClick={handleClick} />
-     
-      <div
-        style={{
-          maxWidth: "1260px",
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-around",
-          padding: "20px 0",
-          flexWrap: "wrap",
-          margin: "0 auto",
-        }}
-      >
-        {filteredFoods.map((item) => (
-          <div
-            key={item.id}
-            style={{
-              width: "276px",
-              height: "340px",
-              borderRadius: "14px",
-              backgroundColor: 'white',
-              position: "relative",
-              marginTop: "100px",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: "-50px",
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: "194px",
-                height: "194px",
-                backgroundColor: "#C4C4C4",
-                borderRadius: "50%",
-              }}
-            ></div>
 
-            <div
+      {isLoading ? (
+        <p style={{ textAlign: "center" }}>Yuklanmoqda...</p>
+      ) : search.length > 0 ? (
+        filteredFoods.length > 0 ? (
+          <FoodsList data={filteredFoods} handleDelete={handleDelete} />
+        ) : (
+          <h1 style={{ textAlign: "center" }}>Food topilmadi!</h1>
+        )
+      ) : (
+        <FoodsList data={items} handleDelete={handleDelete} />
+      )}
+    </>
+  );
+}
+
+function FoodsList({ data, handleDelete }) {
+  return (
+    <div
+      style={{
+        maxWidth: "1260px",
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-around",
+        padding: "20px 0",
+        flexWrap: "wrap",
+        margin: "0 auto",
+      }}
+    >
+      {data.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            width: "276px",
+            height: "340px",
+            borderRadius: "14px",
+            backgroundColor: "white",
+            position: "relative",
+            marginTop: "100px",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: "-50px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "194px",
+              height: "194px",
+              backgroundColor: "#C4C4C4",
+              borderRadius: "50%",
+            }}
+          ></div>
+
+          <div style={{ padding: "20px", marginTop: "140px" }}>
+            <p
               style={{
-                padding: "20px",
-                marginTop: "140px",
+                fontWeight: "700",
+                fontSize: "18px",
+                textAlign: "center",
+                margin: "0 0 8px 0",
               }}
             >
-              <p
-                style={{
-                  fontWeight: "700",
-                  fontSize: "18px",
-                  textAlign: "center",
-                  margin: "0 0 8px 0",
-                }}
-              >
-                {item.name}
-              </p>
-              <p
-                style={{
-                  color: "#00B074",
-                  fontSize: "14px",
-                  textAlign: "center",
-                  margin: "0 0 20px 0",
-                }}
-              >
-                {item.type} / {item.category}
-              </p>
-              <Edit id={item.id} handleDelete={handleDelete} />
-            </div>
+              {item.name}
+            </p>
+            <p
+              style={{
+                color: "#00B074",
+                fontSize: "14px",
+                textAlign: "center",
+                margin: "0 0 20px 0",
+              }}
+            >
+              {item.type} / {item.category}
+            </p>
+            <Edit id={item.id} handleDelete={handleDelete} />
           </div>
-        ))}
-      </div>
-    </>
+        </div>
+      ))}
+    </div>
   );
 }
 
 function Edit({ id, handleDelete }) {
   const router = useRouter();
 
-  
-  const handleClick = (item) => {
-    if (item === "View") {
+  const handleClick = (action) => {
+    if (action === "View") {
       router.push(`/foods/${id}`);
-    } else if (item === "Edit") {
+    } else if (action === "Edit") {
       router.push(`/foods/${id}/edit`);
-    } else if (item === "Delete") {
+    } else if (action === "Delete") {
       handleDelete(id);
     }
   };
