@@ -10,7 +10,7 @@ export default function Foods() {
   const [filteredFoods, setFilteredFoods] = useState([]);
   const router = useRouter();
 
-  const [foods, isLoading] = useFetchItems("/foods?populate=*husniyahonim");
+  const [foods, isLoading] = useFetchItems("/foods?populate=*&asliddin");
 
   useEffect(() => {
     setItems(foods);
@@ -53,30 +53,29 @@ export default function Foods() {
     </>
   );
 }
-
 function FoodsList({ data, handleDelete }) {
   return (
     <div
       style={{
-        maxWidth: "1260px",
-        width: "100%",
+        maxWidth: "1460px",
+        padding: "40px 20px",
         display: "flex",
-        justifyContent: "space-around",
-        padding: "20px 0",
         flexWrap: "wrap",
-        margin: "0 auto",
+        gap: "40px",
       }}
     >
       {data.map((item) => (
         <div
-          key={item.id}
+          key={item?.id}
           style={{
             width: "276px",
-            height: "340px",
+            minHeight: "340px",
             borderRadius: "14px",
-            backgroundColor: "white",
+            backgroundColor: "#fff",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
             position: "relative",
-            marginTop: "100px",
+            paddingTop: "100px",
+            textAlign: "center",
           }}
         >
           <div
@@ -85,41 +84,42 @@ function FoodsList({ data, handleDelete }) {
               top: "-50px",
               left: "50%",
               transform: "translateX(-50%)",
-              width: "194px",
-              height: "194px",
+              width: "150px",
+              height: "150px",
               backgroundColor: "#C4C4C4",
               borderRadius: "50%",
+              marginTop:'15px'
             }}
-          ></div>
-
-          <div style={{ padding: "20px", marginTop: "140px" }}>
-            <p
+          >
+            
+          </div>
+          <div style={{ padding: "20px" }}>
+            <h3
               style={{
                 fontWeight: "700",
                 fontSize: "18px",
-                textAlign: "center",
                 margin: "0 0 8px 0",
               }}
             >
-              {item.name}
-            </p>
+              {item?.name}
+            </h3>
             <p
               style={{
                 color: "#00B074",
                 fontSize: "14px",
-                textAlign: "center",
                 margin: "0 0 20px 0",
               }}
             >
-              {item.type} / {item.category}
+              {item?.type?.name} / {item?.type?.category?.name}
             </p>
-            <Edit id={item.id} handleDelete={handleDelete} />
+            <Edit id={item?.id} handleDelete={handleDelete} />
           </div>
         </div>
       ))}
     </div>
   );
 }
+
 
 function Edit({ id, handleDelete }) {
   const router = useRouter();
