@@ -10,7 +10,7 @@ export default function Foods() {
   const [filteredFoods, setFilteredFoods] = useState([]);
   const router = useRouter();
 
-  const [foods, isLoading] = useFetchItems("/foods?populate=*&asliddin");
+  const [foods, isLoading] = useFetchItems("/foods?populate[type][populate][0]=category");
 
   useEffect(() => {
     setItems(foods);
@@ -54,6 +54,7 @@ export default function Foods() {
   );
 }
 function FoodsList({ data, handleDelete }) {
+  console.log('data', data);
   return (
     <div
       style={{

@@ -1,11 +1,23 @@
 
-import React, { useEffect } from "react";
-import { TextField, Button, Grid, Box } from "@mui/material";
+import React, { use, useEffect } from "react";
+import {
+  TextField,
+  Button,
+  Grid,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Snackbar,
+} from "@mui/material";
+import useFetchItems from "@/hooks/useFetchApi";
 import { useState } from "react";
 
 function FoodForm({ title, food, btnText }) {
+  const [isSnackOpen, setIsSnackOpen] = useState(false);
   const [formData, setFormData] = useState(null);
-  console.log("food", food);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     if (food) {
@@ -23,14 +35,49 @@ function FoodForm({ title, food, btnText }) {
     });
   };
 
+  const [categories, isLoading] = useFetchItems("/categories");
+  const [types, typesLoading] = useFetchItems(
+    `/types?filters[category][documentId][$eq]=${category}`
+  );
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted", formData);
+    try {
+      e.preventDefault();
+      const values = {
+        data: {
+          name: formData.name ?? "test",
+          price: formData.price ?? "1000",
+          comment: formData.comment ?? "q34",
+          type: {
+            connect: [formData.type],
+          },
+        },
+      };
+  
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+      fetch("http://192.168.100.108:1337/api/foods", options)
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+    } catch(error) {
+      console.error('message', error);
+    }
+
   };
+
+  console.log("category", category);
 
   if (!formData) {
     return null;
   }
+
+  console.log("hey", formData);
 
   return (
     <Box
@@ -85,58 +132,49 @@ function FoodForm({ title, food, btnText }) {
 
           {/* Category */}
           <Grid item size={6}>
-            <TextField
-              fullWidth
-              label="Category"
-              variant="outlined"
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "#00B074",
-                },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "#00B074",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#00B074",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#00B074",
-                  },
-                },
-              }}
-            />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Category"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                {categories.map((cat) => (
+                  <MenuItem key={cat.id} value={cat.documentId}>
+                    {cat.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
 
           {/* Type */}
           <Grid item size={6}>
-            <TextField
-              fullWidth
-              label="Type"
-              variant="outlined"
-              name="type"
-              value={formData.type}
-              onChange={handleChange}
-              sx={{
-                "& .MuiInputLabel-root": {
-                  color: "#00B074",
-                },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "#00B074",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#00B074",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#00B074",
-                  },
-                },
-              }}
-            />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Type</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={formData.type}
+                label="Type"
+                onChange={(e) => {
+                  handleChange({
+                    target: {
+                      name: "type",
+                      value: e.target.value,
+                    },
+                  });
+                }}
+              >
+                {[...(types ?? [])].map((type) => (
+                  <MenuItem key={type.id} value={type.documentId}>
+                    {type.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
 
           {/* Price */}
@@ -217,6 +255,12 @@ function FoodForm({ title, food, btnText }) {
           </Grid>
         </Grid>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={isSnackOpen}
+        onClose={() => setIsSnackOpen(false)}
+        message="Food is created"
+      />
     </Box>
   );
 }
@@ -225,7 +269,6 @@ export default FoodForm;
 
 const foodInitialValues = {
   name: "",
-  category: "",
   type: "",
   price: "",
   comment: "",
