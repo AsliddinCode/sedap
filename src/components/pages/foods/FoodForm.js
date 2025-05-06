@@ -1,4 +1,3 @@
-
 import React, { use, useEffect } from "react";
 import {
   TextField,
@@ -9,19 +8,28 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Snackbar,
-} from "@mui/material";
-import useFetchItems from "@/hooks/useFetchApi";
+  Snackbar,} from "@mui/material";
+import useFetchApiItems from "@/hooks/useFetchApiItems";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 function FoodForm({ title, food, btnText }) {
+  const router = useRouter();
   const [isSnackOpen, setIsSnackOpen] = useState(false);
   const [formData, setFormData] = useState(null);
   const [category, setCategory] = useState("");
 
   useEffect(() => {
     if (food) {
-      setFormData(food);
+      setFormData({
+        documentId: food.documentId ?? null,
+        name: food.name,
+        image: food.image,
+        type: food.type?.documentId,
+        price: food.price,
+        comment: food.comment,
+      });
+      setCategory(food.type?.category?.documentId);
     } else {
       setFormData(foodInitialValues);
     }
@@ -35,25 +43,45 @@ function FoodForm({ title, food, btnText }) {
     });
   };
 
-  const [categories, isLoading] = useFetchItems("/categories");
-  const [types, typesLoading] = useFetchItems(
+  const [categories, isLoading] = useFetchApiItems("/categories");
+  const [types, typesLoading] = useFetchApiItems(
     `/types?filters[category][documentId][$eq]=${category}`
   );
 
   const handleSubmit = (e) => {
-    try {
-      e.preventDefault();
-      const values = {
-        data: {
-          name: formData.name ?? "test",
-          price: formData.price ?? "1000",
-          comment: formData.comment ?? "q34",
-          type: {
-            connect: [formData.type],
-          },
+    e.preventDefault();
+    console.log("Form Submitted", formData);
+
+    const values = {
+      data: {
+        name: formData.name,
+        image: formData.image,
+        price: formData.price,
+        comment: formData.comment,
+        type: {
+          connect: [formData.type],
         },
+      },
+    };
+
+    if (formData.documentId) {
+      // update
+      const options = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
       };
-  
+      fetch(`http://192.168.100.108:1337/api/foods/${formData.documentId}`, options)
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
+          router.push(`/foods/${res.data.documentId}`);
+        })
+        .catch((error) => console.error(error));
+    } else {
+      // create
       const options = {
         method: "POST",
         headers: {
@@ -63,12 +91,12 @@ function FoodForm({ title, food, btnText }) {
       };
       fetch("http://192.168.100.108:1337/api/foods", options)
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((res) => {
+          console.log(res);
+          router.push(`/foods/${res.data.documentId}`);
+        })
         .catch((error) => console.error(error));
-    } catch(error) {
-      console.error('message', error);
     }
-
   };
 
   console.log("category", category);
@@ -142,7 +170,7 @@ function FoodForm({ title, food, btnText }) {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 {categories.map((cat) => (
-                  <MenuItem key={cat.id} value={cat.documentId}>
+                  <MenuItem key={cat.documentId} value={cat.documentId}>
                     {cat.name}
                   </MenuItem>
                 ))}
@@ -187,6 +215,34 @@ function FoodForm({ title, food, btnText }) {
               value={formData.price}
               onChange={handleChange}
               type="number"
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "#00B074",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#00B074",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#00B074",
+                  },
+                },
+              }}
+            />
+          </Grid>
+
+          {/* image field */}
+          <Grid item size={12}>
+            <TextField
+              fullWidth
+              label="Image"
+              variant="outlined"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
               sx={{
                 "& .MuiInputLabel-root": {
                   color: "#00B074",
@@ -268,7 +324,9 @@ function FoodForm({ title, food, btnText }) {
 export default FoodForm;
 
 const foodInitialValues = {
+  documentId: null,
   name: "",
+  image: "",
   type: "",
   price: "",
   comment: "",

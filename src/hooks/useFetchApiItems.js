@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function useFetchItems(path) {
+function useFetchApiItems(path) {
   const [items, setItems] = useState([]);
+  const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     fetch(`http://192.168.100.108:1337/api${path}`, {
       method: "GET",
@@ -17,6 +19,9 @@ export default function useFetchItems(path) {
         console.log(error);
         setIsLoading(false);
       });
-  }, [path]);
-  return [items, isLoading];
+  }, [path, count]);
+
+  return [items, isLoading, () => setCount(count + 1)];
 }
+
+export default useFetchApiItems;
