@@ -92,9 +92,11 @@ export default function Foods() {
                   transform: "translateX(-50%)",
                   width: "160px",
                   height: "160px",
-                  backgroundColor: "#C4C4C4",
+                  backgroundColor: "white",
                   borderRadius: "50%",
+                  overflow:"hidden",
                   marginTop: "15px",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
                 }}
               >
                 <img
@@ -113,6 +115,7 @@ export default function Foods() {
                     fontWeight: "700",
                     fontSize: "18px",
                     margin: "0 0 8px 0",
+                    marginTop:'10px'
                   }}
                 >
                   {item?.name}

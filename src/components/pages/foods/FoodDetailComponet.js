@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Box, Button } from "@mui/material";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function FoodDetailComponent(props) {
   const router = useRouter();
@@ -61,7 +62,17 @@ export default function FoodDetailComponent(props) {
                 backgroundColor: "#C4C4C4",
                 borderRadius: "14px",
               }}
-            ></div>
+            >
+              <Image
+                width={200}
+                height={200}
+                src={data?.image}
+                alt="test"
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            </div>
             <Box
               sx={{
                 maxWidth: "312px",

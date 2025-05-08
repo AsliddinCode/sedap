@@ -86,7 +86,7 @@ export default function FoodsMap({ selected, data, refetch }) {
                 <Image
                   width={200}
                   height={200}
-                  src={food.image}
+                  src={food?.image}
                   alt="test"
                   style={{
                     objectFit: "contain",
