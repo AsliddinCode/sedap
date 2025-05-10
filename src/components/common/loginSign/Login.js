@@ -131,7 +131,7 @@ export default function LogIn() {
             <Typography
               variant="body2"
               color="primary"
-              sx={{ cursor: "pointer", color: "blue" }}
+              sx={{ cursor: "pointer", color: "skyblue" }}
             >
               Forgot Password?
             </Typography>
