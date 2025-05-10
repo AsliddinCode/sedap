@@ -133,43 +133,7 @@ export default function FoodsMap({ selected, data, refetch }) {
                       gap: "20px",
                       marginTop: "22px",
                     }}
-                  >
-                    <CustomBtnFood
-                      back="#00B07426"
-                      img="/foodIcon.png"
-                      text="View"
-                      onClick={() => router.push(`/foods/${food.documentId}`)}
-                    />
-                    <CustomBtnFood
-                      onClick={() =>
-                        router.push(`/foods/${food.documentId}/edit`)
-                      }
-                      back="#FF5B5B26"
-                      img="/foodIcon2.png"
-                      text="Edit"
-                    />
-                    <CustomBtnFood
-                      onClick={() =>
-                        setDialogState({
-                          open: true,
-                          foodId: food.documentId,
-                        })
-                      }
-                      back="#2D9CDB26"
-                      img="/foodIcon3.png"
-                      text="Delete"
-                    />
-                    <CustomBtnFood
-                      onClick={() =>
-                        router.push(
-                          `/foods/new?name=${food.name}&price=${food.price}`
-                        )
-                      }
-                      back="#5E6C9326"
-                      img="/foodIcon4.png"
-                      text="Duplicate"
-                    />
-                  </div>
+                  ></div>
                 </p>
               </div>
             </div>
@@ -231,7 +195,7 @@ export default function FoodsMap({ selected, data, refetch }) {
                       fontSize: "22px",
                     }}
                   >
-                    {food.price} so'm
+                    {food.price} sum
                   </p>
                 </div>
               </div>
@@ -242,35 +206,6 @@ export default function FoodsMap({ selected, data, refetch }) {
                   flexDirection: "column",
                 }}
               >
-                <CustomBtnFood
-                  back="#00B07426"
-                  img="/foodIcon.png"
-                  text="View"
-                  onClick={() => router.push(`/foods/${food.documentId}`)}
-                />
-                <CustomBtnFood
-                  onClick={() => router.push(`/foods/${food.documentId}/edit`)}
-                  back="#FF5B5B26"
-                  img="/foodIcon2.png"
-                  text="Edit"
-                />
-                <CustomBtnFood
-                  onClick={() =>
-                    setDialogState({
-                      open: true,
-                      foodId: food.documentId,
-                    })
-                  }
-                  back="#2D9CDB26"
-                  img="/foodIcon3.png"
-                  text="Delete"
-                />
-                <CustomBtnFood
-                  onClick={() => router.push(`/foods/${food.documentId}/edit`)}
-                  back="#5E6C9326"
-                  img="/foodIcon4.png"
-                  text="Duplicate"
-                />
               </div>
             </div>
           ))}
