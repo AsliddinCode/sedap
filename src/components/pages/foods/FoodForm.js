@@ -8,7 +8,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Snackbar,} from "@mui/material";
+  Snackbar,
+} from "@mui/material";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -73,7 +74,10 @@ function FoodForm({ title, food, btnText }) {
         },
         body: JSON.stringify(values),
       };
-      fetch(`http://192.168.100.108:1337/api/foods/${formData.documentId}`, options)
+      fetch(
+        `http://192.168.100.108:1337/api/foods/${formData.documentId}`,
+        options
+      )
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
@@ -170,7 +174,7 @@ function FoodForm({ title, food, btnText }) {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 {categories.map((cat) => (
-                  <MenuItem key={cat.documentId} value={cat.documentId}>
+                  <MenuItem key={cat.id} value={cat.documentId}>
                     {cat.name}
                   </MenuItem>
                 ))}

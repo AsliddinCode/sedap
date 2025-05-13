@@ -1,5 +1,8 @@
+import axios from "axios";
+
 const instance = axios.create({
-    baseURL: 'https://some-domain.com/api/',
-    timeout: 1000,
-    headers: {'X-Custom-Header': 'foobar'}
-  });                 
+  baseURL: "http://192.168.100.108:1337/api",
+  timeout: 6000,
+});
+
+export const axiosInstance = instance;

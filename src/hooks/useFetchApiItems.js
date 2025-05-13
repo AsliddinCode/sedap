@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { axiosInstance } from "@/utils/axiosInstance";
 
 function useFetchApiItems(path) {
   const [items, setItems] = useState([]);
@@ -6,19 +7,11 @@ function useFetchApiItems(path) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://192.168.100.108:1337/api${path}`, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data);
-        setItems(data.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
+    axiosInstance
+      .get(path)
+      .then((res) => setItems(res.data.data))
+      .catch((err) => console.log("err", err))
+      .finally(() => setIsLoading(false));
   }, [path, count]);
 
   return [items, isLoading, () => setCount(count + 1)];
