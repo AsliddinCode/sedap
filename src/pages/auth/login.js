@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Paper,
-  Alert,
-} from "@mui/material";
+import {Box,TextField,Button,Typography,Paper,Alert,} from "@mui/material";
 import Link from "next/link";
 import AuthLayout from "@/components/AuthLayout";
 
@@ -23,27 +16,22 @@ export default function LogIn() {
 
     try {
       setLoading(true);
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-      // Uncomment and configure your API endpoint
-      // const response = await fetch("/api/auth/login", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ email, password }),
-      // });
+      if (response.ok) {
+        const res = await response.json();
+        const { user, jwt } = res.body;
 
-      // if (response.ok) {
-      //   const res = await response.json();
-      //   const { user, jwt } = res.body;
-      const user = {
-        id: "23",
-        userName: "ttes",
-      };
-      localStorage.setItem("user", JSON.stringify(user));
-      // localStorage.setItem("jwt", jwt);
-      router.push("/dashboard");
-      // } else {
-      //   setError("Invalid login credentials");
-      // }
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("jwt", jwt);
+        router.push("/dashboard");
+      } else {
+        setError("qaytadan tekshir");
+      }
     } catch (err) {
       setError("An error occurred while logging in");
     } finally {
@@ -53,12 +41,6 @@ export default function LogIn() {
 
   return (
     <AuthLayout>
-      {error && (
-        <Alert severity="error" sx={{ width: "100%", mb: 2 }}>
-          {error}
-        </Alert>
-      )}
-
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -68,10 +50,12 @@ export default function LogIn() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           width: "100vw",
-          height: "100vh",
+          minHeight: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          flexDirection: "column",
+          paddingTop: 4,
         }}
       >
         <Paper
@@ -84,22 +68,25 @@ export default function LogIn() {
             flexDirection: "column",
             gap: 3,
             borderRadius: 5,
-            height: "auto",
-            maxHeight: "850px",
-            backgroundColor: "transparent",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
             border: "none",
             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+            backdropFilter: "blur(10px)",
           }}
         >
+          {error && (
+            <Alert severity="error" sx={{ width: "100%" }}>
+              {error}
+            </Alert>
+          )}
+
           <Box
             sx={{
-              backgroundSize: "cover",
-              backgroundColor: "white",
-              backgroundPosition: "center",
               width: 150,
               height: 150,
               borderRadius: "50%",
-              margin: "0 auto 20px",
+              margin: "0 auto",
+              backgroundColor: "white",
               border: "4px solid rgba(0, 0, 0, 0.2)",
               boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
               transition: "transform 0.2s, box-shadow 0.2s",
@@ -108,7 +95,7 @@ export default function LogIn() {
                 boxShadow: "0 8px 15px rgba(0, 0, 0, 0.2)",
               },
             }}
-          ></Box>
+          />
 
           <Typography
             variant="h4"
@@ -130,7 +117,6 @@ export default function LogIn() {
             autoComplete="email"
             onChange={(e) => setEmail(e.target.value)}
             sx={{
-              marginBottom: 2,
               "& .MuiOutlinedInput-root": {
                 borderRadius: "10px",
               },
@@ -155,7 +141,6 @@ export default function LogIn() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             sx={{
-              marginBottom: 2,
               "& .MuiOutlinedInput-root": {
                 borderRadius: "10px",
               },
@@ -178,7 +163,6 @@ export default function LogIn() {
             fullWidth
             disabled={loading}
             sx={{
-              marginBottom: 2,
               padding: "12px",
               fontWeight: "bold",
               "&:hover": {
@@ -192,10 +176,9 @@ export default function LogIn() {
           </Button>
 
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Link href="/sign" passHref>
+            <Link href="/auth/register" passHref>
               <Typography
                 variant="body2"
-                color="primary"
                 sx={{ cursor: "pointer", color: "skyblue" }}
               >
                 Forgot Password?

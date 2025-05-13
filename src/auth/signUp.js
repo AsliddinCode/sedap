@@ -1,14 +1,15 @@
 import { axiosInstance } from "@/utils/axiosInstance";
 
-export default async function signIn(param, data) {
-  const { email, password } = data;
+export default async function signUp(data) {
+  const { email, password, username } = data;
   try {
     // Request API.
     // fetch
     const data = await axiosInstance
-      .post("/auth/local", {
-        identifier: email,
+      .post("/auth/local/register", {
+        email: email,
         password: password,
+        username: username,
       })
       .then((response) => {
         // Handle success.

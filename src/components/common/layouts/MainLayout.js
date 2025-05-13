@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Navigation from "../Navigation";
@@ -8,14 +7,14 @@ import Search from "../Search";
 function MainLayout(props) {
   const router = useRouter();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const testUser = localStorage.getItem("user");
-      if (!testUser) {
-        router.push("/login");
-      }
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const testUser = localStorage.getItem("user");
+  //     if (!testUser) {
+  //       // router.push("/auth/login");
+  //     }
+  //   }
+  // }, [router]);
 
   return (
     <main
