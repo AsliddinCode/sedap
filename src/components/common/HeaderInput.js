@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, TextField, IconButton, Button } from "@mui/material";
 import PageTitle from "./PageTitle";
+import Image from "next/image";
 
 function HeaderInput(props) {
   const { setSearch, handleClick } = props;
@@ -47,7 +48,9 @@ function HeaderInput(props) {
               "&:hover": { backgroundColor: "#F5F5F5" },
             }}
           >
-            <img src="/grid.png" alt="" />
+            <Image src="/grid.png" alt="" 
+            width={24} 
+            height={24} />
           </IconButton>
           <IconButton
             sx={{
@@ -58,7 +61,12 @@ function HeaderInput(props) {
               "&:hover": { backgroundColor: "#F5F5F5" },
             }}
           >
-            <img src="/layer.png" alt="" />
+            <Image
+              src="/layer.png" 
+              alt="Layer Image"
+              width={24} 
+              height={24} 
+            />
           </IconButton>
         </Box>
 

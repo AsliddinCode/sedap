@@ -1,24 +1,31 @@
 import React from "react";
+import { Box, Typography } from "@mui/material";
 import PageTitle from "@/components/common/PageTitle";
 import CustomerTable from "./CustomerTable";
-import styles from "@/styles/order.module.css";
 import CustomerFilter from "./CustomerFilter";
 
 export default function CustomersList() {
   return (
     <>
-      <div className={styles["orderDiv"]}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontFamily: '"Barlow", sans-serif',
+          marginBottom: "40px", 
+        }}
+      >
         <PageTitle
           title="General Customer"
           subtitle="Here is your general customers list data"
         />
-        <div className={styles["calendar"]}>
+        <Box sx={{ display: "flex" }}>
           <CustomerFilter />
-        </div>
-      </div>
-      <div className={"tableData"}>
+        </Box>
+      </Box>
+      <Box className="tableData">
         <CustomerTable />
-      </div>
+      </Box>
     </>
   );
 }

@@ -9,7 +9,7 @@ export const orderListData = [
     items: [
       {
         id: "1",
-        img: "/turtburchak.png",
+        img: "",
         name: "MAIN COURSE",
         text: "Watermelon juice with ice",
         x: 5,
@@ -21,7 +21,7 @@ export const orderListData = [
       name: "Kevin Hobs Jr.",
       phone: "+12 345 5662 66",
       time: "12.53",
-      img: "/turtburchak.png",
+      img: "",
     },
   },
   {
@@ -46,7 +46,7 @@ export const orderListData = [
       name: "Kevin Hobs Jr.",
       phone: "+12 345 5662 66",
       time: "12.53",
-      img: "/turtburchak.png",
+      img: "/",
     },
   },
   {
@@ -71,7 +71,7 @@ export const orderListData = [
       name: "Kevin Hobs Jr.",
       phone: "+12 345 5662 66",
       time: "12.53",
-      img: "/turtburchak.png",
+      img: "/",
     },
   },
   {
@@ -96,7 +96,7 @@ export const orderListData = [
       name: "Kevin Hobs Jr.",
       phone: "+12 345 5662 66",
       time: "12.53",
-      img: "/turtburchak.png",
+      img: "/",
     },
   },
   {
@@ -121,7 +121,7 @@ export const orderListData = [
       name: "Kevin Hobs Jr.",
       phone: "+12 345 5662 66",
       time: "12.53",
-      img: "/turtburchak.png",
+      img: "/",
     },
   },
   {
@@ -146,7 +146,7 @@ export const orderListData = [
       name: "Kevin Hobs Jr.",
       phone: "+12 345 5662 66",
       time: "12.53",
-      img: "/turtburchak.png",
+      img: "",
     },
   },
 ];

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import CustomersList from "@/components/pages/customers/CustomersList";
 import MainLayout from "@/components/common/layouts/MainLayout";
 
 

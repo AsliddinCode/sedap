@@ -72,11 +72,12 @@ function Navigation() {
       <aside style={{ height: "100%" }} className={styles["aside"]}>
         <div className={styles["aside-header"]}>
           <Image
-            src="/Sedap.png"
-            alt=""
+            src="/sedap.png"
+            alt="Sedap"
             className={styles["logo"]}
             width={167}
             height={49}
+            priority
           />
           <p
             style={{

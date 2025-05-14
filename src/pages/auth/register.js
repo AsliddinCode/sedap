@@ -176,7 +176,7 @@ export default function RegisterPage() {
         /> */}
 
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-          Ro'yxatdan o'tish
+          Ruyxatdan otish
         </Button>
 
         <Grid container justifyContent="flex-end">

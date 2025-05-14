@@ -75,7 +75,7 @@ export default function UserMenu(props) {
         <MenuItem onClick={handleAcc}>Profil</MenuItem>
         <MenuItem onClick={handleClose}>Sozlamalar</MenuItem>
         {!isXLargeScreen && (
-          <MenuItem onClick={handleClose}>qo'shildi</MenuItem>
+          <MenuItem onClick={handleClose}>qoshildi</MenuItem>
         )}
         <MenuItem
           onClick={logOut}

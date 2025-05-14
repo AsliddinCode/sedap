@@ -1,16 +1,22 @@
 import React from "react";
+import { Box, Typography } from "@mui/material";
 
-function PageTitle(props) {
-  const { title, subtitle } = props;
+function PageTitle({ title, subtitle }) {
   return (
-    <div>
-      <h1 style={{
-        marginBottom:'16px'
-      }}>{title}</h1>
-      <p style={{
-        color:'#A3A3A3'
-      }}>{subtitle}</p>
-    </div>
+    <Box>
+      <Typography
+        variant="h5"
+        sx={{ marginBottom: "16px", fontWeight: 600, fontFamily: "Barlow, sans-serif" }}
+      >
+        {title}
+      </Typography>
+      <Typography
+        variant="body2"
+        sx={{ color: "#A3A3A3", fontFamily: "Barlow, sans-serif" }}
+      >
+        {subtitle}
+      </Typography>
+    </Box>
   );
 }
 

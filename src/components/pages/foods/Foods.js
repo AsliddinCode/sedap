@@ -3,6 +3,7 @@ import useFetchItems from "@/hooks/useFetchApiItems";
 import HeaderInput from "@/components/common/HeaderInput";
 import { useRouter } from "next/router";
 import { icons } from "@/data";
+import Image from "next/image";
 
 export default function Foods() {
   const [search, setSearch] = useState("");
@@ -99,7 +100,7 @@ export default function Foods() {
                   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
                 }}
               >
-                <img
+                <Image
                   src={item?.image}
                   alt={item?.name}
                   style={{
@@ -155,7 +156,7 @@ export default function Foods() {
                         }}
                         onClick={() => handleAction(icon.name, item.documentId)}
                       >
-                        <img
+                        <Image
                           src={icon.img}
                           alt={icon.name}
                           style={{ width: "24px", height: "24px" }}

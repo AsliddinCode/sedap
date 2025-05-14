@@ -1,12 +1,4 @@
-.orderDiv {
-  display: flex;
-  justify-content: space-between;
-  font-family: "Barlow", sans-serif;
-  margin-bottom: 40px;
-}
-.calendar {
-  display: flex;
-}
+
 .status {
   display: flex;
   justify-content: center;

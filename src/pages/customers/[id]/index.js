@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { customerData } from "@/data";
 import Box from "@mui/material/Box";
-
 import Grid from "@mui/material/Grid";
+import Image from "next/image";
 
 export default function CustomerDetail() {
   const router = useRouter();
@@ -27,7 +27,7 @@ export default function CustomerDetail() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div >
+      <div>
         <PageTitle
           title={"Customer Detail"}
           subtitle={"Here your Customer Detail Profile"}
@@ -40,11 +40,11 @@ export default function CustomerDetail() {
                 padding: "30px",
                 display: "flex",
                 borderRadius: "16px",
-                minWidth:'972px'
+                minWidth: "972px",
               }}
             >
               <div>
-                <img src="/avatar.png" alt="" />
+                <Image src="/avatar.png" alt="" width={222} height={217} />
               </div>
               <div
                 style={{
@@ -94,7 +94,7 @@ export default function CustomerDetail() {
                         height: "60px",
                       }}
                     >
-                      <img src="/info.png" alt="" />
+                      <Image src="/info.png" alt="" width={60} height={60} />
                     </button>
                     <button
                       style={{
@@ -104,7 +104,7 @@ export default function CustomerDetail() {
                         height: "60px",
                       }}
                     >
-                      <img src="/edit.png" alt="" />
+                      <Image src="/edit.png" alt="" width={60} height={60} />
                     </button>
                   </div>
                 </div>
@@ -123,7 +123,7 @@ export default function CustomerDetail() {
                       justifyContent: "center",
                     }}
                   >
-                    <img src="/mail.png" alt="" />
+                    <Image src="/mail.png" alt="" width={16} height={16}/>
                     <p>eren.yeager@mail.co.id</p>
                   </div>
                   <div
@@ -133,7 +133,7 @@ export default function CustomerDetail() {
                       justifyContent: "center",
                     }}
                   >
-                    <img src="/mail.png" alt="" />
+                    <Image src="/mail.png" alt="" width={16} height={16}/>
                     <p>+012 345 6789</p>
                   </div>
                   <div
@@ -143,7 +143,7 @@ export default function CustomerDetail() {
                       justifyContent: "center",
                     }}
                   >
-                    <img src="/mail.png" alt="" />
+                    <Image src="/mail.png" alt="" width={16} height={16}/>
                     <p>Highspeed Studios</p>
                   </div>
                 </div>
@@ -211,13 +211,11 @@ export default function CustomerDetail() {
                 <p>Name</p>
                 <h2>Eren Yeager</h2>
               </div>
-              <img
-                style={{
-                  width: "60px",
-                  height: "56px",
-                }}
+              <Image
                 src="/master.png"
                 alt=""
+                width={60}
+                height={56}
               />
             </div>
           </Grid>
@@ -339,14 +337,14 @@ function Lists(props) {
       }}
     >
       <div>
-        <img
+        <Image
           style={{
-            width: "87px",
-            height: "87px",
             marginRight: "30px",
           }}
           src={item.img}
           alt=""
+          width={87}
+          height={87}
         />
       </div>
 

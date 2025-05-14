@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "@/styles/order.module.css";
-import { orderListData } from '@/data'
+import { orderListData } from "@/data";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Table() {
   const columns = [
@@ -61,8 +62,19 @@ function TableHead({ name }) {
             margin: "10px",
           }}
         >
-          <img src="./Vector1.png" />
-          <img src="./Vector2.png" />
+          <Image
+            src="/Vector1.png"
+            alt="igm"
+            width={15}
+            height={15}
+          />
+          <Image
+
+            src="/Vector2.png"
+            alt="igm"
+            width={15}
+            height={15}
+          />
         </div>
       </div>
     </th>
@@ -75,7 +87,7 @@ function TableRow(props) {
 
   const goToDetails = (itemId) => {
     router.push(`/orders/${itemId}`);
-  };  
+  };
 
   return (
     <tr
