@@ -5,14 +5,23 @@ import { useRouter } from "next/router";
 import { icons } from "@/data";
 import Image from "next/image";
 
-export default function Foods() {
+export default function Foods({}) {
   const [search, setSearch] = useState("");
   const [filteredFoods, setFilteredFoods] = useState([]);
   const router = useRouter();
-  const [foods, isLoading, refetch] = useFetchItems(
-    "/foods?populate[type][populate][0]=category"
+  let user = null;
+  if (typeof window !== "undefined") {
+    user = localStorage.getItem("user");
+    user = user ? JSON.parse(user) : null;
+  }
+  const [restaurants, isresLoading, refetchres] = useFetchItems(
+    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
   );
-  console.log(foods, "food");
+  const foundRestaurant = restaurants[0] ?? null;
+  const [foods, isLoading, refetch] = useFetchItems(
+    `/foods?filters[restaurant][documentId][$eqi]=${foundRestaurant?.documentId}&populate[type][populate][0]=category`
+  );
+
   useEffect(() => {
     const result =
       search.length > 0
@@ -30,7 +39,7 @@ export default function Foods() {
   const handleDelete = async (foodId) => {
     try {
       const res = await fetch(
-        `http://192.168.100.108:1337/api/foods/${foodId}`,
+        `http://192.168.100.84:1337/api/foods/${foodId}`,
         {
           method: "DELETE",
         }
@@ -59,7 +68,7 @@ export default function Foods() {
     <>
       <HeaderInput setSearch={setSearch} handleClick={handleClick} />
 
-      {isLoading ? (
+      {isLoading && foundRestaurant ? (
         <p style={{ textAlign: "center" }}>Yuklanmoqda...</p>
       ) : filteredFoods.length > 0 ? (
         <div
@@ -95,17 +104,17 @@ export default function Foods() {
                   height: "160px",
                   backgroundColor: "white",
                   borderRadius: "50%",
-                  overflow:"hidden",
+                  overflow: "hidden",
                   marginTop: "15px",
                   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
                 }}
               >
                 <Image
+                  width={160}
+                  height={160}
                   src={item?.image}
                   alt={item?.name}
                   style={{
-                    width: 160,
-                    height: 160,
                     objectFit: "contain",
                   }}
                 />
@@ -116,7 +125,7 @@ export default function Foods() {
                     fontWeight: "700",
                     fontSize: "18px",
                     margin: "0 0 8px 0",
-                    marginTop:'10px'
+                    marginTop: "10px",
                   }}
                 >
                   {item?.name}
@@ -128,7 +137,7 @@ export default function Foods() {
                     margin: "0 0 20px 0",
                   }}
                 >
-                  {item?.type?.name} / {item?.type?.category?.name}
+                  {item?.type?.category?.name} / {item?.type?.name}
                 </p>
                 <div
                   style={{
@@ -159,7 +168,8 @@ export default function Foods() {
                         <Image
                           src={icon.img}
                           alt={icon.name}
-                          style={{ width: "24px", height: "24px" }}
+                          width={24}
+                          height={24}
                         />
                       </button>
                       <span

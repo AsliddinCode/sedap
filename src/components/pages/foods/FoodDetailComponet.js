@@ -63,7 +63,7 @@ export default function FoodDetailComponent(props) {
                 borderRadius: "14px",
               }}
             >
-              <Image
+              <img
                 width={200}
                 height={200}
                 src={data?.image}

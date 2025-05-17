@@ -1,3 +1,4 @@
+
 import React, { use, useEffect } from "react";
 import {
   TextField,
@@ -14,7 +15,7 @@ import useFetchApiItems from "@/hooks/useFetchApiItems";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-function FoodForm({ title, food, btnText }) {
+function FoodForm({ title, food, btnText, }) {
   const router = useRouter();
   const [isSnackOpen, setIsSnackOpen] = useState(false);
   const [formData, setFormData] = useState(null);
@@ -55,6 +56,7 @@ function FoodForm({ title, food, btnText }) {
 
     const values = {
       data: {
+        // restaurant: restaurant.documentId,
         name: formData.name,
         image: formData.image,
         price: formData.price,
@@ -74,10 +76,7 @@ function FoodForm({ title, food, btnText }) {
         },
         body: JSON.stringify(values),
       };
-      fetch(
-        `http://192.168.100.108:1337/api/foods/${formData.documentId}`,
-        options
-      )
+      fetch(`http://192.168.100.108:1337/api/foods/${formData.documentId}`, options)
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
