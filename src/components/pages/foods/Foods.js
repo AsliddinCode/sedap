@@ -9,28 +9,6 @@ export default function Foods({}) {
   const [search, setSearch] = useState("");
   const [filteredFoods, setFilteredFoods] = useState([]);
   const router = useRouter();
-  let user = null;
-  if (typeof window !== "undefined") {
-    user = localStorage.getItem("user");
-    user = user ? JSON.parse(user) : null;
-  }
-  const [restaurants, isresLoading, refetchres] = useFetchItems(
-    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
-  );
-  const foundRestaurant = restaurants[0] ?? null;
-  const [foods, isLoading, refetch] = useFetchItems(
-    `/foods?filters[restaurant][documentId][$eqi]=${foundRestaurant?.documentId}&populate[type][populate][0]=category`
-  );
-
-  useEffect(() => {
-    const result =
-      search.length > 0
-        ? foods.filter((item) =>
-            item.name?.toLowerCase().includes(search.toLowerCase())
-          )
-        : foods;
-    setFilteredFoods(result);
-  }, [search, foods]);
 
   const handleClick = () => {
     router.push("/foods/new");
@@ -64,6 +42,40 @@ export default function Foods({}) {
     }
   };
 
+  let user = null;
+  if (typeof window !== "undefined") {
+    user = localStorage.getItem("user");
+    user = user ? JSON.parse(user) : null;
+  }
+
+  const [restaurants, isresLoading, refetchres] = useFetchItems(
+    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
+  );
+
+  const foundRestaurant = restaurants[0] ?? null;
+
+  const [foods, isLoading, refetch] = useFetchItems(
+    `/foods?filters[restaurant][documentId][$eqi]=${foundRestaurant?.documentId}&populate[type][populate][0]=category`
+  );
+
+  useEffect(() => {
+    const result =
+      search.length > 0
+        ? foods.filter((item) =>
+            item.name?.toLowerCase().includes(search.toLowerCase())
+          )
+        : foods;
+    setFilteredFoods(result);
+  }, [search, foods]);
+
+  const image = (item) => {
+    const img = item?.image;
+    if (img.startsWith("https") || img.endsWith(".jpg")) {
+      return img;
+    }else{
+      return "/trash.png"; 
+    } 
+  };
   return (
     <>
       <HeaderInput setSearch={setSearch} handleClick={handleClick} />
@@ -112,7 +124,7 @@ export default function Foods({}) {
                 <Image
                   width={160}
                   height={160}
-                  src={item?.image}
+                  src={image(item)}
                   alt={item?.name}
                   style={{
                     objectFit: "contain",

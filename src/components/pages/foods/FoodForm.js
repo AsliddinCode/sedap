@@ -15,11 +15,23 @@ import useFetchApiItems from "@/hooks/useFetchApiItems";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-function FoodForm({ title, food, btnText, }) {
+function FoodForm({ title, food, btnText }) {
   const router = useRouter();
   const [isSnackOpen, setIsSnackOpen] = useState(false);
   const [formData, setFormData] = useState(null);
   const [category, setCategory] = useState("");
+
+  let user = null;
+  if (typeof window !== "undefined") {
+    user = localStorage.getItem("user");
+    user = user ? JSON.parse(user) : null;
+  }
+
+  const [restaurants, isresLoading, refetchres] = useFetchApiItems(
+    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
+  );
+
+  const foundRestaurant = restaurants[0] ?? null;
 
   useEffect(() => {
     if (food) {
@@ -45,7 +57,9 @@ function FoodForm({ title, food, btnText, }) {
     });
   };
 
-  const [categories, isLoading] = useFetchApiItems("/categories");
+  const [categories, isLoading] = useFetchApiItems(
+    `/categories?filters[restaurant][documentId][$eq]=${foundRestaurant?.documentId}`
+  );
   const [types, typesLoading] = useFetchApiItems(
     `/types?filters[category][documentId][$eq]=${category}`
   );
@@ -56,7 +70,6 @@ function FoodForm({ title, food, btnText, }) {
 
     const values = {
       data: {
-        // restaurant: restaurant.documentId,
         name: formData.name,
         image: formData.image,
         price: formData.price,
@@ -64,6 +77,7 @@ function FoodForm({ title, food, btnText, }) {
         type: {
           connect: [formData.type],
         },
+        restaurant: foundRestaurant?.documentId ?? null,
       },
     };
 
@@ -76,7 +90,7 @@ function FoodForm({ title, food, btnText, }) {
         },
         body: JSON.stringify(values),
       };
-      fetch(`http://192.168.100.108:1337/api/foods/${formData.documentId}`, options)
+      fetch(`http://192.168.100.84:1337/api/foods/${formData.documentId}`, options)
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
@@ -84,31 +98,30 @@ function FoodForm({ title, food, btnText, }) {
         })
         .catch((error) => console.error(error));
     } else {
-      // create
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      };
-      fetch("http://192.168.100.108:1337/api/foods", options)
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-          router.push(`/foods/${res.data.documentId}`);
-        })
-        .catch((error) => console.error(error));
+      if (values.data.restaurant) {
+        // create
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        };
+        fetch("http://192.168.100.84:1337/api/foods", options)
+          .then((response) => response.json())
+          .then((res) => {
+            console.log(res);
+            router.push(`/foods/${res.data.documentId}`);
+          })
+          .catch((error) => console.error(error));
+      }
     }
   };
 
-  console.log("category", category);
 
   if (!formData) {
     return null;
   }
-
-  console.log("hey", formData);
 
   return (
     <Box
