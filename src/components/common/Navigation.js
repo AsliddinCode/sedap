@@ -43,9 +43,9 @@ function Navigation() {
     },
     {
       id: 6,
-      linkName: "Analytics",
+      linkName: "Categoris",
       linkImg: <AnalyticsOutlinedIcon />,
-      href: "#",
+      href: "/categorie",
     },
     {
       id: 7,

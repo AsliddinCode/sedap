@@ -109,7 +109,7 @@ function Search() {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "20px",
+
         }}
       >
         <h3
