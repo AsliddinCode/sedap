@@ -1,29 +1,28 @@
 import Head from "next/head";
 import MainLayout from "@/components/common/layouts/MainLayout";
+import useCurrentUser from "@/hooks/useCurrentUser";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
 
 export default function Dashboard() {
-  let user = null;
-  if (typeof window !== "undefined") {
-    user = localStorage.getItem("user");
-    user = user ? JSON.parse(user) : null;
-  }
-  console.log("user", user);
-  const [restaurants, isresLoading, refetchres] = useFetchApiItems(
-    `/restaurants?filters[users][documentId][$eq]=${user?.documentId}`
-  );
-  console.log("restaurants", restaurants);
-  const foundRestaurant = restaurants[0] ?? null;
+  const user = useCurrentUser()
+  // const [hanCreateCat] = useFetchApiItems()
 
-  const handleCategories = (res) => {
-    if (res?.documentId) {
-      console.log("dsd", res.documentId);
+  // hanCreateCat({
+  //   name: "Tapichka",
+  //   description: "kalish",
+  //   internalName: "Asliddin_meet",
+  //   restaurant: resId,
+  // })
+ 
+  const handleCategories = (resId) => {
+    if (resId) {
+      console.log("dsd", resId);
       const values = {
         data: {
           name: "Tapichka",
           description: "kalish",
           internalName: "Asliddin_meet",
-          restaurant: res.documentId,
+          restaurant: resId,
         },
       };
 
@@ -35,7 +34,7 @@ export default function Dashboard() {
         body: JSON.stringify(values),
       };
 
-      fetch("http://192.168.100.84:1337/api/categories", options)
+      fetch("http://192.168.100.113:1337/api/categories", options)
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
@@ -45,7 +44,7 @@ export default function Dashboard() {
   };
 
   const [categories, isLoading] = useFetchApiItems(
-    `/categories?filters[restaurant][documentId][$eqi]=${foundRestaurant?.documentId}`
+    `/categories?filters[restaurant][documentId][$eqi]=${user?.restaurantId}`
   );
 
   const handletype = (cats) => {
@@ -66,7 +65,7 @@ export default function Dashboard() {
         body: JSON.stringify(values),
       };
 
-      fetch("http://192.168.100.84:1337/api/types", options)
+      fetch("http://192.168.100.113:1337/api/types", options)
         .then((response) => response.json())
         .then((res) => {
           console.log(res);
@@ -85,18 +84,18 @@ export default function Dashboard() {
       <div>
         <button
           onClick={() => {
-            handleCategories(foundRestaurant);
+            handleCategories(user?.restaurantId);
           }}
         >
           Categories
         </button>
-        <button
+        {/* <button
           onClick={() => {
             handletype(categories);
           }}
         >
           type
-        </button>
+        </button> */}
       </div>
     </>
   );

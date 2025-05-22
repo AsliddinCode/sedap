@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
 import { axiosInstance } from "@/utils/axiosInstance";
 
+const ROOT_API = '/categories'
+
 function useFetchApiItems(path) {
   const [items, setItems] = useState([]);
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+
+  const hanCreateCat = (data) => {
+    axiosInstance
+  }
+
+  const handleDelete = (id) => {
+
+  }
 
   useEffect(() => {
     axiosInstance
@@ -14,7 +24,7 @@ function useFetchApiItems(path) {
       .finally(() => setIsLoading(false));
   }, [path, count]);
 
-  return [items, isLoading, () => setCount(count + 1)];
+  return [items, isLoading, () => setCount(count + 1), hanCreateCat];
 }
 
 export default useFetchApiItems;

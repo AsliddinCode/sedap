@@ -120,7 +120,7 @@ function Search() {
             margin: 0,
           }}
         >
-          <span style={{ fontWeight: "400" }}>Mr</span>, {user?.username || "Guest"}
+          <span style={{ fontWeight: "400" }}>Mr</span>. {user?.username || "Guest"}
         </h3>
 
         <UserMenu
