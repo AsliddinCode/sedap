@@ -11,11 +11,6 @@ function useFetchApiItems(path) {
   const hanCreateCat = (data) => {
     axiosInstance
   }
-
-  const handleDelete = (id) => {
-
-  }
-
   useEffect(() => {
     axiosInstance
       .get(path)

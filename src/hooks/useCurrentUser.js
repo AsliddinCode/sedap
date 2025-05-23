@@ -11,6 +11,5 @@ export default function useCurrentUser() {
       setUser(user1);
     }
   }, [])
-
   return user;
 }
