@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Grid, Box, Snackbar } from "@mui/material";
 import MainLayout from "@/components/common/layouts/MainLayout";
-import useCategory from '@/hooks/useCategories'
+import useCategory from '@/hooks/useCategory'
 
 
-export default function Category() {
+export default function Type() {
   const [ handleCreateCategory] = useCategory();
   const [isSnackOpen, setIsSnackOpen] = useState(false);
   const [cate, setCate] = useState({
@@ -102,8 +102,8 @@ export default function Category() {
   );
 }
 
-Category.getLayout = (pageProps) => (
+Type.getLayout = (pageProps) => (
   <MainLayout>
-    <Category {...pageProps} />
+    <Type {...pageProps} />
   </MainLayout>
 );

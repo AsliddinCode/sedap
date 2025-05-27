@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Grid, Box, Snackbar } from "@mui/material";
 import MainLayout from "@/components/common/layouts/MainLayout";
-import useCategory from '@/hooks/useCategory'
+import useCategories from '@/hooks/useCategories'
 
 
 export default function Category() {
-  const [ handleCreateCategory] = useCategory();
+  const [ handleCreateCategory] = useCategories();
   const [isSnackOpen, setIsSnackOpen] = useState(false);
   const [cate, setCate] = useState({
     name: '',

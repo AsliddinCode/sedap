@@ -49,9 +49,9 @@ function Navigation() {
     },
     {
       id: 7,
-      linkName: "Calendar",
+      linkName: "Type",
       linkImg: <CalendarMonthIcon />,
-      href: "#",
+      href: "/type",
     },
     {
       id: 8,

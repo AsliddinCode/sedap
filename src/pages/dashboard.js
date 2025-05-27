@@ -1,13 +1,7 @@
 import Head from "next/head";
 import MainLayout from "@/components/common/layouts/MainLayout";
-import useCurrentUser from "@/hooks/useCurrentUser";
-import useFetchApiItems from "@/hooks/useFetchApiItems";
 
 export default function Dashboard() {
-  const [user, handleCategories, handleType] = useCurrentUser();
-  const [categories, isLoading] = useFetchApiItems(
-    `/categories?filters[restaurant][documentId][$eqi]=${user?.restaurantId}`
-  );
 
   return (
     <>
@@ -18,20 +12,6 @@ export default function Dashboard() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <button
-          onClick={() => {
-            handleCategories(user.restaurantId);
-          }}
-        >
-          Categories
-        </button>
-        <button
-          onClick={() => {
-            handleType(categories);
-          }}
-        >
-          type
-        </button>
       </div>
     </>
   );
