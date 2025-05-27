@@ -4,74 +4,10 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
 
 export default function Dashboard() {
-  const user = useCurrentUser();
-  const [hanCreateCat] = useFetchApiItems();
-
-  // hanCreateCat({
-  //   name: "Tapichka",
-  //   description: "kalish",
-  //   internalName: "Asliddin_meet",
-  //   restaurant: resId,
-  // });
-
-  const handleCategories = (resId) => {
-    if (resId) {
-      console.log("dsd", resId);
-      const values = {
-        data: {
-          name: "Tapichka",
-          description: "kalish",
-          internalName: "Asliddin_meet",
-          restaurant: resId,
-        },
-      };
-
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      };
-
-      fetch("http://192.168.100.113:1337/api/categories", options)
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => console.error(error));
-    }
-  };
-
+  const [user, handleCategories, handleType] = useCurrentUser();
   const [categories, isLoading] = useFetchApiItems(
     `/categories?filters[restaurant][documentId][$eqi]=${user?.restaurantId}`
   );
-
-  const handleType = (cats) => {
-    const [firstCategory] = cats;
-    const categoryId = firstCategory?.id || firstCategory?.documentId;
-    const values = {
-      data: {
-        name: "Tapichka",
-        category: categoryId,
-      },
-    };
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    };
-
-    fetch("http://192.168.100.113:1337/api/types", options)
-      .then((response) => response.json())
-      .then((res) => {
-        console.log("Type created:", res);
-      })
-      .catch((error) => console.error("Type creation failed:", error));
-  };
 
   return (
     <>
@@ -84,7 +20,7 @@ export default function Dashboard() {
       <div>
         <button
           onClick={() => {
-            handleCategories(user?.restaurantId);
+            handleCategories(user.restaurantId);
           }}
         >
           Categories

@@ -17,7 +17,7 @@ export default function Foods({}) {
   const handleDelete = async (foodId) => {
     try {
       const res = await fetch(
-        `http://192.168.100.113:1337/api/foods/${foodId}`,
+        `http://192.168.100.109:1337/api/foods/${foodId}`,
         {
           method: "DELETE",
         }

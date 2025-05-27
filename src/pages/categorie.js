@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import MainLayout from "@/components/common/layouts/MainLayout";
+import useCurrentUser from "@/hooks/useCurrentUser";
 import useFetchApiItems from "@/hooks/useFetchApiItems";
 import {
   TextField,
@@ -14,7 +15,7 @@ import axios from "axios";
 
 export default function Categories() {
   const [foundRestaurant, setFoundRestaurant] = useState(null);
-
+  const [user, handleCategories, handleType] = useCurrentUser();
   const [showForm, setShowForm] = useState(false);
 
   const [newCategoryName, setNewCategoryName] = useState("");
@@ -108,7 +109,7 @@ export default function Categories() {
         {!showForm && (
           <Button
             variant="contained"
-            onClick={() => setShowForm(true)}
+            onClick={() => handleCategories()}
             sx={{ mb: 4 }}
           >
             Kategoriyani qo'shish
