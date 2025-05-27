@@ -30,34 +30,6 @@ export default function useCurrentUser() {
       .catch((error) => console.error("Type creation failed:", error));
   };
 
-  const handleCategories = (resId) => {
-    if (resId) {
-      const values = {
-        data: {
-          name: "semichka",
-          description: "kalish",
-          internalName: "Asliddin_meet",
-          restaurant: resId,
-        },
-      };
-
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      };
-
-      fetch("http://192.168.100.109:1337/api/categories", options)
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => console.error(error));
-    }
-  };
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       let user1 = localStorage.getItem("user");
@@ -66,5 +38,5 @@ export default function useCurrentUser() {
     }
   }, []);
 
-  return [user, handleCategories, handleType];
+  return [user,  handleType];
 }

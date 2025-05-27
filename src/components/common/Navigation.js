@@ -45,7 +45,7 @@ function Navigation() {
       id: 6,
       linkName: "Categoris",
       linkImg: <AnalyticsOutlinedIcon />,
-      href: "/categorie",
+      href: "/category",
     },
     {
       id: 7,
