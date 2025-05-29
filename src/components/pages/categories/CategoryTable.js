@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import useCurrentUser from "@/hooks/useCurrentUser";
-import useFetchApiItems from "@/hooks/useFetchApiItems";
 
+import React, { useEffect, useState } from "react";
+import useCurrent from "@/hooks/useCurrentUser";
+import useFetchApiItems from "@/hooks/useFetchApiItems";
+import CustomBtnFood from "@/components/pages/foods/CustomBtnFood";
 import {
   Table,
   TableHead,
@@ -11,27 +12,28 @@ import {
   Paper,
 } from "@mui/material";
 
-function CategoryTable() {
-  const user = useCurrentUser();
+function CategoryTable({ setDialogState, handleChange, handleSubmit }) {
+  const user = useCurrent();
+  console.log(user);
 
   const [form, setForm] = useState({
-    documentId: '',
+    documentId: null,
     name: "",
     description: "",
   });
 
-  const [foundRestaurant, setFoundRestaurant] = useState(null);
+  // const [foundRestaurant, setFoundRestaurant] = useState(null);
 
   const [categories, isLoading, refetchCategories] = useFetchApiItems(
-    foundRestaurant
-      ? `/categories?filters[restaurant][documentId][$eq]=${foundRestaurant.documentId}`
+    user?.restaurantId
+      ? `/categories?filters[restaurant][documentId][$eq]=${user?.restaurantId}`
       : null
   );
 
-  const [dialogState, setDialogState] = useState({
-    open: false,
-    categoryId: null,
-  });
+  // const [dialogState, setDialogState] = useState({
+  //   open: false,
+  //   categoryId: null,
+  // });
 
   const handleDelete = (categoryId) => {
     if (categoryId) {
@@ -54,11 +56,11 @@ function CategoryTable() {
     }
   };
 
-  useEffect(() => {
-    if (user?.restaurants?.length > 0) {
-      setFoundRestaurant(user.restaurants[0]);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user?.restaurantId) {
+  //     setFoundRestaurant(user.restaurants[0]);
+  //   }
+  // }, [user]);
 
   const [editCategory, setEditCategory] = useState(null);
 
@@ -109,7 +111,7 @@ function CategoryTable() {
                     <CustomBtnFood
                       onClick={() => setEditCategory(cat)}
                       back="#FF5B5B26"
-                      img="/foodIcon2.png"
+                      img="/foodicon2.png"
                       text="Edit"
                     />
                     <CustomBtnFood

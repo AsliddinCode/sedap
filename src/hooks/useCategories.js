@@ -1,34 +1,50 @@
 import { useEffect, useState } from "react";
+import { axiosInstance } from "@/utils/axiosInstance";
 
 export default function useCategory() {
   const [user, setUser] = useState(null);
-  const handleCreateCategory = (data) => {
-    if (user.restaurantId) {
+  const [error, setError]=useState()
+
+  const handleCreateCategory = async (data) => {
+    if (user?.restaurantId) {
       const values = {
         data: {
           name: data.name,
           description: data.description,
           internalName: `Asliddin_${data.name}`,
-          restaurant: user?.restaurantId,
+          restaurant: user.restaurantId,
         },
       };
 
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      };
-
-      fetch("http://192.168.100.109:1337/api/categories", options)
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => console.error(error));
+      try {
+        const response = await axiosInstance.post(
+          "/categories",
+          values,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("Success:", response.data);
+      } catch (error) {
+        console.error("Error creating category:", error);
+      }
     }
   };
+
+
+
+  const deletyCategory = async (documentId)=>{
+    axiosInstance
+    .delete(documentId)
+    .then((res)=>{
+      console.log(res, 'res');
+    })
+    .catch((err)=>{
+      setError(err)
+    })
+  }
   useEffect(() => {
     if (typeof window !== "undefined") {
       let user1 = localStorage.getItem("user");
@@ -36,5 +52,6 @@ export default function useCategory() {
       setUser(user1);
     }
   }, []);
+
   return [handleCreateCategory];
 }

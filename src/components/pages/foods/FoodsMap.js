@@ -9,6 +9,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
+import { axiosInstance } from "@/utils/axiosInstance";
 
 export default function FoodsMap({ selected, data, refetch }) {
   const router = useRouter();
@@ -16,28 +17,27 @@ export default function FoodsMap({ selected, data, refetch }) {
     open: false,
     foodId: null,
   });
-
-  const handleDelete = (foodId) => {
-    if (foodId) {
-      fetch(`http://192.168.100.109:1337/api/foods/${foodId}`, {
-        method: "DELETE",
-      })
-        .then((res) => {
-          console.log("delete:", res);
-          if (res.ok) {
-            setDialogState({
-              open: false,
-              foodId: null,
-            });
-            refetch();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  
+  const handleDelete = async (foodId) => {
+    if (!foodId) return;
+  
+    try {
+      const res = await axiosInstance.delete(`/foods/${foodId}`);
+      console.log("delete:", res.data);
+  
+      setDialogState({
+        open: false,
+        foodId: null,
+      });
+  
+      if (typeof refetch === "function") {
+        refetch();
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
     }
   };
-
+  
   return (
     <div
       style={{
