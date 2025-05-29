@@ -20,7 +20,7 @@ function useFetchApiItems(path) {
   useEffect(() => {
     setIsLoading(true);
     axiosInstance
-      .get(ROOT_PATH)
+      .get(path)
       .then((res) => setItems(res.data.data))
       .catch((err) => console.log("Fetch xatolik:", err))
       .finally(() => setIsLoading(false));

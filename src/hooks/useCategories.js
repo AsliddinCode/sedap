@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "@/utils/axiosInstance";
 const ROOT_PATH = "/categories";
+import useCurrentUser from "./useCurrentUser";
 
 export default function useCategory() {
-  const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState();
-
+  const user = useCurrentUser
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      let user1 = localStorage.getItem("user");
-      user1 = user1 ? JSON.parse(user1) : null;
-      setUser(user1);
-    }
     axiosInstance
       .get(ROOT_PATH)
       .then((res) => setCategories(res.data.data))
@@ -28,7 +23,7 @@ export default function useCategory() {
           name: data.name,
           description: data.description,
           internalName: `Asliddin_${data.name}`,
-          restaurant: data?.restaurantId,
+          restaurant: user.restaurantId,
         },
       };
 
