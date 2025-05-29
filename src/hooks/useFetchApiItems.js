@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { axiosInstance } from "@/utils/axiosInstance";
+const ROOT_PATH = "/categories";
 
 function useFetchApiItems(path) {
   const [items, setItems] = useState([]);
@@ -11,7 +12,7 @@ function useFetchApiItems(path) {
         data,
       });
       console.log("Yaratildi:", response.data);
-      setCount((prev) => prev + 1); 
+      setCount((prev) => prev + 1);
     } catch (error) {
       console.error("Kategoriya yaratishda xatolik:", error);
     }
@@ -19,7 +20,7 @@ function useFetchApiItems(path) {
   useEffect(() => {
     setIsLoading(true);
     axiosInstance
-      .get(path)
+      .get(ROOT_PATH)
       .then((res) => setItems(res.data.data))
       .catch((err) => console.log("Fetch xatolik:", err))
       .finally(() => setIsLoading(false));

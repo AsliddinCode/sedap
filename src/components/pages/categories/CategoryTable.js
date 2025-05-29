@@ -14,7 +14,6 @@ import {
 
 function CategoryTable({ setDialogState, handleChange, handleSubmit }) {
   const user = useCurrent();
-  console.log(user);
 
   const [form, setForm] = useState({
     documentId: null,
@@ -34,27 +33,6 @@ function CategoryTable({ setDialogState, handleChange, handleSubmit }) {
   //   open: false,
   //   categoryId: null,
   // });
-
-  const handleDelete = (categoryId) => {
-    if (categoryId) {
-      fetch(`http://192.168.100.109:1337/api/categories/${categoryId}`, {
-        method: "DELETE",
-      })
-        .then((res) => {
-          console.log("delete:", res);
-          if (res.ok) {
-            setDialogState({
-              open: false,
-              categoryId: null,
-            });
-            refetchCategories();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
 
   // useEffect(() => {
   //   if (user?.restaurantId) {

@@ -11,12 +11,12 @@ import useCategories from "@/hooks/useCategories";
 
 export default function CategoryForm({
   editCategory,
-  onCancel,
   foundRestaurant,
   onSuccess,
   refetchCategories,
 }) {
-  const [handleCreateCategory] = useCategories();
+  const [, { createCategory }] = useCategories();
+
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -31,8 +31,9 @@ export default function CategoryForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCreateCategory(form);
+    createCategory(form);
   };
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const user = useCurrentUser();
@@ -142,7 +143,7 @@ export default function CategoryForm({
           <Button
             variant="contained"
             color={form.documentId ? "warning" : "primary"}
-            onClick={handleSubmit}
+            type="submit"
             disabled={loading}
             sx={{ minWidth: 120 }}
           >
