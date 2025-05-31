@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import CategoryDialog from "@/components/pages/categories/Dialog";
@@ -10,14 +9,7 @@ import useCategories from "@/hooks/useCategories";
 
 export default function CategoriesPage() {
   const user = useCurrentUser();
-  const [handleCreateCategory] = useCategories();
-  const [cate, setCate] = useState({
-    name: "",
-    description: "",
-  });
-
-  // const [editCategory, setEditCategory] = useState(null);
-
+  const [{categories, isLoading},{updateCategory, deletyCategory}] = useCategories();
   const [dialogState, setDialogState] = useState({
     open: false,
     categoryId: null,
@@ -29,7 +21,13 @@ export default function CategoriesPage() {
         {user?.email} restoranining Categories
       </Typography>
       <CategoryForm />
-      <CategoryTable setDialogState={setDialogState} />
+      <CategoryTable
+        setDialogState={setDialogState}
+        categories={categories}
+        updateCategory={updateCategory}
+        isLoading={isLoading}
+        deletyCategory={deletyCategory}
+      />
       <CategoryDialog
         dialogState={dialogState}
         setDialogState={setDialogState}

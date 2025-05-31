@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useCategories from "@/hooks/useCategories";
+const ROOT_PATH = "/categories";
+
 
 export default function CategoryForm({
   editCategory,
@@ -16,10 +18,12 @@ export default function CategoryForm({
   refetchCategories,
 }) {
   const [, { createCategory }] = useCategories();
+  const user = useCurrentUser();
 
   const [form, setForm] = useState({
     name: "",
     description: "",
+    documentId:user
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +40,6 @@ export default function CategoryForm({
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const user = useCurrentUser();
 
   useEffect(() => {
     if (editCategory) {
@@ -85,8 +88,8 @@ export default function CategoryForm({
     };
 
     const url = form.documentId
-      ? `http://192.168.100.109:1337/api/categories/${form.documentId}`
-      : `http://192.168.100.109:1337/api/categories`;
+      ? `http://192.168.100.114:1337/api/categories/${form.documentId}`
+      : `http://192.168.100.114:1337/api/categories`;
 
     const method = form.documentId ? "PUT" : "POST";
 

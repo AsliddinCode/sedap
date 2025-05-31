@@ -1,7 +1,4 @@
-
-import React, { useEffect, useState } from "react";
-import useCurrent from "@/hooks/useCurrentUser";
-import useFetchApiItems from "@/hooks/useFetchApiItems";
+import React from "react";
 import CustomBtnFood from "@/components/pages/foods/CustomBtnFood";
 import {
   Table,
@@ -12,45 +9,12 @@ import {
   Paper,
 } from "@mui/material";
 
-function CategoryTable({ setDialogState, handleChange, handleSubmit }) {
-  const user = useCurrent();
-
-  const [form, setForm] = useState({
-    documentId: null,
-    name: "",
-    description: "",
-  });
-
-  // const [foundRestaurant, setFoundRestaurant] = useState(null);
-
-  const [categories, isLoading, refetchCategories] = useFetchApiItems(
-    user?.restaurantId
-      ? `/categories?filters[restaurant][documentId][$eq]=${user?.restaurantId}`
-      : null
-  );
-
-  // const [dialogState, setDialogState] = useState({
-  //   open: false,
-  //   categoryId: null,
-  // });
-
-  // useEffect(() => {
-  //   if (user?.restaurantId) {
-  //     setFoundRestaurant(user.restaurants[0]);
-  //   }
-  // }, [user]);
-
-  const [editCategory, setEditCategory] = useState(null);
-
-  function cancelEdit() {
-    setEditCategory(null);
-    setForm({ name: "", description: "" });
-  }
-
-  useEffect(() => {
-    setForm(editCategory);
-  }, [editCategory]);
-
+function CategoryTable({
+  categories,
+  updateCategory,
+  isLoading,
+  deletyCategory,
+}) {
   return (
     <>
       <Paper>
@@ -76,36 +40,37 @@ function CategoryTable({ setDialogState, handleChange, handleSubmit }) {
                 </TableCell>
               </TableRow>
             ) : categories.length > 0 ? (
-              categories.map((cat) => (
-                <TableRow key={cat.id}>
-                  <TableCell>{cat.id}</TableCell>
-                  <TableCell>{cat.attributes?.name || cat.name}</TableCell>
-                  <TableCell>
-                    {cat.attributes?.description || cat.description || "-"}
-                  </TableCell>
-                  <TableCell
-                    sx={{ display: "flex", gap: "20px", justifyContent: "end" }}
-                  >
-                    <CustomBtnFood
-                      onClick={() => setEditCategory(cat)}
-                      back="#FF5B5B26"
-                      img="/foodicon2.png"
-                      text="Edit"
-                    />
-                    <CustomBtnFood
-                      onClick={() =>
-                        setDialogState({
-                          open: true,
-                          categoryId: cat.documentId,
-                        })
-                      }
-                      back="#2D9CDB26"
-                      img="/foodIcon3.png"
-                      text="Delete"
-                    />
-                  </TableCell>
-                </TableRow>
-              ))
+              categories.map((cat) =>
+               (
+                  <TableRow key={cat.id}>
+                    <TableCell>{cat.id}</TableCell>
+                    <TableCell>{cat.attributes?.name || cat.name}</TableCell>
+                    <TableCell>
+                      {cat.attributes?.description || cat.description || "-"}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        display: "flex",
+                        gap: "20px",
+                        justifyContent: "end",
+                      }}
+                    >
+                      <CustomBtnFood
+                        onClick={() => updateCategory(cat)}
+                        back="#FF5B5B26"
+                        img="/foodicon2.png"
+                        text="Edit"
+                      />
+                      <CustomBtnFood
+                        onClick={() => deletyCategory(cat.documentId)}
+                        back="#2D9CDB26"
+                        img="/foodIcon2.png"
+                        text="Delete"
+                      />
+                    </TableCell>
+                  </TableRow>
+                )
+              )
             ) : (
               <TableRow>
                 <TableCell colSpan={5} align="center">

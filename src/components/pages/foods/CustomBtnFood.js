@@ -22,7 +22,12 @@ function CustomBtn(props) {
           backgroundColor: back,
         }}
       >
-        {/* <Image src={icon} width={28} height={28} alt="icon" /> */}
+        <button style={{
+          overflow:'hidden',
+          border:'none',
+          backgroundColor:'unset',
+          color:'white',
+        }} >Click</button>
       </div>
       <p
         style={{

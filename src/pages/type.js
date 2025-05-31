@@ -5,7 +5,7 @@ import useCategory from '@/hooks/useCategory'
 
 
 export default function Type() {
-  const [ handleCreateCategory] = useCategory();
+  const [ createCategory] = useCategory();
   const [isSnackOpen, setIsSnackOpen] = useState(false);
   const [cate, setCate] = useState({
     name: '',
@@ -22,7 +22,7 @@ export default function Type() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCreateCategory(cate);
+    createCategory(cate);
     setIsSnackOpen(true);
   };
 

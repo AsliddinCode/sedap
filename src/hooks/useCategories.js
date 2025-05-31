@@ -7,34 +7,42 @@ export default function useCategory() {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState();
-  const user = useCurrentUser
+  const user = useCurrentUser();
+
   useEffect(() => {
-    axiosInstance
-      .get(ROOT_PATH)
-      .then((res) => setCategories(res.data.data))
-      .catch((err) => setError(err))
-      .finally(() => setIsLoading(false));
-  }, []);
+    if (user) {
+      axiosInstance
+        .get(
+          `/categories?filters[restaurant][documentId][$eq]=${user.restaurantId}`
+        )
+        .then((response) => {
+          setCategories(response.data.data);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [user]);
 
   const createCategory = (data) => {
-    if (data?.restaurantId) {
+    if (data) {
       const values = {
         data: {
           name: data.name,
           description: data.description,
           internalName: `Asliddin_${data.name}`,
-          restaurant: user.restaurantId,
+          restaurant: user?.restaurantId,
         },
       };
 
       axiosInstance
-        .post(ROOT_PATH, values, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        .post(ROOT_PATH, values, {})
         .then((res) => {
-          console.log("Success:", res.data);
+          console.log("Success:", res.data.data);
+          setCategories(res.data.data);
           reFetch();
         })
         .catch((error) => {
@@ -53,16 +61,19 @@ export default function useCategory() {
       .catch((err = console.error(error)));
     return cat;
   };
+
   const deletyCategory = async (documentId) => {
     axiosInstance
-      .delete(documentId)
+      .delete(`${ROOT_PATH}/${documentId}`) 
       .then((res) => {
         console.log(res, "res");
+        reFetch()
       })
       .catch((err) => {
         setError(err);
       });
   };
+
   const reFetch = () => {
     setIsLoading(true);
     axiosInstance
