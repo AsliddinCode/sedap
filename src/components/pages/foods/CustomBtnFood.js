@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 function CustomBtn(props) {
-  const { back, icon } = props;
+  const { back, icon, onClick } = props;
   return (
     <div
       style={{
@@ -22,7 +22,7 @@ function CustomBtn(props) {
           backgroundColor: back,
         }}
       >
-        <button style={{
+        <button onClick={onClick} style={{
           overflow:'hidden',
           border:'none',
           backgroundColor:'unset',

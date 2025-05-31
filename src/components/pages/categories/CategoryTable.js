@@ -7,26 +7,14 @@ import {
   TableRow,
   TableCell,
   Paper,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  Button,
 } from "@mui/material";
 
-function CategoryTable({ categories, updateCategory, isLoading, deletyCategory }) {
-  const [dialogState, setDialogState] = useState({
-    open: false,
-    categoryId: null,
-  });
-
-  const handleDeleteConfirm = () => {
-    if (dialogState.categoryId) {
-      deletyCategory(dialogState.categoryId);
-      setDialogState({ open: false, categoryId: null });
-    }
-  };
+function CategoryTable({
+  categories,
+  updateCategory,
+  isLoading,
+  deletyCategory,
+}) {
 
   return (
     <>
@@ -37,7 +25,10 @@ function CategoryTable({ categories, updateCategory, isLoading, deletyCategory }
               <TableCell>ID</TableCell>
               <TableCell>Category</TableCell>
               <TableCell>Description</TableCell>
-              <TableCell sx={{ textAlign: "end", paddingRight: "40px" }} colSpan={2}>
+              <TableCell
+                sx={{ textAlign: "end", paddingRight: "40px" }}
+                colSpan={2}
+              >
                 Actions
               </TableCell>
             </TableRow>
@@ -54,7 +45,9 @@ function CategoryTable({ categories, updateCategory, isLoading, deletyCategory }
                 <TableRow key={cat.id}>
                   <TableCell>{cat.id}</TableCell>
                   <TableCell>{cat.attributes?.name || cat.name}</TableCell>
-                  <TableCell>{cat.attributes?.description || cat.description || "-"}</TableCell>
+                  <TableCell>
+                    {cat.attributes?.description || cat.description || "-"}
+                  </TableCell>
                   <TableCell
                     sx={{
                       display: "flex",
@@ -69,7 +62,7 @@ function CategoryTable({ categories, updateCategory, isLoading, deletyCategory }
                       text="Edit"
                     />
                     <CustomBtnFood
-                      onClick={() => setDialogState({ open: true, categoryId: cat.documentId })}
+                      onClick={() => deletyCategory(cat.documentId )}
                       back="#2D9CDB26"
                       img="/foodIcon2.png"
                       text="Delete"
@@ -87,29 +80,6 @@ function CategoryTable({ categories, updateCategory, isLoading, deletyCategory }
           </TableBody>
         </Table>
       </Paper>
-
-      {/* Dialog */}
-      <Dialog
-        open={dialogState.open}
-        onClose={() => setDialogState({ open: false, categoryId: null })}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">Are you sure?</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Do you want to delete this category?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDialogState({ open: false, categoryId: null })}>
-            Cancel
-          </Button>
-          <Button onClick={handleDeleteConfirm} autoFocus>
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
     </>
   );
 }

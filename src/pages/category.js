@@ -9,7 +9,7 @@ import useCategories from "@/hooks/useCategories";
 
 export default function CategoriesPage() {
   const user = useCurrentUser();
-  const [{categories, isLoading},{updateCategory, deletyCategory}] = useCategories();
+  const [{categories, isLoading, reFetch},{updateCategory, deletyCategory}] = useCategories();
   const [dialogState, setDialogState] = useState({
     open: false,
     categoryId: null,
@@ -20,7 +20,7 @@ export default function CategoriesPage() {
       <Typography variant="h4" mb={3}>
         {user?.email} restoranining Categories
       </Typography>
-      <CategoryForm />
+      <CategoryForm reFetch={reFetch}/>
       <CategoryTable
         setDialogState={setDialogState}
         categories={categories}

@@ -13,7 +13,7 @@ export default function useCategory() {
     if (user) {
       axiosInstance
         .get(
-          `/categories?filters[restaurant][documentId][$eq]=${user.restaurantId}`
+          `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user.restaurantId}`
         )
         .then((response) => {
           setCategories(response.data.data);
@@ -39,7 +39,7 @@ export default function useCategory() {
       };
 
       axiosInstance
-        .post(ROOT_PATH, values, {})
+        .post(ROOT_PATH, values)
         .then((res) => {
           console.log("Success:", res.data.data);
           setCategories(res.data.data);
@@ -77,7 +77,7 @@ export default function useCategory() {
   const reFetch = () => {
     setIsLoading(true);
     axiosInstance
-      .get(ROOT_PATH)
+      .get(`${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user.restaurantId}`)
       .then((res) => setCategories(res.data.data))
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false));

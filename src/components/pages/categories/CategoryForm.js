@@ -16,6 +16,7 @@ export default function CategoryForm({
   foundRestaurant,
   onSuccess,
   refetchCategories,
+  reFetch
 }) {
   const [, { createCategory }] = useCategories();
   const user = useCurrentUser();
@@ -23,7 +24,6 @@ export default function CategoryForm({
   const [form, setForm] = useState({
     name: "",
     description: "",
-    documentId:user
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +34,7 @@ export default function CategoryForm({
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    
     createCategory(form);
   };
 
