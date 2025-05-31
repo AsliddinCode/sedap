@@ -1,25 +1,9 @@
-import React, { useEffect, useState } from "react";
-import {
-  Box,
-  TextField,
-  Button,
-  IconButton,
-  CircularProgress,
-} from "@mui/material";
-import useCurrentUser from "@/hooks/useCurrentUser";
+import React, { useState } from "react";
+import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import useCategories from "@/hooks/useCategories";
-const ROOT_PATH = "/categories";
 
-
-export default function CategoryForm({
-  editCategory,
-  foundRestaurant,
-  onSuccess,
-  refetchCategories,
-  reFetch
-}) {
+export default function CategoryForm() {
   const [, { createCategory }] = useCategories();
-  const user = useCurrentUser();
 
   const [form, setForm] = useState({
     name: "",
@@ -34,89 +18,11 @@ export default function CategoryForm({
   };
 
   const handleSubmit = (e) => {
-    
     createCategory(form);
   };
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (editCategory) {
-      setForm({
-        documentId: editCategory.documentId || null,
-        name: editCategory.name || "",
-        description: editCategory.description || "",
-      });
-    } else {
-      setForm({
-        documentId: null,
-        name: "",
-        description: "",
-      });
-    }
-  }, [editCategory]);
-
-  const validateForm = () => {
-    if (!form.name.trim()) {
-      setError("Category nomi kerak");
-      return false;
-    }
-    if (!user.restaurantId) {
-      setError("Restoran topilmadi");
-      return false;
-    }
-    return true;
-  };
-
-  const saveCategory = async () => {
-    if (!validateForm()) return;
-
-    setLoading(true);
-    setError(null);
-
-    const payload = {
-      data: {
-        name: form.name.trim(),
-        description: form.description.trim(),
-        internalName: `${foundRestaurant.name}_${form.name}`.replace(
-          /\s+/g,
-          ""
-        ),
-        restaurant: foundRestaurant.documentId,
-      },
-    };
-
-    const url = form.documentId
-      ? `http://192.168.100.114:1337/api/categories/${form.documentId}`
-      : `http://192.168.100.114:1337/api/categories`;
-
-    const method = form.documentId ? "PUT" : "POST";
-
-    try {
-      const response = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.error?.message || "Category saqlashda xatolik yuz berdi"
-        );
-      }
-
-      setForm({ documentId: null, name: "", description: "" });
-      if (onSuccess) onSuccess(data);
-      if (refetchCategories) refetchCategories();
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <form onSubmit={handleSubmit}>
