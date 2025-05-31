@@ -1,5 +1,5 @@
+import React from "react";
 
-import React, { useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -8,27 +8,8 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-function CategoryDialog({ dialogState, setDialogState }) {
-  const handleDelete = (categoryId) => {
-    if (categoryId) {
-      fetch(`http://192.168.100.109:1337/api/categories/${categoryId}`, {
-        method: "DELETE",
-      })
-        .then((res) => {
-          console.log("delete:", res);
-          if (res.ok) {
-            setDialogState({
-              open: false,
-              categoryId: null,
-            });
-            refetchCategories();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+function CategoryDialog({ dialogState, setDialogState, deletyCategory, categories }) {
+  
   return (
     <>
       <Dialog
@@ -60,7 +41,7 @@ function CategoryDialog({ dialogState, setDialogState }) {
             Cancel
           </Button>
           <Button
-            onClick={() => handleDelete(dialogState.categoryId)}
+            onClick={() => deletyCategory(categories.categoryId)}
             autoFocus
           >
             Delete

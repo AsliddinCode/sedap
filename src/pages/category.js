@@ -31,6 +31,8 @@ export default function CategoriesPage() {
       <CategoryDialog
         dialogState={dialogState}
         setDialogState={setDialogState}
+        deletyCategory={deletyCategory}
+        categories={categories}
       />
     </Box>
   );
