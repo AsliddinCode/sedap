@@ -9,14 +9,14 @@ import {
   Paper,
 } from "@mui/material";
 
-function CategoryTable({ categories, onDelete, onRefetch, setCat }) {
-  const handleEdit = (cat) => {
-    setCat(cat);
-    console.log("categori table", cat);
+function TypeTable({ types, onDelete, onRefetch, setEditType }) {
+  const handleEdit = (type) => {
+    setEditType(type);
+    console.log("type table edit:", type);
   };
 
-  const handleDelete = (cat) => {
-    onDelete(cat.documentId);
+  const handleDelete = (type) => {
+    onDelete(type.documentId);  
     onRefetch();
   };
 
@@ -26,8 +26,8 @@ function CategoryTable({ categories, onDelete, onRefetch, setCat }) {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
+            <TableCell>Type Name</TableCell>
             <TableCell>Category</TableCell>
-            <TableCell>Description</TableCell>
             <TableCell
               sx={{ textAlign: "end", paddingRight: "40px" }}
               colSpan={2}
@@ -37,25 +37,23 @@ function CategoryTable({ categories, onDelete, onRefetch, setCat }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {categories.length > 0 ? (
-            categories.map((cat) => (
-              <TableRow key={cat.id}>
-                <TableCell>{cat.id}</TableCell>
-                <TableCell>{cat.attributes?.name || cat.name}</TableCell>
-                <TableCell>
-                  {cat.attributes?.description || cat.description || "-"}
-                </TableCell>
+          {types.length > 0 ? (
+            types.map((type) => (
+              <TableRow key={type.id || type.documentId}>
+                <TableCell>{type.id || type.documentId}</TableCell>
+                <TableCell>{type.name || "-"}</TableCell>
+                <TableCell>{type.category?.name || "-"}</TableCell>
                 <TableCell
                   sx={{ display: "flex", gap: "20px", justifyContent: "end" }}
                 >
                   <CustomBtnFood
-                    onClick={() => handleEdit(cat)}
+                    onClick={() => handleEdit(type)}
                     back="#FF5B5B26"
                     img="/foodIcon2.png"
                     text="Edit"
                   />
                   <CustomBtnFood
-                    onClick={() => handleDelete(cat)}
+                    onClick={() => handleDelete(type)}
                     back="#2D9CDB26"
                     img="/foodIcon3.png"
                     text="Delete"
@@ -66,7 +64,7 @@ function CategoryTable({ categories, onDelete, onRefetch, setCat }) {
           ) : (
             <TableRow>
               <TableCell colSpan={5} align="center">
-                Hech qanday category topilmadi
+                Hech qanday type topilmadi
               </TableCell>
             </TableRow>
           )}
@@ -76,4 +74,4 @@ function CategoryTable({ categories, onDelete, onRefetch, setCat }) {
   );
 }
 
-export default CategoryTable;
+export default TypeTable;
