@@ -1,22 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import Head from "next/head";
 import FoodForm from "@/components/pages/foods/FoodForm";
+import useFoods from "@/hooks/useFoods";
 import { useRouter } from "next/router";
-import useFetchApiItem from "@/hooks/useFetchApiItem";
 
 export default function FoodEdit() {
   const router = useRouter();
-  const [food, isLoading] = useFetchApiItem(
-    `/foods/${router.query.documentId}?populate[type][populate][0]=category`
-  );
+  const foodId = router?.query?.documentId;
+  const [exist, setExist] = useState(null);
+
+  const [_, { getFood }] = useFoods();
+
+  useEffect(() => {
+    if (foodId) {
+      getFood(foodId).then((res) => {
+        console.log(res, "ds");
+        if (!exist) {
+          setExist(res);
+        }
+      });
+    }
+  }, [foodId]);
 
   return (
     <>
       <Head>
         <title>Food Edit</title>
       </Head>
-      <FoodForm title={"Edit food"} food={food} btnText={"Edit Food"} />
+      {!exist ? (
+        "not"
+      ) : (
+        <FoodForm title={"Edit food"} food={exist} btnText={"Edit Food"} />
+      )}
     </>
   );
 }

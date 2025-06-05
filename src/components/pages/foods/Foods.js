@@ -1,36 +1,25 @@
 import React, { useState, useEffect } from "react";
-import useFetchItems from "@/hooks/useFetchApiItems";
+import useFoods from "@/hooks/useFoods";
 import HeaderInput from "@/components/common/HeaderInput";
 import { useRouter } from "next/router";
 import { icons } from "@/data";
-import Image from "next/image";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function Foods({}) {
   const [search, setSearch] = useState("");
   const [filteredFoods, setFilteredFoods] = useState([]);
   const router = useRouter();
-
+  const user = useCurrentUser();
+  const [
+    { foods, isLoading },
+    { deletyFood },
+  ] = useFoods();
   const handleClick = () => {
     router.push("/foods/new");
   };
 
-  const handleDelete = async (foodId) => {
-    try {
-      const res = await fetch(
-        `http://192.168.100.109:1337/api/foods/${foodId}`,
-        {
-          method: "DELETE",
-        }
-      );
-      if (res.ok) {
-        refetch();
-      } else {
-        console.error("Delete failed");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const restaurants = user?.restaurants || [];
+  const foundRestaurant = restaurants[0] ?? null;
 
   const handleAction = (action, documentId) => {
     if (action === "View") {
@@ -38,25 +27,9 @@ export default function Foods({}) {
     } else if (action === "Edit") {
       router.push(`/foods/${documentId}/edit`);
     } else if (action === "Delete") {
-      handleDelete(documentId);
+      deletyFood(documentId);
     }
   };
-
-  let user = null;
-  if (typeof window !== "undefined") {
-    user = localStorage.getItem("user");
-    user = user ? JSON.parse(user) : null;
-  }
-
-  const [restaurants, isresLoading, refetchres] = useFetchItems(
-    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
-  );
-
-  const foundRestaurant = restaurants[0] ?? null;
-
-  const [foods, isLoading, refetch] = useFetchItems(
-    `/foods?filters[restaurant][documentId][$eqi]=${foundRestaurant?.documentId}&populate[type][populate][0]=category`
-  );
 
   useEffect(() => {
     const result =
@@ -68,14 +41,6 @@ export default function Foods({}) {
     setFilteredFoods(result);
   }, [search, foods]);
 
-  const image = (item) => {
-    const img = item?.image;
-    if (img.startsWith("https") || img.endsWith(".jpg")) {
-      return img;
-    }else{
-      return "/trash.png"; 
-    } 
-  };
   return (
     <>
       <HeaderInput setSearch={setSearch} handleClick={handleClick} />
@@ -121,10 +86,10 @@ export default function Foods({}) {
                   boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
                 }}
               >
-                <Image
+                <img
                   width={160}
                   height={160}
-                  src={image(item)}
+                  src={item?.img}
                   alt={item?.name}
                   style={{
                     objectFit: "contain",
@@ -177,7 +142,7 @@ export default function Foods({}) {
                         }}
                         onClick={() => handleAction(icon.name, item.documentId)}
                       >
-                        <Image
+                        <img
                           src={icon.img}
                           alt={icon.name}
                           width={24}

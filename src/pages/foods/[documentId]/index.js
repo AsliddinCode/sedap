@@ -3,15 +3,14 @@ import React from "react";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import { useRouter } from "next/router";
 import FoodDetailComponent from "@/components/pages/foods/FoodDetailComponet";
-import useFetchApiItem from "@/hooks/useFetchApiItem";
+
 import HeaderInput from "@/components/common/HeaderInput";
+import useFoods from "@/hooks/useFoods";
 
 export default function FoodDetail() {
   const router = useRouter();
   console.log(router, 'ro');
-  const [food, isLoading] = useFetchApiItem(
-    `/foods/${router.query.documentId}?populate[type][populate][0]=category`
-  );
+  const [{foods}] = useFoods()
 
   return (
     <>
@@ -44,7 +43,7 @@ export default function FoodDetail() {
           </div>
         </div>
 
-        {food ? <FoodDetailComponent data={food} /> : <p>Failed</p>}
+        {foods ? <FoodDetailComponent data={foods} /> : <p>Failed</p>}
       </div>
     </>
   );

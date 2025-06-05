@@ -16,7 +16,7 @@ function TypeTable({ types, onDelete, onRefetch, setEditType }) {
   };
 
   const handleDelete = (type) => {
-    onDelete(type.documentId);  
+    onDelete(type.documentId); 
     onRefetch();
   };
 

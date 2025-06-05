@@ -1,5 +1,4 @@
-
-import React, { use, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -11,113 +10,64 @@ import {
   MenuItem,
   Snackbar,
 } from "@mui/material";
-import useFetchApiItems from "@/hooks/useFetchApiItems";
-import { useState } from "react";
+import useFoods from "@/hooks/useFoods";
+import useCategory from "@/hooks/useCategories";
+import useTypes from "@/hooks/useTypes";
 import { useRouter } from "next/router";
 
-function FoodForm({ title, food, btnText }) {
+function FoodForm({ title, btnText, food }) {
+  const [{}, { updateFood, createFood }] = useFoods();
+  const [{ types }] = useTypes();
   const router = useRouter();
-  const [isSnackOpen, setIsSnackOpen] = useState(false);
-  const [formData, setFormData] = useState(null);
-  const [category, setCategory] = useState("");
-
-  let user = null;
-  if (typeof window !== "undefined") {
-    user = localStorage.getItem("user");
-    user = user ? JSON.parse(user) : null;
-  }
-
-  const [restaurants, isresLoading, refetchres] = useFetchApiItems(
-    `/restaurants?filters[users][documentId][$eqi]=${user?.documentId}`
-  );
-
-  const foundRestaurant = restaurants[0] ?? null;
+  const [formData, setFormData] = useState({
+    documentId: null,
+    name: "",
+    image: "",
+    type: "",
+    price: "",
+    comment: "",
+  });
 
   useEffect(() => {
     if (food) {
+      console.log("gjhgj", food);
       setFormData({
-        documentId: food.documentId ?? null,
-        name: food.name,
-        image: food.image,
-        type: food.type?.documentId,
-        price: food.price,
-        comment: food.comment,
+        documentId: food.documentId,
+        name: food.name ?? '',
+        image: food.image ?? '',
+        type: food.type?.documentId ?? "",
+        price: food.price ?? '',
+        comment: food.comment ?? '',
       });
-      setCategory(food.type?.category?.documentId);
-    } else {
-      setFormData(foodInitialValues);
     }
   }, [food]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    console.log(name , value , 'sdf');
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
-  const [categories, isLoading] = useFetchApiItems(
-    `/categories?filters[restaurant][documentId][$eq]=${foundRestaurant?.documentId}`
-  );
-  const [types, typesLoading] = useFetchApiItems(
-    `/types?filters[category][documentId][$eq]=${category}`
-  );
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
-
     const values = {
-      data: {
-        name: formData.name,
-        image: formData.image,
-        price: formData.price,
-        comment: formData.comment,
-        type: {
-          connect: [formData.type],
-        },
-        restaurant: foundRestaurant?.documentId ?? null,
-      },
+      name: formData.name,
+      image: formData.image,
+      price: formData.price,
+      comment: formData.comment,
+      type: formData.type,
     };
-
     if (formData.documentId) {
-      // update
-      const options = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      };
-      fetch(`http://192.168.100.109:1337/api/foods/${formData.documentId}`, options)
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-          router.push(`/foods/${res.data.documentId}`);
-        })
-        .catch((error) => console.error(error));
+      await updateFood({ ...formData });
+      router.push(`/foods/${formData.documentId}`);
     } else {
-      if (values.data.restaurant) {
-        // create
-        const options = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        };
-        fetch("http://192.168.100.109:1337/api/foods", options)
-          .then((response) => response.json())
-          .then((res) => {
-            console.log(res);
-            router.push(`/foods/${res.data.documentId}`);
-          })
-          .catch((error) => console.error(error));
-      }
+      const newFood = createFood(values);
+      router.push(`/foods/${newFood?.documentId}`);
     }
   };
-
 
   if (!formData) {
     return null;
@@ -172,26 +122,6 @@ function FoodForm({ title, food, btnText }) {
                 },
               }}
             />
-          </Grid>
-
-          {/* Category */}
-          <Grid item size={6}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={category}
-                label="Category"
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                {categories.map((cat) => (
-                  <MenuItem key={cat.id} value={cat.documentId}>
-                    {cat.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
           </Grid>
 
           {/* Type */}
@@ -327,23 +257,7 @@ function FoodForm({ title, food, btnText }) {
           </Grid>
         </Grid>
       </form>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={isSnackOpen}
-        onClose={() => setIsSnackOpen(false)}
-        message="Food is created"
-      />
     </Box>
   );
 }
-
 export default FoodForm;
-
-const foodInitialValues = {
-  documentId: null,
-  name: "",
-  image: "",
-  type: "",
-  price: "",
-  comment: "",
-};

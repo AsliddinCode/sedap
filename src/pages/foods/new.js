@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 export default function New() {
   const router = useRouter();
+  // duplicate
   const food = {
     name: router.query.name,
     image: router.query.image,
