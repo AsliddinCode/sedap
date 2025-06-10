@@ -25,9 +25,9 @@ function Navigation() {
     },
     {
       id: 2,
-      linkName: "Order List",
+      linkName: "Bucket",
       linkImg: <FormatListBulletedTwoToneIcon />,
-      href: "/orders",
+      href: "/bucket",
     },
     {
       id: 4,

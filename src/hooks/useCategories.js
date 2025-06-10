@@ -8,8 +8,7 @@ export default function useCategory() {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState();
   const user = useCurrentUser();
-
-  useEffect(() => {
+ useEffect(() => {
     if (user) {
       axiosInstance
         .get(

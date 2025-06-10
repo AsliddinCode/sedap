@@ -48,7 +48,7 @@ export default function UserMenu(props) {
             alt="John Doe"
             src={
               avatar ||
-              "https://avatars.mds.yandex.net/i?id=d2161fd91a435a4528b4bdca7ab9a1149873d046-5847755-images-thumbs&n=13"
+              'sabers.jpg'
             }
             sx={{ width: 70, height: 70 }}
           />
@@ -60,17 +60,10 @@ export default function UserMenu(props) {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        TransitionComponent={Fade}
         keepMounted
         disablePortal
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
-        PaperProps={{
-          sx: {
-            borderRadius: 2,
-            minWidth: 160,
-          },
-        }}
       >
         <MenuItem onClick={handleAcc}>Profil</MenuItem>
         <MenuItem onClick={handleClose}>Sozlamalar</MenuItem>

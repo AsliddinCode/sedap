@@ -14,7 +14,7 @@ export default function useFoods() {
     if (user) {
       axiosInstance
         .get(
-          `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user.restaurantId}&populate[type][populate][0]=category`
+          `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user?.restaurantId}&populate[type][populate][0]=category`
         )
         .then((response) => {
           setFoods(response.data.data);
