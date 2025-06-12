@@ -3,12 +3,16 @@ import { useRouter } from "next/router";
 import {Box,TextField,Button,Typography,Paper,Alert,} from "@mui/material";
 import Link from "next/link";
 import AuthLayout from "@/components/AuthLayout";
+import { Restaurant } from "@mui/icons-material";
+import useCurrentUser from "@/hooks/useCurrentUser";
+
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  // const [{}]
   const router = useRouter();
 
   async function handleSubmit(event) {
@@ -28,7 +32,12 @@ export default function LogIn() {
 
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("jwt", jwt);
-        router.push("/dashboard");
+        if(user.restaurantId){
+          router.push("/dashboard");
+
+        }else{
+          router.push('/client')
+        }
       } else {
         setError("qaytadan tekshir");
       }

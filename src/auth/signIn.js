@@ -35,7 +35,7 @@ export default async function signIn(param, data) {
         ...data,
         user: {
           ...data.user,
-          restaurantId: res.documentId
+          restaurantId: res?.documentId ?? null
         }
       };
     }

@@ -10,10 +10,7 @@ export default function Foods({}) {
   const [filteredFoods, setFilteredFoods] = useState([]);
   const router = useRouter();
   const user = useCurrentUser();
-  const [
-    { foods, isLoading },
-    { deletyFood },
-  ] = useFoods();
+  const [{ foods, isLoading }, { deletyFood }] = useFoods();
   const handleClick = () => {
     router.push("/foods/new");
   };
@@ -89,10 +86,10 @@ export default function Foods({}) {
                 <img
                   width={160}
                   height={160}
-                  src={item?.img}
+                  src={item?.image}
                   alt={item?.name}
                   style={{
-                    objectFit: "contain",
+                    objectFit: "cover",
                   }}
                 />
               </div>

@@ -30,21 +30,20 @@ function FoodForm({ title, btnText, food }) {
 
   useEffect(() => {
     if (food) {
-      console.log("gjhgj", food);
       setFormData({
         documentId: food.documentId,
-        name: food.name ?? '',
-        image: food.image ?? '',
+        name: food.name ?? "",
+        image: food.image ?? "",
         type: food.type?.documentId ?? "",
-        price: food.price ?? '',
-        comment: food.comment ?? '',
+        price: food.price ?? "",
+        comment: food.comment ?? "",
       });
     }
   }, [food]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name , value , 'sdf');
+    console.log(name, value, "sdf");
     setFormData((prev) => ({
       ...prev,
       [name]: value,

@@ -8,14 +8,38 @@ export default function useTypes() {
   const [types, setTypes] = useState([]);
   const [error, setError] = useState();
   const [{ categories }, {}] = useCategories();
+  // useEffect(() => {
+  //   if (categories.length > 0) {
+  //     axiosInstance
+  //       .get(
+  //         `${ROOT_PATH}?filters[category][documentId][$in]=${categories.map(
+  //           (c) => c.documentId
+  //         )}&populate=*`
+  //       )
+  //       .then((response) => {
+  //         setTypes(response.data.data);
+  //       })
+  //       .catch((error) => {
+  //         console.log("error", error);
+  //       })
+  //       .finally(() => {
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // }, [categories]);
   useEffect(() => {
     if (categories.length > 0) {
+      const params = new URLSearchParams();
+      categories.forEach((c, index) => {
+        params.append(
+          `filters[category][documentId][$in][${index}]`,
+          c.documentId
+        );
+      });
+      params.append("populate", "*");
+
       axiosInstance
-        .get(
-          `${ROOT_PATH}?filters[category][documentId][$in]=${categories.map(
-            (c) => c.documentId
-          )}&populate=*`
-        )
+        .get(`${ROOT_PATH}?${params.toString()}`)
         .then((response) => {
           setTypes(response.data.data);
         })
@@ -27,6 +51,24 @@ export default function useTypes() {
         });
     }
   }, [categories]);
+
+  const reFetch = () => {
+    setIsLoading(true);
+    const params = new URLSearchParams();
+    categories.forEach((c, index) => {
+      params.append(
+        `filters[category][documentId][$in][${index}]`,
+        c.documentId
+      );
+    });
+    params.append("populate", "*");
+
+    axiosInstance
+      .get(`${ROOT_PATH}?${params.toString()}`)
+      .then((res) => setTypes(res.data.data))
+      .catch((err) => setError(err))
+      .finally(() => setIsLoading(false));
+  };
 
   const createType = (data) => {
     if (data) {
@@ -73,18 +115,18 @@ export default function useTypes() {
       });
   };
 
-  const reFetch = () => {
-    setIsLoading(true);
-    axiosInstance
-    .get(
-      `${ROOT_PATH}?filters[category][documentId][$in]=${categories.map(
-        (c) => c.documentId
-      )}&populate=*`
-    )
-      .then((res) => setTypes(res.data.data))
-      .catch((err) => setError(err))
-      .finally(() => setIsLoading(false));
-  };
+  // const reFetch = () => {
+  //   setIsLoading(true);
+  //   axiosInstance
+  //   .get(
+  //     `${ROOT_PATH}?filters[category][documentId][$in]=${categories.map(
+  //       (c) => c.documentId
+  //     )}&populate=*`
+  //   )
+  //     .then((res) => setTypes(res.data.data))
+  //     .catch((err) => setError(err))
+  //     .finally(() => setIsLoading(false));
+  // };
 
   const updateType = async (data) => {
     if (!data?.documentId) {
