@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import Head from "next/head";
 import { useUsersWithRestaurants } from "@/hooks/useUsersWithRestaurants";
+import { useRouter } from "next/router";
 
 export default function Clint() {
   const { users, loading } = useUsersWithRestaurants();
@@ -21,10 +22,11 @@ export default function Clint() {
           display: "flex",
           gap: "16px",
           flexWrap: "wrap",
-          justifyContent: "center",
         }}
       >
-        {users?.filter((item) => item.restaurant).map((item) => (
+        {users
+          ?.filter((item) => item.restaurant)
+          .map((item) => (
             <ResCard key={item.id} items={item} />
           ))}
       </Box>
@@ -32,19 +34,27 @@ export default function Clint() {
   );
 }
 function ResCard({ items }) {
+  const handleClick = () => {
+    router.push(`/client/res/[${items?.restaurant?.name}]`);
+  };
+  const router = useRouter();
   return (
     <Box
       sx={{
         maxWidth: "340px",
         width: "100%",
         overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
+        opacity: "100%",
+        "&:hover": {
+          opacity: "70%",
+          transition: ".3s",
+        },
       }}
+      onClick={handleClick}
     >
       <Box sx={{ width: "100%", height: "180px" }}>
         <img
-          src="/sds.jfif"
+          src="/fast.png"
           alt={items?.restaurant?.name || "User"}
           style={{
             width: "100%",
@@ -63,9 +73,9 @@ function ResCard({ items }) {
             alignItems: "center",
           }}
         >
-          <h3 style={{ margin: 0 }}>
+          <h4 style={{ margin: 0 }}>
             {items?.restaurant?.name || "Topilmadi"}
-          </h3>
+          </h4>
           <p style={{ margin: 0 }}>⭐ 5</p>
         </Box>
       </Box>
