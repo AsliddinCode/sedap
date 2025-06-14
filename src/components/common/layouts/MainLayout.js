@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Navigation from "../Navigation";
 import { useRouter } from "next/router";
 import Search from "../Search";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 function MainLayout(props) {
   const router = useRouter();
+  const user = useCurrentUser();
+
+  useEffect(() => {
+    if (user && !user.restaurantId) {
+      router.push("/client");
+    }
+  }, [user, router]);
+
   return (
     <main
       style={{
@@ -14,11 +23,10 @@ function MainLayout(props) {
         width: "100%",
         margin: "0 auto",
         minHeight: "100vh",
-        // minWidth: "100vw",
       }}
     >
       <div style={{ display: "flex", minWidth: "100wh" }}>
-        <Navigation />
+        {user?.restaurantId && <Navigation />}
       </div>
 
       <div

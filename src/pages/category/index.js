@@ -4,8 +4,10 @@ import { Typography, Box } from "@mui/material";
 import CategoryTable from "@/components/pages/categories/CategoryTable";
 import CategoryForm from "@/components/pages/categories/CategoryForm";
 import useCategories from "@/hooks/useCategories";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function CategoriesPage() {
+  const user = useCurrentUser()
   const [
     { categories,  reFetch },
     { createCategory, updateCategory, deletyCategory },
@@ -14,7 +16,7 @@ export default function CategoriesPage() {
   return (
     <Box sx={{ maxWidth: 900, mx: "auto", mt: 4 }}>
       <Typography variant="h4" mb={3}>
-        restoranining Categories
+        {user?.restaurantId} Categories
       </Typography>
       <CategoryForm
         onCreate={createCategory}
