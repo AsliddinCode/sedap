@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "@/utils/axiosInstance";
-const ROOT_PATH = "/categories";
 import useCurrentUser from "./useCurrentUser";
-
-export default function useCategory() {
+const ROOT_PATH = "/categories";
+export default function useCategory(resId = null) {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState();
   const user = useCurrentUser();
- useEffect(() => {
-    if (user) {
+  useEffect(() => {
+    if (user || resId) {
       axiosInstance
         .get(
-          `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user.restaurantId}&populate=*`
+          `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${
+            resId ? resId : user.restaurantId
+          }&populate=*`
         )
         .then((response) => {
           setCategories(response.data.data);
@@ -24,7 +25,7 @@ export default function useCategory() {
           setIsLoading(false);
         });
     }
-  }, [user]);
+  }, [user, resId]);
 
   const createCategory = (data) => {
     if (data) {
@@ -32,7 +33,7 @@ export default function useCategory() {
         data: {
           name: data.name,
           description: data.description,
-          internalName: `Asliddin_${data.name}`,
+          internalName: `Asil_${data.name}`,
           restaurant: user?.restaurantId,
         },
       };
@@ -63,10 +64,10 @@ export default function useCategory() {
 
   const deletyCategory = async (documentId) => {
     axiosInstance
-      .delete(`${ROOT_PATH}/${documentId}`) 
+      .delete(`${ROOT_PATH}/${documentId}`)
       .then((res) => {
         console.log(res, "res");
-        reFetch()
+        reFetch();
       })
       .catch((err) => {
         setError(err);
@@ -76,7 +77,9 @@ export default function useCategory() {
   const reFetch = () => {
     setIsLoading(true);
     axiosInstance
-      .get(`${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user.restaurantId}&populate=*`)
+      .get(
+        `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user.restaurantId}&populate=*`
+      )
       .then((res) => setCategories(res.data.data))
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false));
@@ -92,7 +95,7 @@ export default function useCategory() {
       data: {
         name: data.name,
         description: data.description,
-        internalName: `Asliddin_${data.name}`,
+        internalName: `Asilbek_${data.name}`,
         restaurant: data.restaurantId || data?.restaurantId,
       },
     };
@@ -115,7 +118,7 @@ export default function useCategory() {
       isLoading,
       error,
       reFetch,
-      setCategories
+      setCategories,
     },
     {
       getCategory,

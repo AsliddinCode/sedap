@@ -2,6 +2,8 @@ import { Box } from "@mui/material";
 import Head from "next/head";
 import { useUsersWithRestaurants } from "@/hooks/useUsersWithRestaurants";
 import { useRouter } from "next/router";
+import { GoStarFill } from "react-icons/go";
+import useCategory from "@/hooks/useCategories";
 
 export default function Clint() {
   const { users, loading } = useUsersWithRestaurants();
@@ -24,38 +26,36 @@ export default function Clint() {
           flexWrap: "wrap",
         }}
       >
-        {users
-          ?.filter((item) => item.restaurant)
-          .map((item) => (
-            <ResCard key={item.id} items={item} />
-          ))}
+        {users.map((item) => (
+          <ResCard key={item.id} item={item} />
+        ))}
       </Box>
     </>
   );
 }
-function ResCard({ items }) {
-  const handleClick = () => {
-    router.push(`/client/res/[${items?.restaurant?.name}]`);
-  };
+function ResCard({ item }) {
   const router = useRouter();
+  const handleClick = () => {
+    router.push(`/client/res/${item.documentId}`);
+  };
   return (
     <Box
       sx={{
         maxWidth: "340px",
         width: "100%",
-        overflow: "hidden",
+        cursor: "pointer",
         opacity: "100%",
         "&:hover": {
-          opacity: "70%",
+          opacity: "80%",
           transition: ".3s",
         },
       }}
-      onClick={handleClick}
+      onClick={() => handleClick()}
     >
-      <Box sx={{ width: "100%", height: "180px" }}>
+      <Box sx={{ width: "100%", height: "150px" }}>
         <img
           src="/fast.png"
-          alt={items?.restaurant?.name || "User"}
+          alt={item.name || "User"}
           style={{
             width: "100%",
             height: "100%",
@@ -64,7 +64,6 @@ function ResCard({ items }) {
           }}
         />
       </Box>
-
       <Box sx={{ padding: "16px" }}>
         <Box
           sx={{
@@ -73,10 +72,10 @@ function ResCard({ items }) {
             alignItems: "center",
           }}
         >
-          <h4 style={{ margin: 0 }}>
-            {items?.restaurant?.name || "Topilmadi"}
-          </h4>
-          <p style={{ margin: 0 }}>⭐ 5</p>
+          <h3 style={{ margin: 0 }}>{item.name || "Topilmadi"}</h3>
+          <p style={{ margin: 0, display: "flex", alignItems: "center" }}>
+            <GoStarFill /> 5
+          </p>
         </Box>
       </Box>
     </Box>

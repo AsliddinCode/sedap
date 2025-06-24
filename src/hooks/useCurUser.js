@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "@/utils/axiosInstance";
 
-export function useUsersWithRestaurants() {
-  const [users, setUsers] = useState([]);
+export function useCurUser() {
+  const [curUser, setCurUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const res = await axiosInstance.get("/restaurants");
-        setUsers(res.data.data);
+        const user = await axiosInstance.get("/users");
+        setCurUsers(user.data);
       } catch (err) {
         console.error("Error fetching", err);
-        setUsers([]);
+        setCurUsers([]);
       } finally {
         setLoading(false);
       }
@@ -21,5 +21,5 @@ export function useUsersWithRestaurants() {
     fetchUsers();
   }, []);
 
-  return { users, loading };
+  return { curUser, loading };
 }

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import useFoods from "@/hooks/useFoods";
 import { useRouter } from "next/router";
@@ -5,7 +6,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import MainLayout from "@/components/common/layouts/MainLayout";
 import useCategory from "@/hooks/useCategories";
 import { Box, Link, Button } from "@mui/material";
-export default function Bucket({}) {
+export default function Busket({}) {
   const [search, setSearch] = useState("");
   const [filteredFoods, setFilteredFoods] = useState([]);
   const router = useRouter();
@@ -27,9 +28,16 @@ export default function Bucket({}) {
   }, [search, foods]);
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    setFoodCount(totalCount);
+    const updateCart = () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      setFoodCount(totalCount);
+    };
+    window.addEventListener("cartUpdated", updateCart);
+    updateCart();
+    return () => {
+      window.removeEventListener("cartUpdated", updateCart);
+    };
   }, []);
 
   const handlePlusCount = (item) => {
@@ -75,7 +83,7 @@ export default function Bucket({}) {
           padding: "10px",
         }}
       >
-        <button
+        <Button
           style={{
             width: "100px",
             height: "30px",
@@ -88,7 +96,7 @@ export default function Bucket({}) {
           onClick={() => router.push("/purchases")}
         >
           <span>Bucket | {foodCount}</span>
-        </button>
+        </Button>
         <Box sx={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
           {categories?.categories?.map((cat) => (
             <CategoryCom key={cat.id} items={cat.name} id={cat.documentId} />

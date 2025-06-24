@@ -1,15 +1,21 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { SlBasket } from "react-icons/sl";
 
-export default function Purchases() {
+export default function Purchases(props) {
+  const { foodsByCat } = props;
   const [cart, setCart] = useState([]);
   const [foodCount, setFoodCount] = useState(0);
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(saved);
-  }, []);
+    const loadCart = () => {
+      const saved = JSON.parse(localStorage.getItem("cart")) || [];
+      setCart(saved);
+    };
+    loadCart();
+    window.addEventListener("cartUpdated", loadCart);
+    return () => window.removeEventListener("cartUpdated", loadCart);
+  }, [foodsByCat]);
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -26,10 +32,9 @@ export default function Purchases() {
       cart.push({ ...item, quantity: 1 });
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-
-    const totalCount = cart.reduce((son, i) => son + i.quantity, 0);
-    setFoodCount(totalCount);
     setCart(cart);
+    setFoodCount(cart.reduce((sum, i) => sum + i.quantity, 0));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   const handleMinusCount = (item) => {
@@ -40,134 +45,137 @@ export default function Purchases() {
       if (existing.quantity <= 0) {
         const newCart = cart.filter((i) => i.id !== item.id);
         localStorage.setItem("cart", JSON.stringify(newCart));
-        const totalCount = newCart.reduce((son, i) => son + i.quantity, 0);
-        setFoodCount(totalCount);
         setCart(newCart);
+        setFoodCount(newCart.reduce((sum, i) => sum + i.quantity, 0));
         return;
       }
     }
-
     localStorage.setItem("cart", JSON.stringify(cart));
-    const totalCount = cart.reduce((sum, i) => sum + i.quantity, 0);
-    setFoodCount(totalCount);
     setCart(cart);
+    setFoodCount(cart.reduce((sum, i) => sum + i.quantity, 0));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Savatcha</h2>
+    <Box sx={{ padding: "24px" }}>
+      <Typography variant="h5" fontWeight={600} mb={3}>
+        Savatcha
+      </Typography>
+
       {cart.length === 0 ? (
-        <p>Savatcha bo‘sh</p>
+        <Typography color="text.secondary">Savatcha bo‘sh</Typography>
       ) : (
-        <Box sx={{ width: "100%" }}>
-          {cart.map((item) => (
-            <Box
-              key={item.id}
-              sx={{
-                display: "flex",
-                gap: "10px",
-                padding: "20px",
-                border: "1px solid rgb(216, 216, 216)",
-                marginBottom: "10px",
-                borderRadius: "16px",
-              }}
-            >
-              <img
-                src={item.image}
-                style={{
-                  minWidth: "250px",
-                  minHeight: "150px",
-                  maxHeight: "150px",
-                  borderRadius: "8px",
-                  objectFit: "cover",
-                }}
-              />
+        <>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            {cart.map((item) => (
               <Box
+                key={item.id}
                 sx={{
                   display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
+                  gap: "16px",
+                  padding: "16px",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "12px",
+                  backgroundColor: "#fff",
                 }}
               >
+                <Box
+                  component="img"
+                  src={item.image}
+                  alt={item.name}
+                  sx={{
+                    width: "120px",
+                    height: "100px",
+                    objectFit: "cover",
+                    borderRadius: "10px",
+                    flexShrink: 0,
+                  }}
+                />
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-evenly",
+                    justifyContent: "space-between",
+                    flexGrow: 1,
                   }}
                 >
-                  <p style={{ fontSize: "32px" }}>{item.name}</p>
-                  <p style={{ fontSize: "16px", color: "#00B074" }}>
-                    {item?.type?.category.name} / {item?.type.name}
-                  </p>
-                </Box>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Button
-                    onClick={() => handlePlusCount(item)}
-                    sx={{
-                      backgroundColor: "white",
-                      borderRadius: "20px",
-                      fontSize: "20px",
-                      minWidth: 50,
-                      backgroundColor: "#00B074",
-                      color: "white",
-                      minHeight: 30,
-                      "&:hover": {
-                        backgroundColor: "white",
-                        border: "1px solid #00B074",
-                        color: "#00B074",
-                      },
-                    }}
-                  >
-                    +
-                  </Button>
-                  <p style={{ margin: "0px 20px" }}>{item.quantity}</p>
-                  <Button
-                    onClick={() => handleMinusCount(item)}
-                    sx={{
-                      backgroundColor: "white",
-                      borderRadius: "20px",
-                      fontSize: "20px",
-                      minWidth: 50,
-                      minHeight: 30,
-                      backgroundColor: "#FF5B5B",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "white",
-                        border: "1px solid #FF5B5B",
-                        color: "#FF5B5B",
-                      },
-                    }}
-                  >
-                    -
-                  </Button>
+                  <Box>
+                    <Typography variant="h6" fontWeight={600}>
+                      {item.name}
+                    </Typography>
+                    <Typography variant="body2" color="primary">
+                      {item?.type?.category.name} / {item?.type.name}
+                    </Typography>
+                  </Box>
+
+                  <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
+                    <Button
+                      onClick={() => handleMinusCount(item)}
+                      sx={{
+                        minWidth: 36,
+                        minHeight: 36,
+                        borderRadius: "50%",
+                        backgroundColor: "#FF5B5B",
+                        color: "#fff",
+                        fontWeight: "bold",
+                        "&:hover": {
+                          backgroundColor: "#fff",
+                          color: "#FF5B5B",
+                          border: "1px solid #FF5B5B",
+                        },
+                      }}
+                    >
+                      -
+                    </Button>
+                    <Typography sx={{ mx: 2 }}>{item.quantity}</Typography>
+                    <Button
+                      onClick={() => handlePlusCount(item)}
+                      sx={{
+                        minWidth: 36,
+                        minHeight: 36,
+                        borderRadius: "50%",
+                        backgroundColor: "#00B074",
+                        color: "#fff",
+                        fontWeight: "bold",
+                        "&:hover": {
+                          backgroundColor: "#fff",
+                          color: "#00B074",
+                          border: "1px solid #00B074",
+                        },
+                      }}
+                    >
+                      +
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          ))}
-          <Box sx={{ display: "flex", justifyContent: "end" }}>
+            ))}
+          </Box>
+
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
             <Button
+              variant="contained"
+              startIcon={<SlBasket />}
               sx={{
-                padding: "15px 80px",
+                padding: "12px 36px",
                 backgroundColor: "#00B074",
-                color: "white",
-                borderRadius: "16px",
+                color: "#fff",
+                borderRadius: "12px",
+                fontWeight: 600,
+                fontSize: "16px",
+                textTransform: "none",
                 "&:hover": {
-                  backgroundColor: "white",
+                  backgroundColor: "#fff",
                   color: "#00B074",
                   border: "1px solid #00B074",
-                  padding: "14px 79px",
                 },
               }}
             >
-              <SlBasket
-                style={{ width: "20px", height: "20px", marginRight: "10px" }}
-              />
               Buy
             </Button>
           </Box>
-        </Box>
+        </>
       )}
-    </div>
+    </Box>
   );
 }

@@ -3,41 +3,45 @@ import { axiosInstance } from "@/utils/axiosInstance";
 const ROOT_PATH = "/foods";
 import useCurrentUser from "./useCurrentUser";
 
-
-export default function useFoods() {
+export default function useFoods(resId = null) {
   const [isLoading, setIsLoading] = useState(true);
   const [foods, setFoods] = useState([]);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
   const user = useCurrentUser();
 
   useEffect(() => {
-    if (user) {
-      axiosInstance
-        .get(
-          `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user?.restaurantId}&populate[type][populate][0]=category`
-        )
-        .then((response) => {
-          setFoods(response.data.data);
-        })
-        .catch((error) => {
-          console.log("error", error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+    if (user || resId) {
+      fetch(resId);
     }
-  }, [user]);
+  }, [user, resId]);
+
+  const fetch = (resId) => {
+    if (!resId) {
+      setIsLoading(false);
+      setError("res id topilmadi");
+      return;
+    }
+    axiosInstance
+      .get(
+        `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${
+          resId ? resId : user?.restaurantId
+        }&populate[type][populate][0]=category`
+      )
+      .then((res) => setFoods(res.data.data))
+      .catch((err) => setError(err))
+      .finally(() => setIsLoading(false));
+  };
 
   const createFood = (data) => {
     if (data) {
       const values = {
         data: {
           name: data.name,
-          price: data.price ? parseInt(data.price, 10):null ,
+          price: data.price ? parseInt(data.price, 10) : null,
           image: data.image,
           comment: data.comment,
           restaurant: user?.restaurantId,
-          type: data.type ?data.type : null,
+          type: data.type ? data.type : null,
         },
       };
       axiosInstance
@@ -79,14 +83,7 @@ export default function useFoods() {
   };
 
   const reFetch = () => {
-    setIsLoading(true);
-    axiosInstance
-      .get(
-        `${ROOT_PATH}?filters[restaurant][documentId][$eq]=${user.restaurantId}`
-      )
-      .then((res) => setFoods(res.data.data))
-      .catch((err) => setError(err))
-      .finally(() => setIsLoading(false));
+    fetch();
   };
 
   const updateFood = async (data) => {
@@ -97,10 +94,10 @@ export default function useFoods() {
     const values = {
       data: {
         name: data.name,
-        price: data.price ? parseInt(data.price, 10):null ,
+        price: data.price ? parseInt(data.price, 10) : null,
         image: data.image,
         comment: data.comment,
-        type: data.type ?data.type : null,
+        type: data.type ? data.type : null,
       },
     };
     axiosInstance
